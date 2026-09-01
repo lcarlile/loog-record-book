@@ -109,8 +109,20 @@
   "tiedSeasons": 0,
   "playoffW": 7,
   "playoffL": 6,
-  "playoffApps": 7,
-  "divTitles": 6
+  "playoffApps": 8,
+  "playoffYears": [
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024
+  ],
+  "divTitles": 6,
+  "sheetApps": 7,
+  "sheetDiv": 6
  },
  {
   "name": "Kaila",
@@ -172,8 +184,15 @@
   "tiedSeasons": 1,
   "playoffW": 2,
   "playoffL": 3,
-  "playoffApps": 2,
-  "divTitles": 2
+  "playoffApps": 3,
+  "playoffYears": [
+   2022,
+   2023,
+   2025
+  ],
+  "divTitles": 1,
+  "sheetApps": 2,
+  "sheetDiv": 2
  },
  {
   "name": "Steve",
@@ -206,7 +225,7 @@
     "pa": 1546.46,
     "pfpg": 108.1,
     "papg": 119,
-    "note": "Biggest Loser"
+    "note": null
    },
    {
     "year": 2020,
@@ -216,7 +235,7 @@
     "pa": 1610.5,
     "pfpg": 109.1,
     "papg": 123.9,
-    "note": null
+    "note": "Biggest Loser"
    },
    {
     "year": 2021,
@@ -285,8 +304,18 @@
   "tiedSeasons": 0,
   "playoffW": 4,
   "playoffL": 6,
-  "playoffApps": 5,
-  "divTitles": 3
+  "playoffApps": 6,
+  "playoffYears": [
+   2017,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "divTitles": 3,
+  "sheetApps": 5,
+  "sheetDiv": 3
  },
  {
   "name": "Kim",
@@ -299,7 +328,7 @@
     "pa": 1551.38,
     "pfpg": 118.1,
     "papg": 119.3,
-    "note": null
+    "note": "Biggest Loser"
    },
    {
     "year": 2019,
@@ -382,14 +411,23 @@
   "papg": 113.6,
   "titles": 0,
   "runnerUp": 0,
-  "loser": 0,
+  "loser": 1,
   "winningSeasons": 5,
   "losingSeasons": 2,
   "tiedSeasons": 1,
   "playoffW": 2,
   "playoffL": 5,
   "playoffApps": 5,
-  "divTitles": 1
+  "playoffYears": [
+   2019,
+   2020,
+   2021,
+   2023,
+   2024
+  ],
+  "divTitles": 1,
+  "sheetApps": 5,
+  "sheetDiv": 1
  },
  {
   "name": "Zach",
@@ -501,8 +539,17 @@
   "tiedSeasons": 1,
   "playoffW": 8,
   "playoffL": 2,
-  "playoffApps": 4,
-  "divTitles": 3
+  "playoffApps": 5,
+  "playoffYears": [
+   2017,
+   2018,
+   2019,
+   2022,
+   2024
+  ],
+  "divTitles": 3,
+  "sheetApps": 4,
+  "sheetDiv": 3
  },
  {
   "name": "Jordan",
@@ -614,8 +661,17 @@
   "tiedSeasons": 0,
   "playoffW": 5,
   "playoffL": 4,
-  "playoffApps": 4,
-  "divTitles": 2
+  "playoffApps": 5,
+  "playoffYears": [
+   2017,
+   2018,
+   2019,
+   2022,
+   2024
+  ],
+  "divTitles": 2,
+  "sheetApps": 4,
+  "sheetDiv": 2
  },
  {
   "name": "Conner",
@@ -727,8 +783,17 @@
   "tiedSeasons": 2,
   "playoffW": 4,
   "playoffL": 5,
-  "playoffApps": 4,
-  "divTitles": 1
+  "playoffApps": 5,
+  "playoffYears": [
+   2017,
+   2018,
+   2020,
+   2021,
+   2025
+  ],
+  "divTitles": 1,
+  "sheetApps": 4,
+  "sheetDiv": 1
  },
  {
   "name": "Karen",
@@ -831,7 +896,16 @@
   "playoffW": 1,
   "playoffL": 5,
   "playoffApps": 5,
-  "divTitles": 3
+  "playoffYears": [
+   2018,
+   2019,
+   2020,
+   2021,
+   2023
+  ],
+  "divTitles": 2,
+  "sheetApps": 5,
+  "sheetDiv": 3
  },
  {
   "name": "Danny",
@@ -944,7 +1018,16 @@
   "playoffW": 3,
   "playoffL": 5,
   "playoffApps": 5,
-  "divTitles": 1
+  "playoffYears": [
+   2017,
+   2018,
+   2019,
+   2020,
+   2025
+  ],
+  "divTitles": 1,
+  "sheetApps": 5,
+  "sheetDiv": 1
  },
  {
   "name": "Chase",
@@ -967,7 +1050,7 @@
     "pa": 1610.66,
     "pfpg": 105.6,
     "papg": 123.9,
-    "note": "Biggest Loser"
+    "note": null
    },
    {
     "year": 2019,
@@ -1050,14 +1133,23 @@
   "papg": 117.99,
   "titles": 2,
   "runnerUp": 1,
-  "loser": 2,
+  "loser": 1,
   "winningSeasons": 3,
   "losingSeasons": 4,
   "tiedSeasons": 2,
   "playoffW": 7,
   "playoffL": 3,
   "playoffApps": 5,
-  "divTitles": 2
+  "playoffYears": [
+   2020,
+   2021,
+   2022,
+   2023,
+   2024
+  ],
+  "divTitles": 2,
+  "sheetApps": 5,
+  "sheetDiv": 2
  },
  {
   "name": "Caitlyn",
@@ -1120,7 +1212,12 @@
   "playoffW": 0,
   "playoffL": 1,
   "playoffApps": 1,
-  "divTitles": 1
+  "playoffYears": [
+   2025
+  ],
+  "divTitles": 1,
+  "sheetApps": 1,
+  "sheetDiv": 1
  },
  {
   "name": "Dan",
@@ -1153,7 +1250,7 @@
     "pa": 1442.82,
     "pfpg": 110.8,
     "papg": 111,
-    "note": null
+    "note": "Biggest Loser"
    },
    {
     "year": 2020,
@@ -1163,7 +1260,7 @@
     "pa": 1575.68,
     "pfpg": 98.5,
     "papg": 121.2,
-    "note": "Biggest Loser"
+    "note": null
    },
    {
     "year": 2021,
@@ -1203,7 +1300,7 @@
     "pa": 1615.74,
     "pfpg": 106.6,
     "papg": 115.4,
-    "note": null
+    "note": "Biggest Loser"
    },
    {
     "year": 2025,
@@ -1226,13 +1323,18 @@
   "papg": 116.19,
   "titles": 1,
   "runnerUp": 0,
-  "loser": 1,
+  "loser": 2,
   "winningSeasons": 1,
   "losingSeasons": 8,
   "tiedSeasons": 0,
   "playoffW": 2,
   "playoffL": 0,
   "playoffApps": 1,
-  "divTitles": 1
+  "playoffYears": [
+   2025
+  ],
+  "divTitles": 1,
+  "sheetApps": 1,
+  "sheetDiv": 1
  }
 ]

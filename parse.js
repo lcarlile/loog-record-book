@@ -34,9 +34,19 @@ for (const r of rows) {
   }
 }
 
+// ESPN-verified corrections to the spreadsheet. The sheet is exact on W/L/PF/PA
+// (all 96 season rows match the box scores); these three fields were not.
+const ESPN = JSON.parse(fs.readFileSync("espn.json", "utf8"));
+
 const out = [];
 for (const [name, seasons] of Object.entries(managers)) {
   seasons.sort((a,b)=>a.year-b.year);
+  // "Biggest Loser" is the last-place finisher in ESPN's final standings. The sheet
+  // applied that rule in some years and "worst regular-season record" in others.
+  seasons.forEach(s => {
+    if (s.note === "Biggest Loser") s.note = null;
+    if (ESPN.lastPlace[s.year] === name) s.note = "Biggest Loser";
+  });
   const sum = (k)=>seasons.reduce((s,x)=>s+x[k],0);
   const w = sum('w'), l = sum('l');
   const po = blocks['Playoffs'][name] || {w:0,l:0};
@@ -52,8 +62,12 @@ for (const [name, seasons] of Object.entries(managers)) {
     losingSeasons:  seasons.filter(s=>s.w<s.l).length,
     tiedSeasons:    seasons.filter(s=>s.w===s.l).length,
     playoffW: po.w, playoffL: po.l,
-    playoffApps: blocks["Playoff Appearances"][name],
-    divTitles:   blocks["Division Titles"][name],
+    // sheet undercounted playoff appearances by 6 and division titles by 2
+    playoffApps: (ESPN.playoffYears[name] || []).length,
+    playoffYears: ESPN.playoffYears[name] || [],
+    divTitles:   ESPN.divTitles[name],
+    sheetApps:   blocks["Playoff Appearances"][name],
+    sheetDiv:    blocks["Division Titles"][name],
   });
 }
 out.sort((a,b)=>b.pct-a.pct);
