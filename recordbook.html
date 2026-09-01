@@ -1,0 +1,751 @@
+<title>LoOG Record Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#EFF0EC; --surface:#F7F8F5; --sunk:#E4E6E0; --rule:#CDCFC8; --rule-soft:#DEE0DA;
+  --ink:#171A1F; --ink-2:#4F555E; --ink-3:#7C838C;
+  --pos:#B8862B; --pos-rgb:184,134,43;
+  --neg:#2F6DA4; --neg-rgb:47,109,164;
+  --last:#8A322C;
+  --brass-ink:#8A6317;
+  --shadow:0 1px 2px rgba(23,26,31,.06), 0 8px 24px -12px rgba(23,26,31,.18);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#14171C; --surface:#1B1F26; --sunk:#101317; --rule:#2C323B; --rule-soft:#242A32;
+    --ink:#E7E8E3; --ink-2:#A6ACB5; --ink-3:#79808A;
+    --pos:#B8892C; --pos-rgb:184,137,44;
+    --neg:#4E8CC4; --neg-rgb:78,140,196;
+    --last:#C4675C;
+    --brass-ink:#D2A241;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14171C; --surface:#1B1F26; --sunk:#101317; --rule:#2C323B; --rule-soft:#242A32;
+  --ink:#E7E8E3; --ink-2:#A6ACB5; --ink-3:#79808A;
+  --pos:#B8892C; --pos-rgb:184,137,44;
+  --neg:#4E8CC4; --neg-rgb:78,140,196;
+  --last:#C4675C;
+  --brass-ink:#D2A241;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font-family:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif;
+     font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased}
+.wrap{max-width:1140px; margin:0 auto; padding:0 24px}
+h1,h2,h3{font-family:"Fraunces","Iowan Old Style",Georgia,serif; text-wrap:balance; margin:0; font-weight:600}
+.num{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace; font-variant-numeric:tabular-nums}
+.eyebrow{font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);
+         font-weight:700; font-family:"Karla",sans-serif}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--pos); outline-offset:2px; border-radius:2px}
+
+/* ---------- masthead ---------- */
+.masthead{border-bottom:1px solid var(--rule); background:var(--surface)}
+.masthead .wrap{padding-top:44px; padding-bottom:32px}
+.crest{display:flex; align-items:center; gap:10px; margin-bottom:20px}
+.crest span{font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3); font-weight:700}
+.crest .bar{height:1px; background:var(--rule); flex:1}
+h1{font-size:clamp(34px,6.2vw,68px); line-height:1.02; letter-spacing:-.02em; font-weight:800}
+h1 em{font-style:normal; color:var(--brass-ink)}
+.dek{margin:14px 0 0; max-width:60ch; color:var(--ink-2); font-size:16px}
+.tiles{display:flex; flex-wrap:wrap; gap:0; margin-top:32px; border-top:1px solid var(--rule)}
+.tile{flex:1 1 150px; padding:18px 20px 16px; border-right:1px solid var(--rule-soft)}
+.tile:last-child{border-right:0}
+.tile b{display:block; font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums;
+        font-size:30px; font-weight:500; letter-spacing:-.02em; line-height:1}
+.tile small{display:block; margin-top:7px; font-size:11px; letter-spacing:.13em;
+            text-transform:uppercase; color:var(--ink-3); font-weight:700}
+
+/* ---------- nav ---------- */
+nav{position:sticky; top:0; z-index:40; background:var(--bg); border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex; gap:2px; overflow-x:auto; scrollbar-width:none}
+nav .wrap::-webkit-scrollbar{display:none}
+nav a{padding:13px 14px; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+      font-weight:700; color:var(--ink-3); text-decoration:none; white-space:nowrap;
+      border-bottom:2px solid transparent; transition:color .15s, border-color .15s}
+nav a:hover{color:var(--ink)}
+nav a.on{color:var(--ink); border-bottom-color:var(--pos)}
+
+/* ---------- sections ---------- */
+section{padding:64px 0 8px; scroll-margin-top:52px}
+.head{display:flex; align-items:baseline; gap:16px; margin-bottom:6px}
+.head h2{font-size:clamp(23px,3vw,31px); letter-spacing:-.015em}
+.head .rule{flex:1; height:1px; background:var(--rule)}
+.note{color:var(--ink-2); font-size:14px; max-width:66ch; margin:0 0 26px}
+
+/* ---------- champions ribbon ---------- */
+.ribbon{display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr)); gap:1px;
+        background:var(--rule); border:1px solid var(--rule); border-radius:3px; overflow:hidden}
+.yr{background:var(--surface); padding:16px 12px 14px; text-align:center; position:relative}
+.yr .y{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.1em;
+       color:var(--ink-3); font-weight:600}
+.yr .champ{font-family:"Fraunces",Georgia,serif; font-size:19px; font-weight:600;
+           margin-top:9px; color:var(--brass-ink); line-height:1.15}
+.yr .rec{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink-3); margin-top:3px}
+.yr .sub{margin-top:11px; padding-top:9px; border-top:1px dotted var(--rule);
+         font-size:11px; color:var(--ink-3); line-height:1.5}
+.yr .sub i{font-style:normal; color:var(--ink-2)}
+.yr .field{position:absolute; top:8px; right:9px; font-family:"IBM Plex Mono",monospace;
+           font-size:9.5px; color:var(--ink-3); opacity:.8}
+
+/* ---------- tables ---------- */
+.scroll{overflow-x:auto; border:1px solid var(--rule); border-radius:3px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:14px}
+th,td{padding:9px 11px; text-align:right; white-space:nowrap; border-bottom:1px solid var(--rule-soft)}
+th:first-child,td:first-child{text-align:left}
+thead th{position:sticky; top:0; background:var(--sunk); font-size:10.5px; letter-spacing:.09em;
+         text-transform:uppercase; color:var(--ink-3); font-weight:700; border-bottom:1px solid var(--rule); z-index:2}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:rgba(var(--pos-rgb),.05)}
+td.name{font-weight:700}
+.sortable th[data-k]{cursor:pointer; user-select:none}
+.sortable th[data-k]:hover{color:var(--ink)}
+.sortable th.act{color:var(--ink)}
+.sortable th.act::after{content:"\25BE"; margin-left:4px; font-size:9px}
+.sortable th.act.asc::after{content:"\25B4"}
+.rank{color:var(--ink-3); font-size:12px; width:1px; padding-right:0}
+.pill{display:inline-block; min-width:20px; padding:1px 6px; border-radius:2px; font-size:11.5px;
+      font-weight:700; font-family:"IBM Plex Mono",monospace}
+.pill.gold{background:rgba(var(--pos-rgb),.16); color:var(--brass-ink)}
+.pill.zero{color:var(--ink-3)}
+
+/* ---------- head to head ---------- */
+.h2h{border-collapse:separate; border-spacing:2px; font-size:12px}
+.h2h th{background:transparent; border:0; position:static; padding:5px 7px; font-size:10.5px}
+.h2h th.col{writing-mode:vertical-rl; transform:rotate(180deg); padding:7px 4px; text-align:left}
+.h2h th.row{text-align:right; font-weight:700; color:var(--ink); font-size:12px; text-transform:none; letter-spacing:0}
+.h2h td{border:0; border-radius:2px; text-align:center; padding:7px 6px; min-width:52px;
+        font-family:"IBM Plex Mono",monospace; font-weight:500; color:var(--ink)}
+.h2h td.self{background:repeating-linear-gradient(45deg,transparent,transparent 3px,var(--rule-soft) 3px,var(--rule-soft) 4px)}
+.h2h td.hot{outline:2px solid var(--ink); outline-offset:-2px}
+.legend{display:flex; align-items:center; gap:12px; margin:18px 0 0; flex-wrap:wrap;
+        font-size:11.5px; color:var(--ink-3)}
+.ramp{display:flex; height:9px; width:190px; border-radius:2px; overflow:hidden}
+.ramp i{flex:1}
+
+/* ---------- manager cards ---------- */
+.cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(258px,1fr)); gap:14px}
+.card{background:var(--surface); border:1px solid var(--rule); border-radius:3px; padding:16px 16px 12px;
+      text-align:left; font:inherit; color:inherit; cursor:pointer; width:100%;
+      transition:border-color .15s, transform .15s, box-shadow .15s}
+.card:hover{border-color:var(--ink-3); transform:translateY(-2px); box-shadow:var(--shadow)}
+.card[aria-expanded="true"]{border-color:var(--pos)}
+.card .top{display:flex; justify-content:space-between; align-items:baseline; gap:8px}
+.card .who{font-family:"Fraunces",Georgia,serif; font-size:21px; font-weight:600}
+.card .pct{font-family:"IBM Plex Mono",monospace; font-size:15px; font-weight:600}
+.card .rec{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-3); margin-top:2px}
+.card .trophies{display:flex; gap:4px; margin-top:10px; min-height:19px; flex-wrap:wrap}
+.tag{font-size:10px; letter-spacing:.07em; text-transform:uppercase; font-weight:700;
+     padding:2px 6px; border-radius:2px}
+.tag.t{background:rgba(var(--pos-rgb),.18); color:var(--brass-ink)}
+.tag.r{background:rgba(var(--neg-rgb),.15); color:var(--neg)}
+.tag.l{background:color-mix(in srgb, var(--last) 15%, transparent); color:var(--last)}
+.spark{display:block; width:100%; height:52px; margin-top:10px}
+
+/* ---------- detail ---------- */
+.detail{margin-top:16px; border:1px solid var(--pos); border-radius:3px; background:var(--surface); overflow:hidden}
+.detail .dhead{display:flex; flex-wrap:wrap; align-items:baseline; gap:14px; padding:16px 18px;
+               border-bottom:1px solid var(--rule); background:var(--sunk)}
+.detail .dhead h3{font-size:26px}
+.detail .dhead .k{font-family:"IBM Plex Mono",monospace; font-size:12.5px; color:var(--ink-2)}
+.detail .dhead button{margin-left:auto; background:none; border:1px solid var(--rule); color:var(--ink-2);
+                      font:inherit; font-size:12px; padding:4px 11px; border-radius:2px; cursor:pointer}
+.detail .dhead button:hover{color:var(--ink); border-color:var(--ink-3)}
+.detail .scroll{border:0; border-radius:0}
+.facts{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+       border-top:1px solid var(--rule); background:var(--surface)}
+.facts div{padding:13px 18px; border-right:1px solid var(--rule-soft)}
+.facts b{display:block; font-family:"IBM Plex Mono",monospace; font-size:16px; font-weight:500; margin-top:3px}
+
+/* ---------- records ---------- */
+.recs{display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:14px}
+.rec-card{background:var(--surface); border:1px solid var(--rule); border-radius:3px; padding:15px 17px 13px}
+.rec-card h3{font-size:13px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3);
+             font-family:"Karla",sans-serif; font-weight:700; margin-bottom:11px}
+.rec-card ol{margin:0; padding:0; list-style:none}
+.rec-card li{display:flex; align-items:baseline; gap:9px; padding:6px 0; border-bottom:1px dotted var(--rule-soft)}
+.rec-card li:last-child{border-bottom:0}
+.rec-card li .i{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink-3); width:14px; flex:none}
+.rec-card li .t{flex:1; font-size:13.5px; line-height:1.4}
+.rec-card li .t b{font-weight:700}
+.rec-card li .t em{font-style:normal; color:var(--ink-3); font-size:12px}
+.rec-card li .v{font-family:"IBM Plex Mono",monospace; font-size:14px; font-weight:600; flex:none}
+.v.p{color:var(--brass-ink)} .v.n{color:var(--neg)}
+
+/* ---------- luck ---------- */
+.luck{display:grid; gap:3px}
+.luck-row{display:grid; grid-template-columns:74px 1fr 62px; align-items:center; gap:10px}
+.luck-row .nm{font-size:13px; font-weight:700; text-align:right}
+.luck-bar{position:relative; height:22px; background:var(--sunk); border-radius:2px}
+.luck-bar .mid{position:absolute; left:50%; top:0; bottom:0; width:1px; background:var(--rule)}
+.luck-bar .b{position:absolute; top:4px; bottom:4px; border-radius:2px}
+.luck-row .val{font-family:"IBM Plex Mono",monospace; font-size:12.5px; text-align:right}
+
+/* ---------- season browser ---------- */
+.years{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:18px}
+.years button{font:inherit; font-family:"IBM Plex Mono",monospace; font-size:13px; padding:5px 12px;
+              background:var(--surface); border:1px solid var(--rule); border-radius:2px;
+              color:var(--ink-2); cursor:pointer; transition:.15s}
+.years button:hover{color:var(--ink); border-color:var(--ink-3)}
+.years button.on{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+
+footer{margin-top:72px; border-top:1px solid var(--rule); padding:26px 0 60px; color:var(--ink-3); font-size:13px}
+footer .wrap{display:grid; gap:9px}
+footer b{color:var(--ink-2)}
+
+/* ---------- responsive list components ---------- */
+.only-narrow{display:none}
+.msort{display:none; align-items:center; gap:10px; margin-bottom:14px}
+.msort label{font-size:11px; letter-spacing:.13em; text-transform:uppercase;
+             color:var(--ink-3); font-weight:700; flex:none}
+.msort select{font:inherit; font-size:15px; flex:1; min-height:44px; padding:9px 11px;
+              border:1px solid var(--rule); border-radius:3px; background:var(--surface); color:var(--ink)}
+
+.mlist{display:grid; gap:8px}
+.mrow{display:block; width:100%; text-align:left; font:inherit; color:inherit; cursor:pointer;
+      background:var(--surface); border:1px solid var(--rule); border-radius:3px; padding:13px 14px}
+.mrow:active{border-color:var(--pos)}
+.mrow .l1{display:flex; align-items:baseline; gap:10px}
+.mrow .rk{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-3);
+          min-width:17px; flex:none}
+.mrow .nm{font-family:"Fraunces",Georgia,serif; font-size:20px; font-weight:600; flex:1; line-height:1.1}
+.mrow .big{font-family:"IBM Plex Mono",monospace; font-size:17px; font-weight:600; flex:none}
+.mrow .l2{margin-top:4px; margin-left:27px; font-family:"IBM Plex Mono",monospace;
+          font-size:12.5px; color:var(--ink-3)}
+.mrow .l3{margin-top:10px; margin-left:27px; display:flex; gap:5px; flex-wrap:wrap}
+.chip{display:inline-flex; align-items:baseline; gap:5px; background:var(--sunk);
+      border-radius:2px; padding:4px 8px; font-family:"IBM Plex Mono",monospace;
+      font-size:12.5px; font-variant-numeric:tabular-nums}
+.chip i{font-style:normal; font-family:"Karla",sans-serif; font-size:9.5px; letter-spacing:.09em;
+        text-transform:uppercase; color:var(--ink-3); font-weight:700}
+.chip.gold{background:rgba(var(--pos-rgb),.16)} .chip.gold b{color:var(--brass-ink)}
+
+.picker{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px}
+.picker button{font:inherit; font-size:14px; min-height:40px; padding:7px 14px; border-radius:3px;
+               border:1px solid var(--rule); background:var(--surface); color:var(--ink-2); cursor:pointer}
+.picker button.on{background:var(--ink); color:var(--bg); border-color:var(--ink); font-weight:700}
+.oppr{display:grid; grid-template-columns:1fr auto 52px; gap:10px; align-items:center;
+      padding:11px 13px; border-radius:3px; border:1px solid var(--rule-soft)}
+.oppr .who{font-size:15.5px; font-weight:700}
+.oppr .rec{font-family:"IBM Plex Mono",monospace; font-size:15px; font-weight:600; font-variant-numeric:tabular-nums}
+.oppr .p{font-family:"IBM Plex Mono",monospace; font-size:12.5px; color:var(--ink-2); text-align:right}
+.swipe{display:none; align-items:center; gap:7px; font-size:10.5px; letter-spacing:.11em;
+       text-transform:uppercase; color:var(--ink-3); font-weight:700; margin:0 0 8px}
+
+@media (max-width:700px){
+  .wrap{padding:0 16px}
+  body{font-size:16px}
+  section{padding-top:48px; scroll-margin-top:48px}
+  .only-wide{display:none}
+  .only-narrow{display:inline}
+  .msort{display:flex}
+
+  .tiles{display:grid; grid-template-columns:1fr 1fr}
+  .tile{border-bottom:1px solid var(--rule-soft); padding:14px 16px 13px}
+  .tile:nth-child(2n){border-right:0}
+  .tile:last-child:nth-child(odd){grid-column:1 / -1}
+  .tile b{font-size:26px}
+
+  /* champions: two roomy columns instead of nine cramped ones */
+  .ribbon{grid-template-columns:1fr 1fr}
+  .yr{padding:14px 12px 13px}
+  .yr .champ{font-size:21px}
+  .yr .sub{font-size:12px}
+
+  nav a{padding:14px 13px; font-size:12.5px}
+  .years{display:grid; grid-template-columns:repeat(auto-fill,minmax(72px,1fr)); gap:7px}
+  .years button{min-height:44px; padding:8px 6px; font-size:14px}
+
+  /* remaining wide table (career detail) gets a pinned first column + a swipe hint */
+  .swipe{display:flex}
+  .detail table th:first-child,
+  .detail table td:first-child{position:sticky; left:0; background:var(--surface)}
+  .detail thead th:first-child{background:var(--sunk); z-index:3}
+  .detail .dhead{padding:14px 16px}
+  .detail .dhead h3{font-size:24px}
+  .detail .dhead button{min-height:40px; padding:6px 14px}
+  .facts div{border-right:0; border-bottom:1px solid var(--rule-soft); padding:12px 16px}
+
+  .cards{gap:10px}
+  .recs{gap:10px}
+  .rec-card li{padding:8px 0}
+  .luck-row{grid-template-columns:64px 1fr 52px; gap:8px}
+  .luck-row .nm{font-size:13px}
+  .legend{font-size:12px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="crest"><span>Est. 2017</span><i class="bar"></i><span>Tenth Season</span></div>
+    <h1>League of<br>Ordinary <em>Gentlemen</em></h1>
+    <p class="dek">Nine seasons on the books. Every win, every collapse, every trophy &mdash; and the
+      head-to-head ledger that settles the group chat.</p>
+    <div class="tiles" id="tiles"></div>
+  </div>
+</header>
+
+<nav><div class="wrap" id="nav">
+  <a href="#champions" class="on">Champions</a>
+  <a href="#alltime">All-Time</a>
+  <a href="#h2h">Head to Head</a>
+  <a href="#managers">Managers</a>
+  <a href="#records">Record Book</a>
+  <a href="#luck">Luck</a>
+  <a href="#seasons">Seasons</a>
+</div></nav>
+
+<main class="wrap">
+
+  <section id="champions">
+    <div class="head"><h2>Hall of Champions</h2><i class="rule"></i></div>
+    <p class="note">One name per year, nine years running. The small number in the corner is how many
+      teams that title had to beat &mdash; the league grew from eight to twelve.</p>
+    <div class="ribbon" id="ribbon"></div>
+  </section>
+
+  <section id="alltime">
+    <div class="head"><h2>All-Time Standings</h2><i class="rule"></i></div>
+    <p class="note"><span class="only-wide">Click any column to sort.</span><span class="only-narrow">Tap a manager for their full career.</span>
+      Regular season and playoffs combined, exactly as recorded in the league ledger.</p>
+    <div class="msort"><label for="sortsel">Sort by</label><select id="sortsel"></select></div>
+    <div id="lbwrap"></div>
+  </section>
+
+  <section id="h2h">
+    <div class="head"><h2>Head to Head</h2><i class="rule"></i></div>
+    <p class="note"><span class="only-wide">Every meeting since 2017, pulled from the ESPN box scores.
+      Read across the row: that manager's record against each opponent.</span><span class="only-narrow">Every
+      meeting since 2017, pulled from the ESPN box scores. Pick a manager to see who they own.</span>
+      Gold means a winning record.</p>
+    <div id="h2hwrap"></div>
+    <div class="legend">
+      <span>Losing record</span>
+      <span class="ramp" id="ramp"></span>
+      <span>Winning record</span>
+    </div>
+  </section>
+
+  <section id="managers">
+    <div class="head"><h2>The Managers</h2><i class="rule"></i></div>
+    <p class="note">Twelve people have taken a team. The line under each name is their win percentage
+      by season &mdash; the dotted rule is .500. Click for the full career.</p>
+    <div class="cards" id="cards"></div>
+    <div id="detail"></div>
+  </section>
+
+  <section id="records">
+    <div class="head"><h2>The Record Book</h2><i class="rule"></i></div>
+    <p class="note">Single-week extremes from 788 box scores &mdash; the things a season-totals sheet can't
+      tell you.</p>
+    <div class="recs" id="recs"></div>
+  </section>
+
+  <section id="luck">
+    <div class="head"><h2>Luck of the Schedule</h2><i class="rule"></i></div>
+    <p class="note">Every week, compare each manager's score against <em>everyone</em> that week, not
+      just their opponent. That gives the record they deserved. The bar is what they actually got,
+      minus what they earned &mdash; gold means the schedule was kind.</p>
+    <div class="luck" id="luck"></div>
+  </section>
+
+  <section id="seasons">
+    <div class="head"><h2>Season by Season</h2><i class="rule"></i></div>
+    <p class="note">Final standings for any year, sorted by record then points scored.</p>
+    <div class="years" id="years"></div>
+    <div id="seasonwrap"></div>
+  </section>
+
+</main>
+
+<footer><div class="wrap">
+  <div><b>Sources.</b> Season records from the league record-book spreadsheet; weekly box scores,
+    head-to-head and streaks pulled from ESPN league 1197565 (2017&ndash;2025).</div>
+  <div><b>Two notes on the spreadsheet.</b> Seasons finishing exactly .500 are counted here as their
+    own category rather than as losses &mdash; that moves Karen from four losing seasons to three.
+    And 2024 is the only year with no Biggest Loser recorded.</div>
+</div></footer>
+
+<script>
+const DATA = {"managers":[{"name":"Logan","seasons":[{"year":2017,"w":11,"l":2,"pf":1603.74,"pa":1330.4,"pfpg":123.4,"papg":102.3,"note":"Runner Up"},{"year":2018,"w":7,"l":6,"pf":1612.92,"pa":1686.62,"pfpg":124.1,"papg":129.7,"note":null},{"year":2019,"w":8,"l":5,"pf":1504.98,"pa":1461.72,"pfpg":115.8,"papg":112.4,"note":"Runner Up"},{"year":2020,"w":10,"l":3,"pf":1792.28,"pa":1492.12,"pfpg":137.9,"papg":114.8,"note":"Champion"},{"year":2021,"w":8,"l":6,"pf":1736.2,"pa":1622.84,"pfpg":124,"papg":115.9,"note":"Champion"},{"year":2022,"w":9,"l":5,"pf":1651.3,"pa":1499.86,"pfpg":118,"papg":107.1,"note":null},{"year":2023,"w":8,"l":6,"pf":1679.6,"pa":1669.92,"pfpg":120,"papg":119.3,"note":null},{"year":2024,"w":5,"l":9,"pf":1514.44,"pa":1682.92,"pfpg":108.2,"papg":120.2,"note":null},{"year":2025,"w":8,"l":6,"pf":1534.86,"pa":1454.08,"pfpg":109.6,"papg":103.9,"note":null}],"w":74,"l":48,"g":122,"pct":0.6065573770491803,"pf":14630.32,"pa":13900.48,"pfpg":119.92,"papg":113.94,"titles":2,"runnerUp":2,"loser":0,"winningSeasons":8,"losingSeasons":1,"tiedSeasons":0,"playoffW":7,"playoffL":6,"playoffApps":7,"divTitles":6},{"name":"Kaila","seasons":[{"year":2022,"w":7,"l":7,"pf":1561.74,"pa":1562.02,"pfpg":111.6,"papg":111.6,"note":null},{"year":2023,"w":9,"l":5,"pf":1561.88,"pa":1514.1,"pfpg":111.6,"papg":108.1,"note":null},{"year":2024,"w":8,"l":6,"pf":1639.44,"pa":1527.84,"pfpg":117.1,"papg":109.1,"note":null},{"year":2025,"w":8,"l":6,"pf":1569.72,"pa":1538.82,"pfpg":112.1,"papg":109.9,"note":"Runner Up"}],"w":32,"l":24,"g":56,"pct":0.5714285714285714,"pf":6332.78,"pa":6142.78,"pfpg":113.09,"papg":109.69,"titles":0,"runnerUp":1,"loser":0,"winningSeasons":3,"losingSeasons":0,"tiedSeasons":1,"playoffW":2,"playoffL":3,"playoffApps":2,"divTitles":2},{"name":"Steve","seasons":[{"year":2017,"w":9,"l":4,"pf":1447.26,"pa":1311.44,"pfpg":111.3,"papg":100.9,"note":null},{"year":2018,"w":3,"l":10,"pf":1445.32,"pa":1664.94,"pfpg":111.2,"papg":128.1,"note":null},{"year":2019,"w":4,"l":9,"pf":1405.44,"pa":1546.46,"pfpg":108.1,"papg":119,"note":"Biggest Loser"},{"year":2020,"w":5,"l":8,"pf":1418.9,"pa":1610.5,"pfpg":109.1,"papg":123.9,"note":null},{"year":2021,"w":8,"l":6,"pf":1782.58,"pa":1639.94,"pfpg":127.3,"papg":117.1,"note":null},{"year":2022,"w":9,"l":5,"pf":1761.62,"pa":1585.72,"pfpg":125.8,"papg":113.3,"note":null},{"year":2023,"w":9,"l":5,"pf":1596.32,"pa":1486.24,"pfpg":114,"papg":106.2,"note":"Runner Up"},{"year":2024,"w":12,"l":2,"pf":1782.84,"pa":1521.8,"pfpg":127.3,"papg":108.7,"note":"Runner Up"},{"year":2025,"w":10,"l":4,"pf":1591.88,"pa":1451.52,"pfpg":113.7,"papg":103.7,"note":null}],"w":69,"l":53,"g":122,"pct":0.5655737704918032,"pf":14232.16,"pa":13818.56,"pfpg":116.66,"papg":113.27,"titles":0,"runnerUp":2,"loser":1,"winningSeasons":6,"losingSeasons":3,"tiedSeasons":0,"playoffW":4,"playoffL":6,"playoffApps":5,"divTitles":3},{"name":"Kim","seasons":[{"year":2018,"w":6,"l":7,"pf":1534.86,"pa":1551.38,"pfpg":118.1,"papg":119.3,"note":null},{"year":2019,"w":7,"l":6,"pf":1576.4,"pa":1532.24,"pfpg":121.3,"papg":117.9,"note":null},{"year":2020,"w":7,"l":6,"pf":1428.62,"pa":1571.4,"pfpg":109.9,"papg":120.9,"note":null},{"year":2021,"w":8,"l":6,"pf":1536.74,"pa":1508.5,"pfpg":109.8,"papg":107.8,"note":null},{"year":2022,"w":5,"l":9,"pf":1430.72,"pa":1693.12,"pfpg":102.2,"papg":120.9,"note":null},{"year":2023,"w":7,"l":7,"pf":1646.54,"pa":1502.26,"pfpg":117.6,"papg":107.3,"note":null},{"year":2024,"w":11,"l":3,"pf":1762.82,"pa":1503.18,"pfpg":125.9,"papg":107.4,"note":null},{"year":2025,"w":9,"l":5,"pf":1518.2,"pa":1520.2,"pfpg":108.4,"papg":108.6,"note":null}],"w":60,"l":49,"g":109,"pct":0.5504587155963303,"pf":12434.9,"pa":12382.28,"pfpg":114.08,"papg":113.6,"titles":0,"runnerUp":0,"loser":0,"winningSeasons":5,"losingSeasons":2,"tiedSeasons":1,"playoffW":2,"playoffL":5,"playoffApps":5,"divTitles":1},{"name":"Zach","seasons":[{"year":2017,"w":4,"l":9,"pf":1323.56,"pa":1441.96,"pfpg":101.8,"papg":110.9,"note":null},{"year":2018,"w":9,"l":4,"pf":1745.92,"pa":1600.72,"pfpg":134.3,"papg":123.1,"note":"Champion"},{"year":2019,"w":11,"l":2,"pf":1701.22,"pa":1501.46,"pfpg":130.9,"papg":115.5,"note":"Champion"},{"year":2020,"w":6,"l":7,"pf":1528.9,"pa":1530.1,"pfpg":117.6,"papg":117.7,"note":null},{"year":2021,"w":7,"l":7,"pf":1629.66,"pa":1821.24,"pfpg":116.4,"papg":130.1,"note":null},{"year":2022,"w":12,"l":2,"pf":1723.58,"pa":1440.32,"pfpg":123.1,"papg":102.9,"note":"Runner Up"},{"year":2023,"w":5,"l":9,"pf":1564.36,"pa":1709,"pfpg":111.7,"papg":122.1,"note":null},{"year":2024,"w":6,"l":8,"pf":1755.48,"pa":1675.58,"pfpg":125.4,"papg":119.7,"note":"Champion"},{"year":2025,"w":4,"l":10,"pf":1450.24,"pa":1668.62,"pfpg":103.6,"papg":119.2,"note":null}],"w":64,"l":58,"g":122,"pct":0.5245901639344263,"pf":14422.92,"pa":14389,"pfpg":118.22,"papg":117.94,"titles":3,"runnerUp":1,"loser":0,"winningSeasons":3,"losingSeasons":5,"tiedSeasons":1,"playoffW":8,"playoffL":2,"playoffApps":4,"divTitles":3},{"name":"Jordan","seasons":[{"year":2017,"w":11,"l":2,"pf":1404.1,"pa":1333.72,"pfpg":108,"papg":102.6,"note":"Champion"},{"year":2018,"w":9,"l":4,"pf":1668.18,"pa":1489.26,"pfpg":128.3,"papg":114.6,"note":null},{"year":2019,"w":7,"l":6,"pf":1439.1,"pa":1590.16,"pfpg":110.7,"papg":122.3,"note":null},{"year":2020,"w":6,"l":7,"pf":1511.02,"pa":1543.6,"pfpg":116.2,"papg":118.7,"note":null},{"year":2021,"w":4,"l":10,"pf":1492.6,"pa":1666.64,"pfpg":106.6,"papg":119,"note":"Biggest Loser"},{"year":2022,"w":4,"l":10,"pf":1553.38,"pa":1639.72,"pfpg":111,"papg":117.1,"note":null},{"year":2023,"w":5,"l":9,"pf":1563.66,"pa":1568.92,"pfpg":111.7,"papg":112.1,"note":null},{"year":2024,"w":8,"l":6,"pf":1518.52,"pa":1558.44,"pfpg":108.5,"papg":111.3,"note":null},{"year":2025,"w":6,"l":8,"pf":1411.72,"pa":1389.5,"pfpg":100.8,"papg":99.3,"note":"Biggest Loser"}],"w":60,"l":62,"g":122,"pct":0.4918032786885246,"pf":13562.28,"pa":13779.96,"pfpg":111.17,"papg":112.95,"titles":1,"runnerUp":0,"loser":2,"winningSeasons":4,"losingSeasons":5,"tiedSeasons":0,"playoffW":5,"playoffL":4,"playoffApps":4,"divTitles":2},{"name":"Conner","seasons":[{"year":2017,"w":7,"l":6,"pf":1457.3,"pa":1295.78,"pfpg":112.1,"papg":99.7,"note":null},{"year":2018,"w":8,"l":5,"pf":1696.14,"pa":1599.84,"pfpg":130.5,"papg":123.1,"note":null},{"year":2019,"w":5,"l":8,"pf":1524.74,"pa":1723.06,"pfpg":117.3,"papg":132.5,"note":null},{"year":2020,"w":7,"l":6,"pf":1585.52,"pa":1505.02,"pfpg":122,"papg":115.8,"note":"Runner Up"},{"year":2021,"w":7,"l":7,"pf":1611.9,"pa":1597.06,"pfpg":115.1,"papg":114.1,"note":null},{"year":2022,"w":9,"l":5,"pf":1520.74,"pa":1450.06,"pfpg":108.6,"papg":103.6,"note":null},{"year":2023,"w":7,"l":7,"pf":1529.64,"pa":1541.14,"pfpg":109.3,"papg":110.1,"note":null},{"year":2024,"w":4,"l":10,"pf":1523.2,"pa":1598.52,"pfpg":108.8,"papg":114.2,"note":null},{"year":2025,"w":6,"l":8,"pf":1551.62,"pa":1579.66,"pfpg":110.8,"papg":112.8,"note":null}],"w":60,"l":62,"g":122,"pct":0.4918032786885246,"pf":14000.8,"pa":13890.14,"pfpg":114.76,"papg":113.85,"titles":0,"runnerUp":1,"loser":0,"winningSeasons":4,"losingSeasons":3,"tiedSeasons":2,"playoffW":4,"playoffL":5,"playoffApps":4,"divTitles":1},{"name":"Karen","seasons":[{"year":2018,"w":7,"l":6,"pf":1542.56,"pa":1511.04,"pfpg":118.7,"papg":116.2,"note":null},{"year":2019,"w":5,"l":8,"pf":1543.54,"pa":1471.46,"pfpg":118.7,"papg":113.2,"note":null},{"year":2020,"w":7,"l":6,"pf":1656.04,"pa":1563.28,"pfpg":127.4,"papg":120.3,"note":null},{"year":2021,"w":9,"l":5,"pf":1756,"pa":1706.24,"pfpg":125.4,"papg":121.9,"note":null},{"year":2022,"w":4,"l":10,"pf":1455.98,"pa":1621.22,"pfpg":104,"papg":115.8,"note":"Biggest Loser"},{"year":2023,"w":8,"l":6,"pf":1444.12,"pa":1563.6,"pfpg":103.2,"papg":111.7,"note":null},{"year":2024,"w":7,"l":7,"pf":1653.2,"pa":1622.04,"pfpg":118.1,"papg":115.9,"note":null},{"year":2025,"w":4,"l":10,"pf":1444.1,"pa":1685.92,"pfpg":103.1,"papg":120.4,"note":null}],"w":51,"l":58,"g":109,"pct":0.46788990825688076,"pf":12495.54,"pa":12744.8,"pfpg":114.64,"papg":116.92,"titles":0,"runnerUp":0,"loser":1,"winningSeasons":4,"losingSeasons":3,"tiedSeasons":1,"playoffW":1,"playoffL":5,"playoffApps":5,"divTitles":3},{"name":"Danny","seasons":[{"year":2017,"w":5,"l":8,"pf":1225.42,"pa":1297.16,"pfpg":94.3,"papg":99.8,"note":null},{"year":2018,"w":9,"l":4,"pf":1829.96,"pa":1546.18,"pfpg":140.8,"papg":118.9,"note":"Runner Up"},{"year":2019,"w":7,"l":6,"pf":1641.4,"pa":1474.86,"pfpg":126.3,"papg":113.5,"note":null},{"year":2020,"w":7,"l":6,"pf":1653.08,"pa":1555.42,"pfpg":127.2,"papg":119.6,"note":null},{"year":2021,"w":6,"l":8,"pf":1676.66,"pa":1615.74,"pfpg":119.8,"papg":115.4,"note":null},{"year":2022,"w":6,"l":8,"pf":1435.64,"pa":1556.28,"pfpg":102.5,"papg":111.2,"note":null},{"year":2023,"w":7,"l":7,"pf":1678.52,"pa":1590.02,"pfpg":119.9,"papg":113.6,"note":null},{"year":2024,"w":4,"l":10,"pf":1340.86,"pa":1669.72,"pfpg":95.8,"papg":119.3,"note":null},{"year":2025,"w":5,"l":9,"pf":1577.48,"pa":1640.3,"pfpg":112.7,"papg":117.2,"note":null}],"w":56,"l":66,"g":122,"pct":0.45901639344262296,"pf":14059.02,"pa":13945.68,"pfpg":115.24,"papg":114.31,"titles":0,"runnerUp":1,"loser":0,"winningSeasons":3,"losingSeasons":5,"tiedSeasons":1,"playoffW":3,"playoffL":5,"playoffApps":5,"divTitles":1},{"name":"Chase","seasons":[{"year":2017,"w":2,"l":11,"pf":1282.46,"pa":1480.24,"pfpg":98.7,"papg":113.9,"note":"Biggest Loser"},{"year":2018,"w":3,"l":10,"pf":1372.86,"pa":1610.66,"pfpg":105.6,"papg":123.9,"note":"Biggest Loser"},{"year":2019,"w":5,"l":8,"pf":1532.16,"pa":1565.24,"pfpg":117.9,"papg":120.4,"note":null},{"year":2020,"w":7,"l":6,"pf":1558.9,"pa":1467.28,"pfpg":119.9,"papg":112.9,"note":null},{"year":2021,"w":7,"l":7,"pf":1790.84,"pa":1789.14,"pfpg":127.9,"papg":127.8,"note":"Runner Up"},{"year":2022,"w":9,"l":5,"pf":1830,"pa":1691.24,"pfpg":130.7,"papg":120.8,"note":"Champion"},{"year":2023,"w":10,"l":4,"pf":1740.62,"pa":1560.94,"pfpg":124.3,"papg":111.5,"note":"Champion"},{"year":2024,"w":7,"l":7,"pf":1763.74,"pa":1690.72,"pfpg":126,"papg":120.8,"note":null},{"year":2025,"w":6,"l":8,"pf":1609.44,"pa":1539.44,"pfpg":115,"papg":110,"note":null}],"w":56,"l":66,"g":122,"pct":0.45901639344262296,"pf":14481.02,"pa":14394.9,"pfpg":118.7,"papg":117.99,"titles":2,"runnerUp":1,"loser":2,"winningSeasons":3,"losingSeasons":4,"tiedSeasons":2,"playoffW":7,"playoffL":3,"playoffApps":5,"divTitles":2},{"name":"Caitlyn","seasons":[{"year":2022,"w":6,"l":8,"pf":1441.2,"pa":1435.96,"pfpg":102.9,"papg":102.6,"note":null},{"year":2023,"w":3,"l":11,"pf":1329.12,"pa":1562.36,"pfpg":94.9,"papg":111.6,"note":"Biggest Loser"},{"year":2024,"w":6,"l":8,"pf":1547.02,"pa":1627.06,"pfpg":110.5,"papg":116.2,"note":null},{"year":2025,"w":8,"l":6,"pf":1648.74,"pa":1547.94,"pfpg":117.8,"papg":110.6,"note":null}],"w":23,"l":33,"g":56,"pct":0.4107142857142857,"pf":5966.08,"pa":6173.32,"pfpg":106.54,"papg":110.24,"titles":0,"runnerUp":0,"loser":1,"winningSeasons":1,"losingSeasons":3,"tiedSeasons":0,"playoffW":0,"playoffL":1,"playoffApps":1,"divTitles":1},{"name":"Dan","seasons":[{"year":2017,"w":3,"l":10,"pf":1220.76,"pa":1473.9,"pfpg":93.9,"papg":113.4,"note":null},{"year":2018,"w":4,"l":9,"pf":1507.1,"pa":1695.18,"pfpg":115.9,"papg":130.4,"note":null},{"year":2019,"w":6,"l":7,"pf":1440.5,"pa":1442.82,"pfpg":110.8,"papg":111,"note":null},{"year":2020,"w":3,"l":10,"pf":1281.14,"pa":1575.68,"pfpg":98.5,"papg":121.2,"note":"Biggest Loser"},{"year":2021,"w":6,"l":8,"pf":1577.6,"pa":1623.44,"pfpg":112.7,"papg":116,"note":null},{"year":2022,"w":4,"l":10,"pf":1367.1,"pa":1557.48,"pfpg":97.6,"papg":111.2,"note":null},{"year":2023,"w":6,"l":8,"pf":1536.32,"pa":1602.2,"pfpg":109.7,"papg":114.4,"note":null},{"year":2024,"w":6,"l":8,"pf":1492,"pa":1615.74,"pfpg":106.6,"papg":115.4,"note":null},{"year":2025,"w":10,"l":4,"pf":1697.04,"pa":1589.04,"pfpg":121.2,"papg":113.5,"note":"Champion"}],"w":48,"l":74,"g":122,"pct":0.39344262295081966,"pf":13119.56,"pa":14175.48,"pfpg":107.54,"papg":116.19,"titles":1,"runnerUp":0,"loser":1,"winningSeasons":1,"losingSeasons":8,"tiedSeasons":0,"playoffW":2,"playoffL":0,"playoffApps":1,"divTitles":1}],"espn":{"h2h":["Caitlyn/Chase 1-4","Caitlyn/Conner 5-5","Caitlyn/Dan 4-3","Caitlyn/Danny 3-1","Caitlyn/Jordan 4-1","Caitlyn/Kaila 0-6","Caitlyn/Karen 4-1","Caitlyn/Kim 0-7","Caitlyn/Logan 2-4","Caitlyn/Steve 2-5","Caitlyn/Zach 2-4","Chase/Conner 6-8","Chase/Dan 9-9","Chase/Danny 3-8","Chase/Jordan 6-7","Chase/Kaila 5-2","Chase/Karen 8-5","Chase/Kim 9-6","Chase/Logan 8-11","Chase/Steve 6-8","Chase/Zach 8-10","Conner/Dan 6-8","Conner/Danny 13-8","Conner/Jordan 7-10","Conner/Kaila 2-3","Conner/Karen 7-7","Conner/Kim 7-6","Conner/Logan 6-10","Conner/Steve 5-8","Conner/Zach 6-6","Dan/Danny 7-11","Dan/Jordan 4-12","Dan/Kaila 5-1","Dan/Karen 6-7","Dan/Kim 3-8","Dan/Logan 2-10","Dan/Steve 10-11","Dan/Zach 6-6","Danny/Jordan 9-9","Danny/Kaila 2-3","Danny/Karen 6-10","Danny/Kim 5-6","Danny/Logan 7-6","Danny/Steve 8-4","Danny/Zach 7-12","Jordan/Kaila 1-5","Jordan/Karen 5-7","Jordan/Kim 7-8","Jordan/Logan 5-10","Jordan/Steve 7-5","Jordan/Zach 7-11","Kaila/Karen 4-2","Kaila/Kim 2-4","Kaila/Logan 6-2","Kaila/Steve 2-6","Kaila/Zach 3-1","Karen/Kim 8-6","Karen/Logan 5-8","Karen/Steve 5-6","Karen/Zach 2-12","Kim/Logan 6-6","Kim/Steve 5-13","Kim/Zach 6-5","Logan/Steve 10-5","Logan/Zach 11-5","Steve/Zach 11-5"],"luck":{"Logan":[60.7,55.7],"Kim":[51.1,48.1],"Jordan":[48.3,45.4],"Steve":[55.8,53.2],"Kaila":[55.2,53.6],"Dan":[42.6,41.7],"Karen":[45,45.1],"Conner":[48.3,49.7],"Caitlyn":[39.7,41.5],"Danny":[48.6,52.1],"Zach":[52.7,56.2],"Chase":[49,54.9]},"winStreak":{"Caitlyn":[3,"2025 W10","2025 W12"],"Chase":[7,"2022 W12","2023 W2"],"Conner":[6,"2022 W12","2022 W17"],"Dan":[4,"2021 W3","2021 W6"],"Danny":[7,"2017 W15","2018 W5"],"Jordan":[9,"2017 W1","2017 W9"],"Kaila":[7,"2025 W9","2025 W16"],"Karen":[7,"2021 W5","2021 W11"],"Kim":[8,"2024 W4","2024 W11"],"Logan":[10,"2017 W5","2017 W15"],"Steve":[9,"2024 W1","2024 W9"],"Zach":[10,"2022 W1","2022 W10"]},"lossStreak":{"Caitlyn":[9,"2023 W10","2024 W1"],"Chase":[9,"2017 W2","2017 W10"],"Conner":[6,"2024 W8","2024 W13"],"Dan":[7,"2020 W2","2020 W8"],"Danny":[5,"2024 W7","2024 W11"],"Jordan":[9,"2025 W9","2025 W17"],"Kaila":[4,"2022 W12","2022 W15"],"Karen":[6,"2022 W12","2022 W17"],"Kim":[5,"2018 W3","2018 W7"],"Logan":[5,"2024 W13","2024 W17"],"Steve":[6,"2018 W5","2018 W10"],"Zach":[6,"2023 W11","2023 W16"]},"teamsByYear":{"2017":8,"2018":10,"2019":10,"2020":10,"2021":10,"2022":12,"2023":12,"2024":12,"2025":12},"highWeek":[["Chase",188.32,"Conner",67.74,2025,7],["Logan",187.48,"Chase",146.82,2020,3],["Chase",183.48,"Jordan",151.88,2022,8],["Zach",183.22,"Jordan",111.64,2024,16],["Zach",182.76,"Karen",137.52,2021,4],["Dan",182.68,"Zach",108.18,2021,5]],"lowWeek":[["Jordan",52.64,"Karen",97.58,2025,16],["Danny",54.4,"Kim",136.62,2024,14],["Zach",56.92,"Steve",93.86,2017,7],["Danny",57.34,"Dan",116.26,2024,10],["Logan",59.66,"Chase",146.98,2024,17],["Dan",60.66,"Caitlyn",99.78,2024,7]],"blowout":[["Chase",188.32,"Conner",67.74,2025,7],["Chase",146.98,"Logan",59.66,2024,17],["Steve",178.86,"Zach",93.5,2021,1],["Kim",181.94,"Danny",97.92,2018,12],["Kim",136.62,"Danny",54.4,2024,14]],"closest":[["Chase",108.88,"Logan",108.8,2024,16],["Kaila",96.82,"Logan",96.7,2025,13],["Steve",119.6,"Caitlyn",119.44,2025,15],["Jordan",114.02,"Danny",113.82,2025,3]]}};
+const M = DATA.managers, E = DATA.espn;
+const $ = (s,r)=> (r||document).querySelector(s);
+const el = (t,c,h)=>{const n=document.createElement(t); if(c)n.className=c; if(h!=null)n.innerHTML=h; return n;};
+const pct = v => (v*100).toFixed(1);
+const f1  = v => v.toFixed(1);
+const byName = Object.fromEntries(M.map(m=>[m.name,m]));
+const YEARS = [...new Set(M.flatMap(m=>m.seasons.map(s=>s.year)))].sort();
+
+/* ---------- tiles ---------- */
+const totalW = M.reduce((s,m)=>s+m.w,0);
+const allPF  = M.reduce((s,m)=>s+m.pf,0);
+[[YEARS.length,"Seasons played"],[M.length,"Managers all-time"],
+ [totalW.toLocaleString(),"Games decided"],
+ [Math.round(allPF).toLocaleString(),"Points scored"],
+ [new Set(M.filter(m=>m.titles).map(m=>m.name)).size,"Different champions"]
+].forEach(([v,l])=>{ const t=el("div","tile"); t.append(el("b",null,v), el("small",null,l)); $("#tiles").append(t); });
+
+/* ---------- champions ribbon ---------- */
+const seasonOf = (n,y)=> byName[n].seasons.find(s=>s.year===y);
+const findNote = (y,note)=> M.map(m=>({m,s:m.seasons.find(s=>s.year===y&&s.note===note)})).find(x=>x.s);
+YEARS.forEach(y=>{
+  const ch=findNote(y,"Champion"), ru=findNote(y,"Runner Up"), bl=findNote(y,"Biggest Loser");
+  const d=el("div","yr");
+  d.append(el("div","field",E.teamsByYear[y]+"&nbsp;tm"));
+  d.append(el("div","y",y));
+  d.append(el("div","champ",ch?ch.m.name:"&mdash;"));
+  d.append(el("div","rec",ch?ch.s.w+"&ndash;"+ch.s.l:""));
+  d.append(el("div","sub",
+    (ru?"2nd <i>"+ru.m.name+"</i>":"2nd <i>&mdash;</i>")+"<br>"+
+    (bl?"Last <i>"+bl.m.name+"</i>":"Last <i>not recorded</i>")));
+  $("#ribbon").append(d);
+});
+
+/* ---------- all-time table ---------- */
+const COLS=[
+ {k:"name",  t:"Manager", s:1},
+ {k:"yrs",   t:"Yrs",     v:m=>m.seasons.length},
+ {k:"w",     t:"W"},
+ {k:"l",     t:"L"},
+ {k:"pct",   t:"Win%",    v:m=>pct(m.pct), n:m=>m.pct},
+ {k:"titles",t:"Titles",  pill:1},
+ {k:"runnerUp",t:"2nd",   pill:1},
+ {k:"playoffApps",t:"PO Apps"},
+ {k:"po",    t:"PO Rec",  v:m=>m.playoffW+"&ndash;"+m.playoffL, n:m=>m.playoffW/Math.max(1,m.playoffW+m.playoffL)},
+ {k:"divTitles",t:"Div"},
+ {k:"pfpg",  t:"PF/G",    v:m=>f1(m.pfpg)},
+ {k:"papg",  t:"PA/G",    v:m=>f1(m.papg)},
+ {k:"pf",    t:"Points For", v:m=>Math.round(m.pf).toLocaleString()},
+];
+let sortK="pct", sortAsc=false;
+const NARROW = window.matchMedia("(max-width:700px)");
+const colOf = k => COLS.find(c=>c.k===k);
+const keyOf = (c,m) => c.n?c.n(m) : (c.k==="yrs"?m.seasons.length : m[c.k]);
+function sortedM(){
+  const c=colOf(sortK);
+  return M.slice().sort((a,b)=>{
+    const x=keyOf(c,a), z=keyOf(c,b);
+    const r=(typeof x==="string")? x.localeCompare(z) : x-z;
+    return sortAsc?r:-r;
+  });
+}
+function drawLB(){ if(NARROW.matches) drawLBList(); else drawLBTable(); }
+
+function drawLBList(){
+  const host=$("#lbwrap"); host.innerHTML="";
+  const sel=$("#sortsel");
+  if(!sel.options.length){
+    [["pct","Win percentage"],["w","Wins"],["titles","Titles"],["playoffApps","Playoff appearances"],
+     ["po","Playoff record"],["divTitles","Division titles"],["pfpg","Points per game"],
+     ["pf","Total points"],["yrs","Seasons played"],["name","Name (A\u2013Z)"]]
+      .forEach(([k,t])=>{ const o=document.createElement("option"); o.value=k; o.textContent=t; sel.append(o); });
+    sel.value=sortK;
+    sel.onchange=()=>{ sortK=sel.value; sortAsc=(sortK==="name"); drawLB(); };
+  }
+  const list=el("div","mlist");
+  sortedM().forEach((m,i)=>{
+    const b=el("button","mrow"); b.type="button";
+    b.innerHTML=
+      '<div class="l1"><span class="rk">'+(i+1)+'</span>'
+      +'<span class="nm">'+m.name+'</span><span class="big">'+pct(m.pct)+'</span></div>'
+      +'<div class="l2">'+m.w+'&ndash;'+m.l+' &middot; '+m.seasons.length+' seasons</div>'
+      +'<div class="l3">'
+        +chip("Titles", m.titles, m.titles>0)
+        +chip("2nd", m.runnerUp, false)
+        +chip("Playoffs", m.playoffW+"&ndash;"+m.playoffL, false)
+        +chip("Div", m.divTitles, false)
+        +chip("PF/G", f1(m.pfpg), false)
+      +'</div>';
+    b.onclick=()=>openDetail(m.name);
+    list.append(b);
+  });
+  host.append(list);
+}
+function chip(label, val, gold){
+  return '<span class="chip'+(gold?" gold":"")+'"><i>'+label+'</i><b>'+val+'</b></span>';
+}
+
+function drawLBTable(){
+  const host=$("#lbwrap");
+  host.innerHTML='<div class="scroll"><table class="sortable" id="lb"></table></div>';
+  const t=$("#lb"); t.innerHTML="";
+  const hr=el("tr"); hr.append(el("th","rank",""));
+  COLS.forEach(c=>{ const th=el("th",null,c.t); th.dataset.k=c.k;
+    if(c.k===sortK) th.className=(sortAsc?"act asc":"act");
+    th.onclick=()=>{ if(sortK===c.k) sortAsc=!sortAsc; else {sortK=c.k; sortAsc=(c.k==="name");} drawLB(); };
+    hr.append(th); });
+  t.append(el("thead").appendChild(hr).parentNode);
+  const rows=sortedM();
+  const tb=el("tbody");
+  rows.forEach((m,i)=>{
+    const tr=el("tr"); tr.append(el("td","rank",i+1));
+    COLS.forEach(c=>{
+      const raw = c.v?c.v(m):m[c.k];
+      const td=el("td", c.k==="name"?"name":"num");
+      if(c.pill) td.innerHTML='<span class="pill '+(raw?"gold":"zero")+'">'+raw+'</span>';
+      else td.innerHTML=raw;
+      tr.append(td);
+    });
+    tr.style.cursor="pointer"; tr.onclick=()=>openDetail(m.name);
+    tb.append(tr);
+  });
+  t.append(tb);
+}
+drawLB();
+
+/* ---------- head to head ---------- */
+const H={};
+E.h2h.forEach(p=>{ const [pair,rec]=p.split(" "); const [a,b]=pair.split("/"); const [w,l]=rec.split("-").map(Number);
+  (H[a]=H[a]||{})[b]=[w,l]; (H[b]=H[b]||{})[a]=[l,w]; });
+const NAMES=M.map(m=>m.name);
+function cellColor(w,l){
+  const g=w+l; if(!g) return "transparent";
+  const p=w/g, d=Math.abs(p-.5)*2;
+  const a=(0.10+0.62*d).toFixed(3);
+  return "rgba(var(--"+(p>=.5?"pos":"neg")+"-rgb),"+a+")";
+}
+let h2hPick=null;
+function drawH2H(){ if(NARROW.matches) drawH2HList(); else drawH2HGrid(); }
+
+function drawH2HList(){
+  const host=$("#h2hwrap"); host.innerHTML="";
+  if(!h2hPick) h2hPick=NAMES[0];
+  const pick=el("div","picker");
+  NAMES.forEach(n=>{
+    const b=el("button",null,n); b.type="button";
+    if(n===h2hPick) b.className="on";
+    b.setAttribute("aria-pressed", String(n===h2hPick));
+    b.onclick=()=>{ h2hPick=n; drawH2HList(); };
+    pick.append(b);
+  });
+  host.append(pick);
+  const opps=NAMES.filter(n=>n!==h2hPick && (H[h2hPick]||{})[n])
+    .map(n=>({n, r:H[h2hPick][n]}))
+    .sort((a,b)=> (b.r[0]/(b.r[0]+b.r[1])) - (a.r[0]/(a.r[0]+a.r[1])) || (b.r[0]+b.r[1])-(a.r[0]+a.r[1]));
+  const list=el("div","mlist");
+  opps.forEach(o=>{
+    const [w,l]=o.r, p=w/(w+l);
+    const row=el("div","oppr");
+    row.style.background=cellColor(w,l);
+    row.innerHTML='<span class="who">'+o.n+'</span>'
+      +'<span class="rec">'+w+'&ndash;'+l+'</span>'
+      +'<span class="p">'+pct(p)+'</span>';
+    list.append(row);
+  });
+  host.append(list);
+}
+
+function drawH2HGrid(){
+  const host=$("#h2hwrap");
+  host.innerHTML='<div class="scroll" style="padding:14px"><table class="h2h" id="grid"></table></div>';
+  const t=$("#grid");
+  const hr=el("tr"); hr.append(el("th",null,""));
+  NAMES.forEach(n=>hr.append(el("th","col",n)));
+  t.append(el("thead").appendChild(hr).parentNode);
+  const tb=el("tbody");
+  NAMES.forEach(r=>{
+    const tr=el("tr"); tr.append(el("th","row",r));
+    NAMES.forEach(c=>{
+      if(r===c){ tr.append(el("td","self","")); return; }
+      const rec=(H[r]||{})[c];
+      const td=el("td",null, rec? rec[0]+"&ndash;"+rec[1] : "&middot;");
+      if(rec){ td.style.background=cellColor(rec[0],rec[1]);
+               td.title=r+" is "+rec[0]+"-"+rec[1]+" against "+c; }
+      else td.style.color="var(--ink-3)";
+      tr.append(td);
+    });
+    tb.append(tr);
+  });
+  t.append(tb);
+}
+drawH2H();
+(function(){ const ramp=$("#ramp");
+  for(let i=0;i<11;i++){ const p=i/10, s=el("i");
+    s.style.background = cellColor(Math.round(p*20), 20-Math.round(p*20)); ramp.append(s); }
+})();
+
+/* ---------- sparkline ---------- */
+function spark(m){
+  const S=m.seasons, W=240,Hh=52,pad=6, LO=0.18, HI=0.90;
+  const x=i=>pad+i*(W-2*pad)/Math.max(1,S.length-1);
+  const y=v=>{ const t=Math.min(1,Math.max(0,(v-LO)/(HI-LO))); return Hh-pad-t*(Hh-2*pad); };
+  const pts=S.map((s,i)=>[x(i), y(s.w/(s.w+s.l))]);
+  const d=pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");
+  const last=pts[pts.length-1], lastP=S[S.length-1];
+  const up=lastP.w>=lastP.l;
+  return '<svg class="spark" viewBox="0 0 '+W+' '+Hh+'" preserveAspectRatio="none" aria-hidden="true">'
+    +'<line x1="0" y1="'+y(.5)+'" x2="'+W+'" y2="'+y(.5)+'" stroke="var(--rule)" stroke-width="1" stroke-dasharray="2 3"/>'
+    +'<path d="'+d+'" fill="none" stroke="var(--ink-3)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>'
+    +'<circle cx="'+last[0].toFixed(1)+'" cy="'+last[1].toFixed(1)+'" r="3.6" fill="var(--'+(up?"pos":"neg")+')" stroke="var(--surface)" stroke-width="2"/>'
+    +'</svg>';
+}
+
+/* ---------- manager cards ---------- */
+M.slice().sort((a,b)=>b.pct-a.pct).forEach(m=>{
+  const b=el("button","card"); b.type="button"; b.setAttribute("aria-expanded","false"); b.dataset.n=m.name;
+  const top=el("div","top");
+  top.append(el("span","who",m.name), el("span","pct num",pct(m.pct)));
+  b.append(top, el("div","rec",m.w+"&ndash;"+m.l+" &middot; "+m.seasons.length+" seasons"));
+  const tr=el("div","trophies");
+  const mult=(n,lbl)=> n>1 ? lbl+" &#215;"+n : lbl;
+  if(m.titles)   tr.append(el("span","tag t",mult(m.titles,"Champion")));
+  if(m.runnerUp) tr.append(el("span","tag r",mult(m.runnerUp,"Runner-up")));
+  if(m.loser)    tr.append(el("span","tag l",mult(m.loser,"Last")));
+  b.append(tr);
+  b.insertAdjacentHTML("beforeend", spark(m));
+  b.onclick=()=>openDetail(m.name);
+  $("#cards").append(b);
+});
+
+function openDetail(name){
+  const m=byName[name], host=$("#detail");
+  document.querySelectorAll(".card").forEach(c=>c.setAttribute("aria-expanded", String(c.dataset.n===name)));
+  const best=m.seasons.slice().sort((a,b)=>(b.w-b.l)-(a.w-a.l))[0];
+  const worst=m.seasons.slice().sort((a,b)=>(a.w-a.l)-(b.w-b.l))[0];
+  const hi=m.seasons.slice().sort((a,b)=>b.pf-a.pf)[0];
+  const ws=E.winStreak[name], ls=E.lossStreak[name];
+  host.innerHTML=
+   '<div class="detail"><div class="dhead"><h3>'+name+'</h3>'
+   +'<span class="k">'+m.w+'&ndash;'+m.l+' &nbsp;&middot;&nbsp; '+pct(m.pct)+'% &nbsp;&middot;&nbsp; '
+   +m.titles+' title'+(m.titles===1?'':'s')+'</span>'
+   +'<button type="button" id="cl">Close</button></div>'
+   +'<p class="swipe" style="padding:12px 18px 0;margin:0">Swipe the table sideways for more &rarr;</p>'
+   +'<div class="scroll"><table><thead><tr><th>Year</th><th>W</th><th>L</th><th>Win%</th>'
+   +'<th>PF</th><th>PA</th><th>PF/G</th><th>Finish</th></tr></thead><tbody>'
+   + m.seasons.map(s=>'<tr><td class="num">'+s.year+'</td><td class="num">'+s.w+'</td><td class="num">'+s.l+'</td>'
+     +'<td class="num">'+pct(s.w/(s.w+s.l))+'</td><td class="num">'+f1(s.pf)+'</td><td class="num">'+f1(s.pa)+'</td>'
+     +'<td class="num">'+f1(s.pfpg)+'</td><td>'+(s.note
+        ? '<span class="tag '+(s.note==="Champion"?"t":s.note==="Runner Up"?"r":"l")+'">'+s.note+'</span>' : '')+'</td></tr>').join('')
+   +'</tbody></table></div><div class="facts">'
+   +fact("Best season", best.w+"-"+best.l+" in "+best.year)
+   +fact("Worst season", worst.w+"-"+worst.l+" in "+worst.year)
+   +fact("Most points", Math.round(hi.pf)+" in "+hi.year)
+   +fact("Playoff record", m.playoffW+"-"+m.playoffL+" in "+m.playoffApps+" trips")
+   +fact("Division titles", m.divTitles)
+   +fact("Winning / .500 / losing", m.winningSeasons+" / "+m.tiedSeasons+" / "+m.losingSeasons)
+   +fact("Longest win streak", ws[0]+" &nbsp;<em style='font-style:normal;color:var(--ink-3);font-size:12px'>"+ws[1]+"&ndash;"+ws[2]+"</em>")
+   +fact("Longest skid", ls[0]+" &nbsp;<em style='font-style:normal;color:var(--ink-3);font-size:12px'>"+ls[1]+"&ndash;"+ls[2]+"</em>")
+   +'</div></div>';
+  $("#cl").onclick=()=>{ host.innerHTML=""; document.querySelectorAll(".card").forEach(c=>c.setAttribute("aria-expanded","false")); };
+  host.scrollIntoView({behavior:"smooth", block:"nearest"});
+}
+function fact(l,v){ return '<div><small class="eyebrow">'+l+'</small><b>'+v+'</b></div>'; }
+
+/* ---------- record book ---------- */
+function recCard(title, items){
+  const c=el("div","rec-card"); c.append(el("h3",null,title));
+  const ol=el("ol");
+  items.forEach((it,i)=>{ const li=el("li");
+    li.append(el("span","i",i+1), el("span","t",it[0]), el("span","v "+(it[2]||""),it[1]));
+    ol.append(li); });
+  c.append(ol); $("#recs").append(c);
+}
+const g=(r)=>'<b>'+r[0]+'</b> over '+r[2]+' <em>'+r[4]+' W'+r[5]+'</em>';
+recCard("Highest single week", E.highWeek.map(r=>['<b>'+r[0]+'</b> vs '+r[2]+' <em>'+r[4]+' W'+r[5]+'</em>', f1(r[1]), "p"]));
+recCard("Lowest single week",  E.lowWeek.map(r=>['<b>'+r[0]+'</b> vs '+r[2]+' <em>'+r[4]+' W'+r[5]+'</em>', f1(r[1]), "n"]));
+recCard("Biggest blowout",     E.blowout.map(r=>[g(r), '+'+f1(r[1]-r[3]), "p"]));
+recCard("Closest finish",      E.closest.map(r=>[g(r), '+'+(r[1]-r[3]).toFixed(2), "n"]));
+recCard("Longest win streak",  Object.entries(E.winStreak).sort((a,b)=>b[1][0]-a[1][0]).slice(0,6)
+  .map(([n,s])=>['<b>'+n+'</b> <em>'+s[1]+' &ndash; '+s[2]+'</em>', s[0], "p"]));
+recCard("Longest losing skid", Object.entries(E.lossStreak).sort((a,b)=>b[1][0]-a[1][0]).slice(0,6)
+  .map(([n,s])=>['<b>'+n+'</b> <em>'+s[1]+' &ndash; '+s[2]+'</em>', s[0], "n"]));
+recCard("Best single season",  M.flatMap(m=>m.seasons.map(s=>({n:m.name,s})))
+  .sort((a,b)=>(b.s.w/(b.s.w+b.s.l))-(a.s.w/(a.s.w+a.s.l))).slice(0,6)
+  .map(x=>['<b>'+x.n+'</b> <em>'+x.s.year+'</em>', x.s.w+'&ndash;'+x.s.l, "p"]));
+recCard("Most points, one season", M.flatMap(m=>m.seasons.map(s=>({n:m.name,s})))
+  .sort((a,b)=>b.s.pf-a.s.pf).slice(0,6)
+  .map(x=>['<b>'+x.n+'</b> <em>'+x.s.year+'</em>', Math.round(x.s.pf), "p"]));
+
+/* ---------- luck ---------- */
+const L=Object.entries(E.luck).map(([n,[act,exp]])=>({n,act,exp,d:+(act-exp).toFixed(1)}))
+  .sort((a,b)=>b.d-a.d);
+const MAXD=Math.max(...L.map(x=>Math.abs(x.d)));
+L.forEach(x=>{
+  const row=el("div","luck-row");
+  row.append(el("div","nm",x.n));
+  const bar=el("div","luck-bar"); bar.append(el("i","mid"));
+  const b=el("i","b"); const w=(Math.abs(x.d)/MAXD)*48;
+  b.style.width=w+"%"; b.style.background=x.d>=0?"var(--pos)":"var(--neg)";
+  if(x.d>=0) b.style.left="50%"; else b.style.right="50%";
+  bar.append(b); row.append(bar);
+  row.append(el("div","val",(x.d>0?"+":"")+x.d.toFixed(1)));
+  row.title=x.n+" won "+x.act+"% but earned "+x.exp+"% against the field";
+  $("#luck").append(row);
+});
+
+/* ---------- season browser ---------- */
+let curYear=YEARS[YEARS.length-1];
+YEARS.forEach(y=>{ const b=el("button",null,y); b.type="button";
+  b.onclick=()=>{ curYear=y; drawSeason(); }; $("#years").append(b); });
+function drawSeason(){
+  document.querySelectorAll("#years button").forEach(b=>b.classList.toggle("on", +b.textContent===curYear));
+  const rows=M.map(m=>({n:m.name, s:m.seasons.find(x=>x.year===curYear)})).filter(x=>x.s)
+    .sort((a,b)=> (b.s.w-b.s.l)-(a.s.w-a.s.l) || b.s.pf-a.s.pf);
+  const host=$("#seasonwrap");
+  if(NARROW.matches){
+    host.innerHTML="";
+    const list=el("div","mlist");
+    rows.forEach((x,i)=>{
+      const b=el("button","mrow"); b.type="button";
+      b.innerHTML='<div class="l1"><span class="rk">'+(i+1)+'</span>'
+        +'<span class="nm">'+x.n+'</span>'
+        +'<span class="big">'+x.s.w+'&ndash;'+x.s.l+'</span></div>'
+        +'<div class="l2">'+pct(x.s.w/(x.s.w+x.s.l))+'% win rate</div>'
+        +'<div class="l3">'+chip("PF", f1(x.s.pf), false)+chip("PA", f1(x.s.pa), false)
+          +chip("PF/G", f1(x.s.pfpg), false)
+          +(x.s.note?'<span class="tag '+(x.s.note==="Champion"?"t":x.s.note==="Runner Up"?"r":"l")
+              +'" style="align-self:center">'+x.s.note+'</span>':'')
+        +'</div>';
+      b.onclick=()=>openDetail(x.n);
+      list.append(b);
+    });
+    host.append(list);
+    return;
+  }
+  host.innerHTML='<div class="scroll"><table id="season"></table></div>';
+  $("#season").innerHTML='<thead><tr><th class="rank"></th><th>Manager</th><th>W</th><th>L</th>'
+   +'<th>Win%</th><th>PF</th><th>PA</th><th>PF/G</th><th>Finish</th></tr></thead><tbody>'
+   +rows.map((x,i)=>'<tr><td class="rank">'+(i+1)+'</td><td class="name">'+x.n+'</td>'
+     +'<td class="num">'+x.s.w+'</td><td class="num">'+x.s.l+'</td>'
+     +'<td class="num">'+pct(x.s.w/(x.s.w+x.s.l))+'</td><td class="num">'+f1(x.s.pf)+'</td>'
+     +'<td class="num">'+f1(x.s.pa)+'</td><td class="num">'+f1(x.s.pfpg)+'</td>'
+     +'<td>'+(x.s.note?'<span class="tag '+(x.s.note==="Champion"?"t":x.s.note==="Runner Up"?"r":"l")+'">'+x.s.note+'</span>':'')+'</td></tr>').join('')
+   +'</tbody>';
+}
+drawSeason();
+
+/* ---------- re-render when crossing the phone breakpoint ---------- */
+let wasNarrow = NARROW.matches;
+function syncLayout(){
+  if(NARROW.matches === wasNarrow) return;
+  wasNarrow = NARROW.matches;
+  drawLB(); drawH2H(); drawSeason();
+}
+NARROW.addEventListener("change", syncLayout);
+addEventListener("resize", syncLayout, {passive:true});
+addEventListener("orientationchange", syncLayout);
+
+/* ---------- nav highlight ---------- */
+const links=[...document.querySelectorAll("#nav a")];
+const secs=[...document.querySelectorAll("main section")];
+const navEl=document.querySelector("nav");
+function markNav(){
+  const line=navEl.getBoundingClientRect().bottom+12;
+  let cur=secs[0];
+  secs.forEach(x=>{ if(x.getBoundingClientRect().top<=line) cur=x; });
+  links.forEach(a=>a.classList.toggle("on", a.getAttribute("href")==="#"+cur.id));
+}
+let ticking=false;
+addEventListener("scroll", ()=>{
+  if(ticking) return; ticking=true;
+  requestAnimationFrame(()=>{ markNav(); ticking=false; });
+}, {passive:true});
+addEventListener("resize", markNav, {passive:true});
+markNav();
+</script>
