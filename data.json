@@ -225,7 +225,7 @@
     "pa": 1546.46,
     "pfpg": 108.1,
     "papg": 119,
-    "note": null
+    "note": "Biggest Loser"
    },
    {
     "year": 2020,
@@ -235,7 +235,7 @@
     "pa": 1610.5,
     "pfpg": 109.1,
     "papg": 123.9,
-    "note": "Biggest Loser"
+    "note": null
    },
    {
     "year": 2021,
@@ -328,7 +328,7 @@
     "pa": 1551.38,
     "pfpg": 118.1,
     "papg": 119.3,
-    "note": "Biggest Loser"
+    "note": null
    },
    {
     "year": 2019,
@@ -411,7 +411,7 @@
   "papg": 113.6,
   "titles": 0,
   "runnerUp": 0,
-  "loser": 1,
+  "loser": 0,
   "winningSeasons": 5,
   "losingSeasons": 2,
   "tiedSeasons": 1,
@@ -1050,7 +1050,7 @@
     "pa": 1610.66,
     "pfpg": 105.6,
     "papg": 123.9,
-    "note": null
+    "note": "Biggest Loser"
    },
    {
     "year": 2019,
@@ -1133,7 +1133,7 @@
   "papg": 117.99,
   "titles": 2,
   "runnerUp": 1,
-  "loser": 1,
+  "loser": 2,
   "winningSeasons": 3,
   "losingSeasons": 4,
   "tiedSeasons": 2,
@@ -1250,7 +1250,7 @@
     "pa": 1442.82,
     "pfpg": 110.8,
     "papg": 111,
-    "note": "Biggest Loser"
+    "note": null
    },
    {
     "year": 2020,
@@ -1260,7 +1260,7 @@
     "pa": 1575.68,
     "pfpg": 98.5,
     "papg": 121.2,
-    "note": null
+    "note": "Biggest Loser"
    },
    {
     "year": 2021,

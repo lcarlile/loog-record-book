@@ -430,9 +430,9 @@
  ],
  "lastPlace": {
   "2017": "Chase",
-  "2018": "Kim",
-  "2019": "Dan",
-  "2020": "Steve",
+  "2018": "Chase",
+  "2019": "Steve",
+  "2020": "Dan",
   "2021": "Jordan",
   "2022": "Karen",
   "2023": "Caitlyn",
@@ -532,5 +532,9 @@
   "Dan": 1,
   "Kaila": 1,
   "Caitlyn": 1
+ },
+ "lastPlaceRule": {
+  "2017-2021": "worst regular-season record",
+  "2022-2025": "last in final standings"
  }
 }
