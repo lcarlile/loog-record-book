@@ -1,0 +1,20 @@
+{
+  "slug": "loog",
+  "leagueId": 1197565,
+  "years": [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+  "out": { "site": "index.html", "fragment": "recordbook.html" },
+  "brand": {
+    "title": "LoOG Record Book",
+    "crestLeft": "Est. 2017",
+    "crestRight": "Tenth Season",
+    "h1": "League of<br>Ordinary <em>Gentlemen</em>",
+    "dek": "Nine seasons on the books. Every win, every collapse, every trophy &mdash; and the head-to-head ledger that settles the group chat.",
+    "description": "Nine seasons of League of Ordinary Gentlemen fantasy football - champions, all-time standings, head-to-head records and single-week extremes."
+  },
+  "rules": {
+    "lastPlace": { "recordThrough": 2021 },
+    "keepers": { "enabled": true, "costOffset": 1 },
+    "payoutDepth": 3
+  },
+  "nameOverrides": { "Daniel Johnson": "Danny" }
+}

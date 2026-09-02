@@ -1,0 +1,20 @@
+{
+  "slug": "the-league",
+  "leagueId": 1669597730,
+  "years": [2021, 2022, 2023, 2024, 2025],
+  "out": { "site": "the-league/index.html", "fragment": "the-league/fragment.html" },
+  "brand": {
+    "title": "The League Record Book",
+    "crestLeft": "Est. 2021",
+    "crestRight": "Sixth Season",
+    "h1": "The<br><em>League</em>",
+    "dek": "Five seasons on the books. Every win, every collapse, every trophy &mdash; and the head-to-head ledger that settles the group chat.",
+    "description": "Five seasons of The League fantasy football - champions, all-time standings, head-to-head records and single-week extremes."
+  },
+  "rules": {
+    "lastPlace": { "recordThrough": null },
+    "keepers": { "enabled": false },
+    "payoutDepth": 3
+  },
+  "nameOverrides": {}
+}

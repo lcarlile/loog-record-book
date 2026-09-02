@@ -6,55 +6,36 @@ Live site: https://lcarlile.github.io/loog-record-book/
 Nine seasons (2017-2025): champions, all-time standings, head-to-head, draft history and
 grades, single-week extremes, schedule luck, and season-by-season standings.
 
+## Two leagues, one codebase
+
+Each league is a config in `leagues/`. The code, the design and every metric are shared;
+only the id, seasons, rules and branding differ.
+
+| League | Config | Seasons | Page |
+|---|---|---|---|
+| League of Ordinary Gentlemen | `leagues/loog.json` | 2017- | `/` |
+| The League | `leagues/the-league.json` | 2021- | `/the-league/` |
+
 ## Updating after a season
 
-Everything is derived from the ESPN league, so this is two commands.
-
 ```sh
-./refresh.sh        # pull ESPN, recompute, rewrite data.json + espn.json
-node build.js       # rebuild index.html and recordbook.html
+./refresh.sh                        # loog
+node build.js
+
+./refresh.sh --league the-league    # the other league
+node build.js --league the-league
+
 git commit -am "2026 season" && git push
 ```
 
-`refresh.sh` finds a modern Node for you. If you would rather call it directly, any Node 18+
-works: `node refresh.js`.
+Add the new season to `years` in that league's config first. That is the only yearly edit.
 
-GitHub Pages redeploys itself. The spreadsheet is no longer needed - every figure it
-held was verified against ESPN and is now computed directly.
+### Adding another league
 
-**Add the new season to `YEARS` in `refresh.js` first.** That is the only edit each year.
-
-### Credentials
-
-The league is private, so `refresh.js` needs your ESPN cookies. Sign in at
-fantasy.espn.com, then DevTools > Application > Cookies, and copy `espn_s2` and `SWID`.
-Either export them:
-
-```sh
-export ESPN_S2='...' SWID='{...}'
-```
-
-or create `.espn-auth.json` (gitignored, never committed):
-
-```json
-{ "espn_s2": "...", "SWID": "{...}" }
-```
-
-### Useful flags
-
-| Command | What it does |
-|---|---|
-| `./refresh.sh` | full pull, rewrite the data files, cache the raw pull |
-| `./refresh.sh --check` | pull and compare figure by figure against what is committed; writes nothing |
-| `./refresh.sh --cached` | recompute from the last pull with no network and no cookies |
-
-`--check` compares meaning rather than bytes: manager totals, every season row, and the
-leaderboards. It prints the figures that changed, so after a new season you can see exactly
-what moved before writing anything.
-
-`refresh.js` runs ten structural checks before writing (one champion per season, wins
-equal losses, playoff appearances add up, and so on) and refuses to write if any fail.
-`refresh.sh` picks a suitable Node itself, so the system default being old does not matter.
+Copy a config in `leagues/`, set `leagueId`, `years`, `out`, `brand` and `rules`, then run
+the two commands with `--league <slug>`. Manager names resolve from ESPN member ids, so
+someone renaming themselves does not split into two people; `nameOverrides` handles
+nicknames, keyed by member id or full name.
 
 ## Files
 

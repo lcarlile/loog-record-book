@@ -1,25 +1,46 @@
-/* Builds two targets from template.html + the data files:
-   recordbook.html - fragment for publishing as a Claude Artifact
-   index.html      - standalone document for GitHub Pages            */
+/* Builds a league's page from template.html + its data.
+ *   node build.js                 loog (default)
+ *   node build.js --league <slug>
+ */
 const fs = require('fs');
-const managers = JSON.parse(fs.readFileSync('data.json', 'utf8'));
-const espn = JSON.parse(fs.readFileSync('espn.json', 'utf8'));
-const tpl = fs.readFileSync('template.html', 'utf8');
+const path = require('path');
 
-const page = tpl.replace('/*__DATA__*/', JSON.stringify({ managers, espn }));
-fs.writeFileSync('recordbook.html', page);
+const argOf = f => { const i = process.argv.indexOf(f); return i > -1 ? process.argv[i + 1] : null; };
+const SLUG = argOf('--league') || 'loog';
+const CFG = JSON.parse(fs.readFileSync(path.join(__dirname, 'leagues', SLUG + '.json'), 'utf8'));
+const DIR = path.join(__dirname, 'data', SLUG);
 
-/* lift <title> and the font <link>s out of the fragment and into a real <head> */
-const title = (page.match(/<title>([\s\S]*?)<\/title>/) || [, 'LoOG Record Book'])[1];
+for (const f of ['data.json', 'espn.json']) {
+  if (!fs.existsSync(path.join(DIR, f))) {
+    console.error(`\nMissing data/${SLUG}/${f} - run ./refresh.sh --league ${SLUG} first.\n`);
+    process.exit(1);
+  }
+}
+const managers = JSON.parse(fs.readFileSync(path.join(DIR, 'data.json'), 'utf8'));
+const espn = JSON.parse(fs.readFileSync(path.join(DIR, 'espn.json'), 'utf8'));
+const tpl = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
+
+const brand = Object.assign({ leagueId: CFG.leagueId, years: CFG.years }, CFG.brand);
+const page = tpl
+  .replace('/*__DATA__*/', JSON.stringify({ managers, espn }))
+  .replace('/*__BRAND__*/', JSON.stringify(brand));
+
+const write = (rel, body) => {
+  const p = path.join(__dirname, rel);
+  fs.mkdirSync(path.dirname(p), { recursive: true });
+  fs.writeFileSync(p, body);
+  console.log(`  ${rel.padEnd(26)} ${(body.length / 1024).toFixed(1)}KB`);
+};
+
+write(CFG.out.fragment, page);
+
+/* standalone document for GitHub Pages */
+const title = (page.match(/<title>([\s\S]*?)<\/title>/) || [, brand.title])[1];
 const links = (page.match(/<link\b[^>]*>/g) || []).join('\n');
-const body = page
-  .replace(/<title>[\s\S]*?<\/title>\s*/, '')
-  .replace(/<link\b[^>]*>\s*/g, '');
+const body = page.replace(/<title>[\s\S]*?<\/title>\s*/, '').replace(/<link\b[^>]*>\s*/g, '');
+const DESC = brand.description || '';
 
-const DESC = 'Nine seasons of League of Ordinary Gentlemen fantasy football - champions, '
-  + 'all-time standings, head-to-head records and single-week extremes.';
-
-const doc = `<!doctype html>
+write(CFG.out.site, `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -44,7 +65,5 @@ ${links}
 ${body}
 </body>
 </html>
-`;
-fs.writeFileSync('index.html', doc);
-console.log('recordbook.html', (page.length/1024).toFixed(1)+'KB  (artifact fragment)');
-console.log('index.html    ', (doc.length/1024).toFixed(1)+'KB  (github pages)');
+`);
+console.log(`\n  built ${SLUG} (${managers.length} managers, ${CFG.years.length} seasons)\n`);

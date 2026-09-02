@@ -3,16 +3,21 @@
    actually plays by lives here, so next year is one command. */
 const fs = require('fs');
 
+const path = require('path');
 const mean = a => a.reduce((s, x) => s + x, 0) / (a.length || 1);
 const r2 = n => +n.toFixed(2);
 const POS = { 1: 'QB', 2: 'RB', 3: 'WR', 4: 'TE', 5: 'K', 16: 'D/ST' };
 
-/* Last place changed meaning when the league grew to 12 and added a
-   consolation bracket: worst regular-season record before 2022, toilet-bowl
-   loser from 2022 on. */
-const LAST_BY_RECORD_THROUGH = 2021;
-
-function run({ season, YEARS, CHECK }) {
+function run({ season, YEARS, CHECK, CFG, dir }) {
+  /* Rules that differ between leagues. lastPlace.recordThrough is the last season
+     the wooden spoon went to the worst record; null means the consolation bracket
+     always decided it. */
+  const RULES = (CFG && CFG.rules) || {};
+  const LAST_BY_RECORD_THROUGH = (RULES.lastPlace && RULES.lastPlace.recordThrough) || 0;
+  const KEEPERS = !!(RULES.keepers && RULES.keepers.enabled);
+  const KEEPER_OFFSET = (RULES.keepers && RULES.keepers.costOffset) || 1;
+  const OUT = dir || __dirname;
+  fs.mkdirSync(OUT, { recursive: true });
   const LAST = YEARS[YEARS.length - 1];
   const names = [...new Set(YEARS.flatMap(y => season[y].teams.map(t => t.m)))];
 
@@ -165,10 +170,10 @@ function run({ season, YEARS, CHECK }) {
   const draftedAt = {}; picks.forEach(p => { if (p.n) draftedAt[`${p.y}|${p.n}`] = p.r; });
   picks.forEach(p => {
     p.disc = false;
-    if (p.y === YEARS[0] || !p.n) return;
+    if (!KEEPERS || p.y === YEARS[0] || !p.n) return;
     if (!season[p.y - 1] || !season[p.y - 1].roster[`${p.m}|${p.n}`]) return;
     const prev = draftedAt[`${p.y - 1}|${p.n}`];
-    if (prev !== undefined && p.r === prev - 1) p.disc = true; });
+    if (prev !== undefined && p.r === prev - KEEPER_OFFSET) p.disc = true; });
 
   // scoring changed over the years -> put seasons on a common scale
   const posAll = {}, posYr = {};
@@ -245,10 +250,14 @@ function run({ season, YEARS, CHECK }) {
     closest: bot(marg, 'd', 6).map(mTuple),
     lopsided, evenRivalry, weeklyHigh, weeklyLow, heartbreak: hb,
     regularSeasonWeeks: Object.keys(regWk).length,
+    boxScores: rows.length,
     lastPlace: Object.fromEntries(YEARS.map(y => [y, finish[y].last])),
     lastPlaceRecordThrough: LAST_BY_RECORD_THROUGH,
-    lastPlaceRule: { [`${YEARS[0]}-${LAST_BY_RECORD_THROUGH}`]: 'worst regular-season record',
-                     [`${LAST_BY_RECORD_THROUGH + 1}-${LAST}`]: 'last in final standings' },
+    lastPlaceRule: LAST_BY_RECORD_THROUGH
+      ? { [`${YEARS[0]}-${LAST_BY_RECORD_THROUGH}`]: 'worst regular-season record',
+          [`${LAST_BY_RECORD_THROUGH + 1}-${LAST}`]: 'last in final standings' }
+      : { [`${YEARS[0]}-${LAST}`]: 'last in final standings' },
+    keepers: KEEPERS,
     playoffYears, divTitles,
     draftR1, favourite, draftGrade, draftCareer, bestDrafts,
     steals, busts, bestKeeps, keeperValue,
@@ -327,11 +336,12 @@ function run({ season, YEARS, CHECK }) {
       d.push('espn.draftGrade count changed');
     return d;
   }
+  const P = f => path.join(OUT, f);
   if (CHECK) {
-    const haveBoth = fs.existsSync('data.json') && fs.existsSync('espn.json');
+    const haveBoth = fs.existsSync(P('data.json')) && fs.existsSync(P('espn.json'));
     if (!haveBoth) { console.log('\nNothing committed to compare against.\n'); process.exit(0); }
-    const d = semanticDiff(JSON.parse(fs.readFileSync('data.json', 'utf8')),
-                           JSON.parse(fs.readFileSync('espn.json', 'utf8')));
+    const d = semanticDiff(JSON.parse(fs.readFileSync(P('data.json'), 'utf8')),
+                           JSON.parse(fs.readFileSync(P('espn.json'), 'utf8')));
     if (!d.length) {
       console.log('\nReproduces every committed figure. Nothing written.\n');
       process.exit(0);
@@ -343,9 +353,9 @@ function run({ season, YEARS, CHECK }) {
     process.exit(1);
   }
   for (const [file, value] of Object.entries({ 'data.json': managers, 'espn.json': espn })) {
-    fs.writeFileSync(file, JSON.stringify(value, null, 1));
-    console.log(`  wrote ${file}`);
+    fs.writeFileSync(P(file), JSON.stringify(value, null, 1));
+    console.log('  wrote ' + path.relative(process.cwd(), P(file)));
   }
-  console.log('\nNow run:  node build.js\n');
+  console.log('\nNow run:  node build.js --league ' + (CFG ? CFG.slug : 'loog') + '\n');
 }
 module.exports = { run };

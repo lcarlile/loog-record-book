@@ -419,10 +419,9 @@ footer b{color:var(--ink-2)}
 
 <header class="masthead">
   <div class="wrap">
-    <div class="crest"><span>Est. 2017</span><i class="bar"></i><span>Tenth Season</span></div>
-    <h1>League of<br>Ordinary <em>Gentlemen</em></h1>
-    <p class="dek">Nine seasons on the books. Every win, every collapse, every trophy &mdash; and the
-      head-to-head ledger that settles the group chat.</p>
+    <div class="crest"><span id="crestL"></span><i class="bar"></i><span id="crestR"></span></div>
+    <h1 id="mastheadTitle"></h1>
+    <p class="dek" id="dek"></p>
     <div class="tiles" id="tiles"></div>
   </div>
 </header>
@@ -487,7 +486,7 @@ footer b{color:var(--ink-2)}
 
   <section id="draft">
     <div class="head"><h2>The Draft</h2><i class="rule"></i></div>
-    <p class="note">Nine drafts, 1,464 picks. A pick is worth the points it scored above what that
+    <p class="note"><span id="draftCount"></span> A pick is worth the points it scored above what that
       draft slot normally returns <em>at its position</em>, so a quarterback is only ever compared with
       other quarterbacks. Scoring changed over the years, so points are put on a common scale and every
       season is centred on zero &mdash; each manager is judged against the field he actually drafted
@@ -501,8 +500,8 @@ footer b{color:var(--ink-2)}
 
   <section id="records" data-tier="c">
     <div class="head"><h2>The Record Book</h2><i class="rule"></i></div>
-    <p class="note">Single-week extremes from 788 box scores &mdash; the things a season-totals sheet can't
-      tell you.</p>
+    <p class="note">Single-week extremes from every box score the league has played &mdash; the things
+      a season-totals sheet can't tell you.</p>
     <div class="recs" id="recs"></div>
   </section>
 
@@ -534,8 +533,9 @@ footer b{color:var(--ink-2)}
 </main>
 
 <footer><div class="wrap">
-  <div><b>Sources.</b> Everything is computed from ESPN league 1197565 (2017&ndash;2025) &mdash; 788
-    box scores and 1,464 draft picks, <span id="totalPts"></span> points scored in all.</div>
+  <div><b>Sources.</b> Everything is computed from <span id="srcLeague"></span> &mdash;
+    <span id="srcGames"></span> box scores and <span id="srcPicks"></span> draft picks,
+    <span id="totalPts"></span> points scored in all.</div>
   <div><b>Reconciled against ESPN.</b> All 96 season rows in the spreadsheet match the box scores
     exactly on wins, losses, points for and points against, as do every champion and runner-up.
     Three fields did not, and use the ESPN figures here: playoff appearances (the sheet undercounted
@@ -552,6 +552,7 @@ footer b{color:var(--ink-2)}
 
 <script>
 const DATA = /*__DATA__*/;
+const BRAND = /*__BRAND__*/;
 const M = DATA.managers, E = DATA.espn;
 const $ = (s,r)=> (r||document).querySelector(s);
 const el = (t,c,h)=>{const n=document.createElement(t); if(c)n.className=c; if(h!=null)n.innerHTML=h; return n;};
@@ -559,6 +560,18 @@ const pct = v => (v*100).toFixed(1);
 const f1  = v => v.toFixed(1);
 const byName = Object.fromEntries(M.map(m=>[m.name,m]));
 const YEARS = [...new Set(M.flatMap(m=>m.seasons.map(s=>s.year)))].sort();
+
+/* ---------- masthead ---------- */
+(function(){
+  document.title = BRAND.title;
+  $("#crestL").textContent = BRAND.crestLeft || "";
+  $("#crestR").textContent = BRAND.crestRight || "";
+  $("#mastheadTitle").innerHTML = BRAND.h1 || BRAND.title;
+  $("#dek").innerHTML = BRAND.dek || "";
+  const yrs = BRAND.years || [];
+  $("#srcLeague").textContent = "ESPN league " + BRAND.leagueId
+    + " (" + yrs[0] + "\u2013" + yrs[yrs.length-1] + ")";
+})();
 
 /* ---------- tiles ---------- */
 const totalW = M.reduce((s,m)=>s+m.w,0);
@@ -948,6 +961,10 @@ recCard("Most points, one season", M.flatMap(m=>m.seasons.map(s=>({n:m.name,s}))
 })();
 
 /* ---------- the draft ---------- */
+(function(){ const n=$("#draftCount"); if(!n) return;
+  const t=E.draftTotals||{};
+  n.textContent=YEARS.length+" drafts, "+(t.picks||0).toLocaleString()+" picks.";
+})();
 let draftYear=YEARS[YEARS.length-1];
 YEARS.forEach(y=>{ const b=el("button",null,y); b.type="button";
   b.onclick=()=>{ draftYear=y; drawDraft(); }; $("#draftyears").append(b); });
@@ -1106,7 +1123,11 @@ NARROW.addEventListener("change", syncLayout);
 addEventListener("resize", syncLayout, {passive:true});
 addEventListener("orientationchange", syncLayout);
 
-(function(){ const n=$("#totalPts"); if(n) n.textContent=Math.round(allPF).toLocaleString(); })();
+(function(){
+  const n=$("#totalPts"); if(n) n.textContent=Math.round(allPF).toLocaleString();
+  const g=$("#srcGames"); if(g) g.textContent=(E.boxScores||totalW).toLocaleString();
+  const p=$("#srcPicks"); if(p) p.textContent=((E.draftTotals&&E.draftTotals.picks)||0).toLocaleString();
+})();
 
 (function(){ const rail=$("#ribbon");
   if(rail){ rail.addEventListener("scroll", ()=>requestAnimationFrame(railCount), {passive:true}); railCount(); }

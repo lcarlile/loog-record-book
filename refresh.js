@@ -20,11 +20,20 @@ if (MAJOR < 18) {
   process.exit(1);
 }
 
+const argOf = f => { const i = process.argv.indexOf(f); return i > -1 ? process.argv[i + 1] : null; };
+const SLUG = argOf('--league') || 'loog';
+const CFG_PATH = path.join(__dirname, 'leagues', SLUG + '.json');
+if (!fs.existsSync(CFG_PATH)) {
+  console.error('\nNo config at leagues/' + SLUG + '.json. Available: '
+    + fs.readdirSync(path.join(__dirname, 'leagues')).map(f => f.replace('.json', '')).join(', ') + '\n');
+  process.exit(1);
+}
+const CFG = JSON.parse(fs.readFileSync(CFG_PATH, 'utf8'));
 const CHECK  = process.argv.includes('--check');
 const CACHED = process.argv.includes('--cached');   // recompute from the last pull, no network
-const CACHE  = path.join(__dirname, '.espn-cache.json');
-const LEAGUE = 1197565;
-const YEARS = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
+const CACHE  = path.join(__dirname, '.espn-cache-' + SLUG + '.json');
+const LEAGUE = CFG.leagueId;
+const YEARS = CFG.years;
 const HOST = 'https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl';
 
 /* ---------- auth ---------------------------------------------------------- */
@@ -73,21 +82,32 @@ async function api(y, query, filter) {
   return Array.isArray(j) ? j[0] : j;
 }
 
-const NAME = {
-  'Logan Carlile': 'Logan', 'Jordan Baumiller': 'Jordan', 'Chase Carlile': 'Chase',
-  'Zach Johnson': 'Zach', 'Daniel Johnson': 'Danny', 'Steve Johnson': 'Steve',
-  'Conner  Johnson': 'Conner', 'Conner Johnson': 'Conner', 'Dan Devilbiss': 'Dan',
-  'Kim D': 'Kim', 'Karen Edwards': 'Karen', 'Kaila Beach': 'Kaila', 'Caitlyn Darrah': 'Caitlyn',
-};
-const unknown = new Set();
+const OVERRIDE = CFG.nameOverrides || {};
+const people = {};        // memberId -> { first, last }
+function noteMembers(j) {
+  (j.members || []).forEach(m => {
+    people[m.id] = { first: (m.firstName || '').trim(), last: (m.lastName || '').trim() };
+  });
+}
+/* One display name per member id. Default to the first name; disambiguate a shared
+   first name with a last initial; let the config override either key. */
+let display = {};
+function resolveNames() {
+  const byFirst = {};
+  Object.entries(people).forEach(([id, p]) => (byFirst[p.first] = byFirst[p.first] || []).push(id));
+  display = {};
+  Object.entries(people).forEach(([id, p]) => {
+    const full = `${p.first} ${p.last}`.trim();
+    display[id] = OVERRIDE[id] || OVERRIDE[full]
+      || (byFirst[p.first].length > 1 && p.last ? `${p.first} ${p.last[0]}` : p.first);
+  });
+}
 function managerMap(j) {
-  const mem = {};
-  (j.members || []).forEach(m => mem[m.id] = `${m.firstName || ''} ${m.lastName || ''}`.trim());
+  noteMembers(j); resolveNames();
   const out = {};
   (j.teams || []).forEach(t => {
-    const raw = (t.owners || []).map(o => mem[o]).join('/');
-    if (!NAME[raw]) unknown.add(raw);
-    out[t.id] = NAME[raw] || raw;
+    const ids = (t.owners || []).filter(o => people[o]);
+    out[t.id] = ids.map(o => display[o]).join('/') || ('team' + t.id);
   });
   return out;
 }
@@ -147,7 +167,8 @@ async function pull() {
     season[y] = { teams, sched, divs, picks, roster, weeks: ss.matchupPeriodCount };
     process.stdout.write(`ok (${teams.length} teams, ${picks.length} picks)\n`);
   }
-  if (unknown.size) console.log('  ! unmapped owners:', [...unknown].join(', '));
+  const roster = [...new Set(Object.values(display))].sort();
+  console.log('  managers: ' + roster.join(', '));
 }
 
 module.exports = { season, YEARS, api };
@@ -161,11 +182,11 @@ if (require.main === module) {
       Object.assign(season, JSON.parse(fs.readFileSync(CACHE, 'utf8')));
       console.log('\nUsing cached ESPN pull (no network).');
     } else {
-      console.log('\nPulling ESPN...');
+      console.log('\nPulling ' + SLUG + ' (ESPN league ' + LEAGUE + ')...');
       await pull();
       fs.writeFileSync(CACHE, JSON.stringify(season));
       console.log('  cached the raw pull to .espn-cache.json');
     }
-    require('./compute.js').run({ season, YEARS, CHECK });
+    require('./compute.js').run({ season, YEARS, CHECK, CFG, dir: path.join(__dirname, 'data', SLUG) });
   })().catch(e => { console.error('\nFAILED:', e.message); process.exit(1); });
 }
