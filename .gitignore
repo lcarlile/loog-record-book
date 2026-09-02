@@ -1,3 +1,4 @@
 .espn-auth.json
 espn-auth.json
 .espn-cache*.json
+.DS_Store
