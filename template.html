@@ -374,11 +374,12 @@ footer b{color:var(--ink-2)}
   <section id="draft">
     <div class="head"><h2>The Draft</h2><i class="rule"></i></div>
     <p class="note">Nine drafts, 1,464 picks. A pick is worth the points it scored above what that
-      draft slot normally returns at its position &mdash; so a late-round quarterback who finishes as
-      the best in the league is worth far more than one taken first. Scoring changed over the years,
-      so points are put on a common scale and every season is centred on zero: each manager is judged
-      against the field he actually drafted against. Keepers taken at a discounted round are excluded
-      from draft grades and scored separately below.</p>
+      draft slot normally returns <em>at its position</em>, so a quarterback is only ever compared with
+      other quarterbacks. Scoring changed over the years, so points are put on a common scale and every
+      season is centred on zero &mdash; each manager is judged against the field he actually drafted
+      against. Keepers taken at a discounted round are excluded from draft grades and scored on their
+      own below. Busts are limited to the first three rounds, where a miss actually costs something;
+      kickers and defences are left out of steals and busts entirely.</p>
     <div class="years" id="draftyears"></div>
     <div id="draftboard"></div>
     <div class="recs" id="draftrecs" style="margin-top:14px"></div>
@@ -773,7 +774,7 @@ drawDraft();
   const o1=el("ol");
   E.bestDrafts.forEach((d,i)=>{ const li=el("li");
     li.append(el("span","i",i+1),
-      el("span","t","<b>"+d[0]+"</b> <em>"+d[1]+"</em>"),
+      el("span","t","<b>"+d[0]+"</b> <em>"+d[1]+" &middot; grade "+d[3]+"</em>"),
       el("span","v p", "+"+d[2].toFixed(1)));
     o1.append(li); });
   c1.append(o1); host.append(c1);
@@ -796,14 +797,14 @@ drawDraft();
   };
   mk("Biggest steals <em>&mdash; points above what the slot returns</em>", E.steals.map(p=>
     ['<b>'+p[2]+'</b> <em>'+p[1]+', '+p[0]+' '+p[4]+' &middot; '+p[6]+' pts</em>', p[5], "p"]));
-  mk("Biggest busts <em>&mdash; points below what the slot returns</em>", E.busts.map(p=>
+  mk("Biggest busts <em>&mdash; rounds 1&ndash;3 only</em>", E.busts.map(p=>
     ['<b>'+p[2]+'</b> <em>'+p[1]+', '+p[0]+' '+p[4]+' &middot; '+p[6]+' pts</em>', p[5], "n"]));
-  mk("Best keepers <em>&mdash; value after paying the keeper round</em>", E.bestKeeps.map(k=>
+  mk("Best keepers <em>&mdash; points above what the keeper round costs</em>", E.bestKeeps.map(k=>
     ['<b>'+k[2]+'</b> <em>'+k[1]+', '+k[0]+' '+k[3]+' &middot; '+k[5]+' pts</em>', k[4], "p"]));
-  mk("Keeper value <em>&mdash; average per player kept</em>", E.keeperValue.map(k=>
+  mk("Keeper value <em>&mdash; average of that, per manager</em>", E.keeperValue.map(k=>
     ['<b>'+k[0]+'</b> <em>'+k[2]+' kept</em>', (k[1]>0?'+':'')+k[1], k[1]>=0?"p":"n"]));
-  mk("Career draft grade", E.draftCareer.map(c=>
-    ['<b>'+c[0]+'</b> <em>'+(c[1]>0?'+':'')+c[1].toFixed(1)+' pts per pick</em>', c[2],
+  mk("Career draft grade <em>&mdash; adjusted for how many drafts</em>", E.draftCareer.map(c=>
+    ['<b>'+c[0]+'</b> <em>'+c[3]+' drafts &middot; '+(c[4]>0?'+':'')+c[4].toFixed(1)+' raw</em>', c[2],
      c[1]>=0?"p":"n"]));
 })();
 

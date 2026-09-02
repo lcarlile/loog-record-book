@@ -1177,11 +1177,11 @@
    "B"
   ],
   "Danny|2017": [
-   -27.2,
+   -27.3,
    "C-"
   ],
   "Zach|2017": [
-   -14.1,
+   -14.2,
    "C"
   ],
   "Logan|2017": [
@@ -1205,7 +1205,7 @@
    "A-"
   ],
   "Danny|2018": [
-   21.1,
+   21,
    "A"
   ],
   "Conner|2018": [
@@ -1213,11 +1213,11 @@
    "A-"
   ],
   "Steve|2018": [
-   -4,
+   -4.1,
    "B-"
   ],
   "Logan|2018": [
-   -6,
+   -6.1,
    "B-"
   ],
   "Jordan|2018": [
@@ -1293,11 +1293,11 @@
    "B+"
   ],
   "Danny|2020": [
-   19,
+   18.9,
    "A-"
   ],
   "Logan|2020": [
-   20.8,
+   20.7,
    "A"
   ],
   "Zach|2020": [
@@ -1337,7 +1337,7 @@
    "D"
   ],
   "Danny|2021": [
-   7.5,
+   7.6,
    "B+"
   ],
   "Conner|2021": [
@@ -1373,7 +1373,7 @@
    "B+"
   ],
   "Dan|2022": [
-   -11.5,
+   -11.6,
    "C+"
   ],
   "Kaila|2022": [
@@ -1401,7 +1401,7 @@
    "C"
   ],
   "Danny|2023": [
-   -12.4,
+   -12.5,
    "C+"
   ],
   "Dan|2023": [
@@ -1465,7 +1465,7 @@
    "B"
   ],
   "Zach|2024": [
-   24.6,
+   24.5,
    "A"
   ],
   "Steve|2024": [
@@ -1485,7 +1485,7 @@
    "B"
   ],
   "Danny|2024": [
-   -6.1,
+   -6,
    "B-"
   ],
   "Conner|2024": [
@@ -1497,7 +1497,7 @@
    "C-"
   ],
   "Steve|2025": [
-   16.6,
+   16.5,
    "A-"
   ],
   "Dan|2025": [
@@ -1505,7 +1505,7 @@
    "A-"
   ],
   "Kaila|2025": [
-   -18.4,
+   -18.5,
    "C"
   ],
   "Chase|2025": [
@@ -1537,7 +1537,7 @@
    "C"
   ],
   "Jordan|2025": [
-   -3,
+   -3.1,
    "B-"
   ],
   "Karen|2025": [
@@ -1548,63 +1548,87 @@
  "draftCareer": [
   [
    "Steve",
-   10.1,
-   "A"
+   5.2,
+   "A",
+   9,
+   10.1
   ],
   [
    "Kaila",
-   7,
-   "A-"
+   2.3,
+   "A-",
+   4,
+   7
   ],
   [
    "Jordan",
-   4.1,
-   "A-"
+   2.1,
+   "A-",
+   9,
+   4.1
   ],
   [
    "Kim",
-   3.2,
-   "B+"
+   1.5,
+   "B+",
+   8,
+   3.2
   ],
   [
    "Danny",
-   2.1,
-   "B+"
+   1.1,
+   "B+",
+   9,
+   2.1
   ],
   [
    "Zach",
-   -0.3,
-   "B"
+   -0.2,
+   "B",
+   9,
+   -0.3
   ],
   [
    "Caitlyn",
-   -1.7,
-   "B-"
+   -0.6,
+   "B-",
+   4,
+   -1.7
   ],
   [
    "Chase",
-   -3,
-   "B-"
+   -1.5,
+   "B-",
+   9,
+   -3
   ],
   [
    "Logan",
-   -3.7,
-   "C+"
+   -1.8,
+   "C+",
+   9,
+   -3.7
   ],
   [
    "Dan",
-   -4,
-   "C+"
+   -2.1,
+   "C+",
+   9,
+   -4
   ],
   [
    "Karen",
-   -4.9,
-   "C"
+   -2.4,
+   "C",
+   8,
+   -4.9
   ],
   [
    "Conner",
-   -6.4,
-   "C"
+   -3.3,
+   "C",
+   9,
+   -6.4
   ]
  ],
  "steals": [
@@ -1683,24 +1707,6 @@
  ],
  "busts": [
   [
-   2019,
-   "Logan",
-   "Cam Newton",
-   "QB",
-   "R7",
-   "-262",
-   16.7
-  ],
-  [
-   2022,
-   "Logan",
-   "Trey Lance",
-   "QB",
-   "R8",
-   "-212",
-   12.5
-  ],
-  [
    2023,
    "Chase",
    "Nick Chubb",
@@ -1753,6 +1759,24 @@
    "R1",
    "-178",
    34
+  ],
+  [
+   2024,
+   "Chase",
+   "Christian McCaffrey",
+   "RB",
+   "R1",
+   "-174",
+   40.3
+  ],
+  [
+   2021,
+   "Chase",
+   "Gus Edwards",
+   "RB",
+   "R3",
+   "-160",
+   0
   ]
  ],
  "bestKeeps": [
@@ -1769,7 +1793,7 @@
    "Caitlyn",
    "Jaxon Smith-Njigba",
    "R6",
-   "+219",
+   "+218",
    300.4
   ],
   [
@@ -1826,7 +1850,7 @@
   "graded": 1342,
   "discountedKeepers": 122
  },
- "draftMethod": "Value = points above what that positional draft slot historically returns. Points are normalised per season (scoring changed over the years) and every season is centred on zero, so managers are compared against the field they actually drafted against.",
+ "draftMethod": "A pick is worth the points it scored above what that draft slot normally returns at its position. Points are put on a common scale across seasons (scoring changed over the years) and each season is centred on zero, so a manager is measured against the field he actually drafted against. Keepers taken at a discounted round are excluded from grades and scored separately.",
  "bestDrafts": [
   [
    "Steve",
@@ -1849,7 +1873,7 @@
   [
    "Zach",
    2024,
-   24.6,
+   24.5,
    "A"
   ],
   [
@@ -1873,7 +1897,7 @@
   [
    "Danny",
    2018,
-   21.1,
+   21,
    "A"
   ]
  ],
@@ -1925,7 +1949,7 @@
   ],
   [
    "Logan",
-   9,
+   10,
    16
   ],
   [

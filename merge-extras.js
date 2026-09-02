@@ -24,7 +24,8 @@ e.regularSeasonWeeks = raw.regularSeasonWeeks;
 const split = (s, n) => { const [k, v] = s.split('='); const [val, letter] = v.split(':'); return [k, +val, letter]; };
 e.draftGrade = {};
 G.grades.forEach(s => { const [k, val, letter] = split(s); e.draftGrade[k] = [val, letter]; });
-e.draftCareer = G.career.map(s => { const [m, v, l] = s.split(':'); return [m, +v, l]; });
+e.draftCareer = G.career.map(t => { const [m, v, l, drafts, raw] = t.split(":");
+  return [m, +v, l, +drafts, +raw]; });   // [name, shrunk, letter, drafts, raw]
 const pick = s => { const [y,m,n,pos,r,val,pts] = s.split('|'); return [+y,m,n,pos,r,val,+pts]; };
 e.steals    = G.steals.map(pick);
 e.busts     = G.busts.map(pick);
