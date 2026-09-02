@@ -270,11 +270,13 @@ function run({ season, YEARS, CHECK, CFG, dir }) {
 
   const draftR1 = picks.filter(p => p.r === 1).sort((a, b) => a.y - b.y || a.o - b.o)
     .map(p => [p.y, p.m, p.n]);
+  /* Only meaningful if they actually took someone more than once - at 1x the "favourite"
+     is just an arbitrary tie among every pick they ever made. */
   const favourite = {};
-  names.forEach(m => { const c = {};
-    picks.filter(p => p.m === m && p.n).forEach(p => c[p.n] = (c[p.n] || 0) + 1);
-    const best = Object.entries(c).sort((a, b) => b[1] - a[1])[0];
-    if (best) favourite[m] = [best[0], best[1]]; });
+  names.forEach(m => { const tally = {};
+    picks.filter(p => p.m === m && p.n).forEach(p => tally[p.n] = (tally[p.n] || 0) + 1);
+    const best = Object.entries(tally).sort((x, z) => z[1] - x[1])[0];
+    if (best && best[1] >= 2) favourite[m] = [best[0], best[1]]; });
 
   /* ---- assemble ---- */
   const espn = {

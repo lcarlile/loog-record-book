@@ -1008,7 +1008,7 @@ drawDraft();
     o1.append(li); });
   c1.append(o1); host.append(c1);
 
-  const c2=el("div","rec-card"); c2.append(el("h3",null,"Each manager&rsquo;s favourite pick"));
+  const c2=el("div","rec-card"); c2.append(el("h3",null,"Each manager&rsquo;s favourite pick <em>&mdash; players taken more than once</em>"));
   const o2=el("ol");
   Object.entries(E.favourite).sort((a,b)=>b[1][1]-a[1][1]).forEach(([m,[p,n]],i)=>{
     const li=el("li");
