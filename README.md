@@ -24,6 +24,7 @@ node build.js
 
 ./refresh.sh --league the-league    # the other league
 node build.js --league the-league
+./make-og.sh the-league
 ./publish.sh the-league             # pushes to its own site repo
 
 git commit -am "2026 season" && git push

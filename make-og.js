@@ -37,6 +37,7 @@ fs.writeFileSync(path.join(__dirname, 'og', SLUG + '.html'), `<!doctype html>
   .rule{height:2px;background:#C79A3A;margin:34px 0 22px;width:190px}
   .stats{font-size:26px;letter-spacing:.04em;color:rgba(239,233,218,.9)}
   .foot{display:flex;justify-content:space-between;align-items:flex-end}
+  .foot .studs{padding-bottom:6px}
   .url{font-size:21px;letter-spacing:.08em;color:rgba(239,233,218,.55)}
   .plate{background:linear-gradient(163deg,#E6C878 0%,#B8862B 40%,#8A6317 56%,#D9AF52 78%,#F0DCA4 100%);
      color:#2A1F08;padding:13px 20px 15px;text-align:center;border:1px solid #6E4E10;
@@ -53,11 +54,10 @@ fs.writeFileSync(path.join(__dirname, 'og', SLUG + '.html'), `<!doctype html>
     <div class="stats">${stats}</div>
   </div>
   <div class="foot">
-    <div class="url">${(CFG.brand.site || 'lcarlile.github.io/loog-record-book/').replace(/^https?:\/\//, '')}</div>
+    <div class="studs">${'<i></i>'.repeat(13)}</div>
     <div class="plate"><small>CHAMPION ${years[years.length - 1]}</small>
       <b>${(M.find(m => m.seasons.some(s => s.year === years[years.length - 1] && s.note === 'Champion')) || {}).name || ''}</b></div>
   </div>
-  <div class="studs" style="position:absolute;left:72px;bottom:34px">${'<i></i>'.repeat(13)}</div>
 </div>
 `);
 console.log('wrote og/' + SLUG + '.html');
