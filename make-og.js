@@ -1,4 +1,4 @@
-/* Writes a 1200x630 social card for a league, to be screenshotted into a PNG. */
+/* Writes a 1200x630 social card for a league, to be rendered by make-og.sh. */
 const fs = require('fs');
 const path = require('path');
 const argOf = f => { const i = process.argv.indexOf(f); return i > -1 ? process.argv[i + 1] : null; };
@@ -7,13 +7,11 @@ const CFG = JSON.parse(fs.readFileSync(path.join(__dirname, 'leagues', SLUG + '.
 const M = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', SLUG, 'data.json'), 'utf8'));
 
 const years = CFG.years;
+const lastYear = years[years.length - 1];
 const champs = new Set(M.filter(m => m.titles).map(m => m.name)).size;
-const plain = (CFG.brand.h1 || '').replace(/<br>/g, ' ').replace(/<\/?em>/g, '');
-const stats = [
-  `${years.length} seasons`,
-  `${M.length} managers`,
-  `${champs} champions`,
-].join('  ·  ');
+const reigning = (M.find(m => m.seasons.some(s => s.year === lastYear && s.note === 'Champion')) || {}).name || '';
+const stats = `${years.length} seasons &nbsp;&middot;&nbsp; ${M.length} managers &nbsp;&middot;&nbsp; ${champs} champions`;
+const studs = '<i></i>'.repeat(13);
 
 fs.writeFileSync(path.join(__dirname, 'og', SLUG + '.html'), `<!doctype html>
 <meta charset="utf-8">
@@ -22,42 +20,36 @@ fs.writeFileSync(path.join(__dirname, 'og', SLUG + '.html'), `<!doctype html>
   *{margin:0;box-sizing:border-box}
   body{width:1200px;height:630px;overflow:hidden;background:#1F3D34;
        font-family:"Archivo",system-ui,sans-serif;color:#EFE9DA}
-  .card{width:1200px;height:630px;padding:64px 72px;display:flex;flex-direction:column;
-        justify-content:space-between;position:relative}
-  .studs{display:flex;gap:16px}
+  .card{width:1200px;height:630px;padding:30px;display:flex}
+  .frame{flex:1;border:1px solid rgba(199,154,58,.4);
+         display:flex;flex-direction:column;align-items:center;justify-content:center;
+         text-align:center;padding:44px 70px;gap:0}
+  .studs{display:flex;gap:17px}
   .studs i{width:9px;height:9px;border-radius:50%;
      background:linear-gradient(160deg,#E6C878,#B8862B 55%,#8A6317)}
-  .studs i:nth-child(even){opacity:.42}
-  .eyebrow{font-size:19px;letter-spacing:.26em;text-transform:uppercase;font-weight:700;
-           color:#C79A3A;font-variation-settings:"wdth" 88}
-  h1{font-family:"Fraunces",Georgia,serif;font-weight:900;font-size:96px;line-height:.9;
-     letter-spacing:-.035em;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 1;
-     margin:26px 0 0;max-width:16ch}
+  .studs i:nth-child(even){opacity:.4}
+  .eyebrow{font-size:19px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;
+           color:#C79A3A;font-variation-settings:"wdth" 88;margin-top:40px}
+  h1{font-family:"Fraunces",Georgia,serif;font-weight:900;font-size:92px;line-height:.92;
+     letter-spacing:-.035em;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 1;margin-top:24px}
   h1 em{font-style:normal;color:#D9A93F}
-  .rule{height:2px;background:#C79A3A;margin:34px 0 22px;width:190px}
-  .stats{font-size:26px;letter-spacing:.04em;color:rgba(239,233,218,.9)}
-  .foot{display:flex;justify-content:space-between;align-items:flex-end}
-  .foot .studs{padding-bottom:6px}
-  .url{font-size:21px;letter-spacing:.08em;color:rgba(239,233,218,.55)}
-  .plate{background:linear-gradient(163deg,#E6C878 0%,#B8862B 40%,#8A6317 56%,#D9AF52 78%,#F0DCA4 100%);
-     color:#2A1F08;padding:13px 20px 15px;text-align:center;border:1px solid #6E4E10;
-     box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 2px 0 rgba(0,0,0,.35)}
-  .plate b{display:block;font-family:"Fraunces",Georgia,serif;font-size:27px;font-weight:700;line-height:1.1}
-  .plate small{font-family:"Archivo",monospace;font-size:12px;letter-spacing:.14em;opacity:.72}
+  .divider{display:flex;align-items:center;gap:16px;margin-top:30px}
+  .divider span{width:150px;height:1px;background:rgba(199,154,58,.55)}
+  .divider b{width:9px;height:9px;transform:rotate(45deg);background:#C79A3A}
+  .stats{font-size:27px;letter-spacing:.05em;margin-top:26px;color:rgba(239,233,218,.92)}
+  .champ{margin-top:20px;font-size:17px;letter-spacing:.22em;text-transform:uppercase;
+         font-weight:700;color:#C79A3A}
+  .champ em{font-style:normal;color:#EFE9DA}
+  .bottom{margin-top:40px}
 </style>
-<div class="card">
-  <div>
-    <div class="studs">${'<i></i>'.repeat(13)}</div>
-    <div class="eyebrow" style="margin-top:30px">${CFG.brand.crestLeft} &nbsp;&middot;&nbsp; ${CFG.brand.crestRight}</div>
-    <h1>${CFG.brand.h1}</h1>
-    <div class="rule"></div>
-    <div class="stats">${stats}</div>
-  </div>
-  <div class="foot">
-    <div class="studs">${'<i></i>'.repeat(13)}</div>
-    <div class="plate"><small>CHAMPION ${years[years.length - 1]}</small>
-      <b>${(M.find(m => m.seasons.some(s => s.year === years[years.length - 1] && s.note === 'Champion')) || {}).name || ''}</b></div>
-  </div>
-</div>
+<div class="card"><div class="frame">
+  <div class="studs">${studs}</div>
+  <div class="eyebrow">${CFG.brand.crestLeft} &nbsp;&middot;&nbsp; ${CFG.brand.crestRight}</div>
+  <h1>${CFG.brand.h1}</h1>
+  <div class="divider"><span></span><b></b><span></span></div>
+  <div class="stats">${stats}</div>
+  ${reigning ? `<div class="champ">${lastYear} Champion &nbsp;<em>${reigning}</em></div>` : ''}
+  <div class="studs bottom">${studs}</div>
+</div></div>
 `);
 console.log('wrote og/' + SLUG + '.html');
