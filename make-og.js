@@ -7,9 +7,7 @@ const CFG = JSON.parse(fs.readFileSync(path.join(__dirname, 'leagues', SLUG + '.
 const M = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', SLUG, 'data.json'), 'utf8'));
 
 const years = CFG.years;
-const lastYear = years[years.length - 1];
 const champs = new Set(M.filter(m => m.titles).map(m => m.name)).size;
-const reigning = (M.find(m => m.seasons.some(s => s.year === lastYear && s.note === 'Champion')) || {}).name || '';
 const stats = `${years.length} seasons &nbsp;&middot;&nbsp; ${M.length} managers &nbsp;&middot;&nbsp; ${champs} champions`;
 const studs = '<i></i>'.repeat(13);
 
@@ -37,10 +35,7 @@ fs.writeFileSync(path.join(__dirname, 'og', SLUG + '.html'), `<!doctype html>
   .divider span{width:150px;height:1px;background:rgba(199,154,58,.55)}
   .divider b{width:9px;height:9px;transform:rotate(45deg);background:#C79A3A}
   .stats{font-size:27px;letter-spacing:.05em;margin-top:26px;color:rgba(239,233,218,.92)}
-  .champ{margin-top:20px;font-size:17px;letter-spacing:.22em;text-transform:uppercase;
-         font-weight:700;color:#C79A3A}
-  .champ em{font-style:normal;color:#EFE9DA}
-  .bottom{margin-top:40px}
+  .bottom{margin-top:44px}
 </style>
 <div class="card"><div class="frame">
   <div class="studs">${studs}</div>
@@ -48,7 +43,6 @@ fs.writeFileSync(path.join(__dirname, 'og', SLUG + '.html'), `<!doctype html>
   <h1>${CFG.brand.h1}</h1>
   <div class="divider"><span></span><b></b><span></span></div>
   <div class="stats">${stats}</div>
-  ${reigning ? `<div class="champ">${lastYear} Champion &nbsp;<em>${reigning}</em></div>` : ''}
   <div class="studs bottom">${studs}</div>
 </div></div>
 `);
