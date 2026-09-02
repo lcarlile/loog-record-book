@@ -28,10 +28,15 @@ e.draftCareer = G.career.map(s => { const [m, v, l] = s.split(':'); return [m, +
 const pick = s => { const [y,m,n,pos,r,val,pts] = s.split('|'); return [+y,m,n,pos,r,val,+pts]; };
 e.steals    = G.steals.map(pick);
 e.busts     = G.busts.map(pick);
-e.bestKeeps = G.bestKeeps.map(s => { const [y,m,n,r,pts] = s.split('|'); return [+y,m,n,r,+pts]; });
-e.keepsByMgr = {};
-G.keepsByMgr.forEach(s => { const [m,c] = s.split(':'); e.keepsByMgr[m] = +c; });
+e.bestKeeps = G.bestKeeps.map(t => { const [y,m,n,r,val,pts] = t.split("|"); return [+y,m,n,r,val,+pts]; });
 e.draftTotals = G.totals;
+e.draftMethod = G.method;
+delete e.keepsByMgr;   // superseded by keeperValue
+e.bestDrafts = G.bestDrafts.map(t => { const [who, rest] = t.split("=");
+  const [val, letter] = rest.split(":");
+  const i = who.lastIndexOf(" ");
+  return [who.slice(0,i), +who.slice(i+1), +val, letter]; });
+e.keeperValue = G.keeperValue.map(t => { const [m,v,n] = t.split(":"); return [m, +v, +n]; });
 
 fs.writeFileSync('espn.json', JSON.stringify(e, null, 1));
 console.log('espn.json merged');
