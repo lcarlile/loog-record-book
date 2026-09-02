@@ -1171,11 +1171,25 @@ addEventListener("orientationchange", syncLayout);
 const links=[...document.querySelectorAll("#nav a")];
 const secs=[...document.querySelectorAll("main section")];
 const navEl=document.querySelector("nav");
+const REDUCED=window.matchMedia("(prefers-reduced-motion: reduce)");
+function keepNavVisible(){
+  const rail=navEl.querySelector(".wrap");
+  const active=links.find(a=>a.classList.contains("on"));
+  if(!rail||!active) return;
+  if(rail.scrollWidth<=rail.clientWidth+1) return;          // nothing to scroll
+  const want=active.offsetLeft-(rail.clientWidth-active.offsetWidth)/2;
+  const to=Math.max(0,Math.min(rail.scrollWidth-rail.clientWidth,want));
+  if(Math.abs(rail.scrollLeft-to)<8) return;
+  rail.scrollTo({left:to, behavior:REDUCED.matches?"auto":"smooth"});
+}
 function markNav(){
   const line=navEl.getBoundingClientRect().bottom+12;
   let cur=secs[0];
   secs.forEach(x=>{ if(x.getBoundingClientRect().top<=line) cur=x; });
+  const before=links.find(a=>a.classList.contains("on"));
   links.forEach(a=>a.classList.toggle("on", a.getAttribute("href")==="#"+cur.id));
+  const after=links.find(a=>a.classList.contains("on"));
+  if(after&&after!==before) keepNavVisible();
 }
 let ticking=false;
 addEventListener("scroll", ()=>{
