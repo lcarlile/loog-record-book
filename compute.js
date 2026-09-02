@@ -37,22 +37,33 @@ function run({ season, YEARS, CHECK, CFG, dir }) {
 
     let last = (y <= LAST_BY_RECORD_THROUGH ? byRecord : byBracket);
     if (CONS_ROUNDS) {
+      /* A consolation ladder places by the path taken, not by wins: the round-two game
+         between round-one winners decides 7th and 8th, the game between round-one losers
+         decides 9th and 10th. So order by each round's result in turn, a win ahead of a
+         loss, earlier rounds dominant. The team that loses every round finishes last. */
       const cons = season[y].sched.filter(g => g.tier === 'LOSERS_CONSOLATION_LADDER');
-      const wks = [...new Set(cons.map(g => g.wk))].sort((a, b) => a - b).slice(0, CONS_ROUNDS);
-      const rec = {};
-      cons.filter(g => wks.includes(g.wk) && g.as !== g.bs).forEach(g => {
-        const w = g.as > g.bs ? g.a : g.b, l = g.as > g.bs ? g.b : g.a;
-        (rec[w] = rec[w] || [0, 0])[0]++; (rec[l] = rec[l] || [0, 0])[1]++;
+      const wks = [...new Set(cons.map(g => g.wk))].sort((x, z) => x - z).slice(0, CONS_ROUNDS);
+      const path = {};                                   // manager -> [0 win, 1 loss] per round
+      wks.forEach((wk, i) => {
+        cons.filter(g => g.wk === wk && g.as !== g.bs).forEach(g => {
+          const w = g.as > g.bs ? g.a : g.b, l = g.as > g.bs ? g.b : g.a;
+          (path[w] = path[w] || [])[i] = 0;
+          (path[l] = path[l] || [])[i] = 1;
+        });
       });
-      const winless = Object.keys(rec).filter(m => rec[m][0] === 0);
-      if (winless.length === 1) last = ts.find(t => t.m === winless[0]) || last;
-      /* re-rank below the playoff cut: consolation wins, then record, then points */
       const inBracket = new Set(season[y].sched
         .filter(g => g.tier === 'WINNERS_BRACKET').flatMap(g => [g.a, g.b]));
-      const below = ts.filter(t => !inBracket.has(t.m))
-        .sort((a, b) => ((rec[b.m] || [0])[0] - (rec[a.m] || [0])[0])
-                     || ((b.w - b.l) - (a.w - a.l)) || (b.pf - a.pf));
+      const below = ts.filter(t => !inBracket.has(t.m)).sort((x, z) => {
+        const px = path[x.m] || [], pz = path[z.m] || [];
+        for (let i = 0; i < wks.length; i++) {
+          const a1 = px[i] === undefined ? 2 : px[i];
+          const b1 = pz[i] === undefined ? 2 : pz[i];
+          if (a1 !== b1) return a1 - b1;
+        }
+        return ((z.w - z.l) - (x.w - x.l)) || (z.pf - x.pf);
+      });
       below.forEach((t, i) => t.fin = inBracket.size + i + 1);
+      if (below.length) last = below[below.length - 1];
     }
     finish[y] = { champ: champ && champ.m, ru: ru && ru.m, third: third && third.m,
                   last: last.m };
