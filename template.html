@@ -1,4 +1,4 @@
-<title>LoOG Record Book</title>
+<title>__TITLE__</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=Archivo:wdth,wght@62..125,400..700&family=Spline+Sans+Mono:wght@400;500;600&display=swap">
@@ -441,8 +441,7 @@ footer b{color:var(--ink-2)}
 
   <section id="champions" data-tier="a">
     <div class="head"><h2>The Mantel</h2><i class="rule"></i></div>
-    <p class="note"><b>One name per year, nine years running.</b> The small number on each plate is how
-      many teams that title had to beat &mdash; the league grew from eight to twelve.</p>
+    <p class="note" id="mantelNote"></p>
     <div class="mantel">
       <div class="mantel-rail" id="ribbon"></div>
       <p class="rail-count" id="railCount"></p>
@@ -463,10 +462,10 @@ footer b{color:var(--ink-2)}
 
   <section id="h2h" data-tier="a">
     <div class="head"><h2>Head to Head</h2><i class="rule"></i></div>
-    <p class="note"><span class="only-wide">Every meeting since 2017, pulled from the ESPN box scores.
-      Read across the row: that manager's record against each opponent.</span><span class="only-narrow">Every
-      meeting since 2017, pulled from the ESPN box scores. Pick a manager to see who they own.</span>
-      Gold means a winning record.</p>
+    <p class="note"><span class="only-wide">Every meeting since <span class="yr0"></span>, pulled from the
+      ESPN box scores. Read across the row: that manager's record against each opponent.</span><span
+      class="only-narrow">Every meeting since <span class="yr0"></span>, pulled from the ESPN box scores.
+      Pick a manager to see who they own.</span> Gold means a winning record.</p>
     <div id="h2hwrap"></div>
     <div class="legend">
       <span>Losing record</span>
@@ -478,7 +477,7 @@ footer b{color:var(--ink-2)}
 
   <section id="managers">
     <div class="head"><h2>The Managers</h2><i class="rule"></i></div>
-    <p class="note">Twelve people have taken a team. The line under each name is their win percentage
+    <p class="note"><span id="mgrCount"></span> The line under each name is their win percentage
       by season &mdash; the dotted rule is .500. Click for the full career.</p>
     <div class="cards" id="cards"></div>
     <div id="detail"></div>
@@ -490,9 +489,8 @@ footer b{color:var(--ink-2)}
       draft slot normally returns <em>at its position</em>, so a quarterback is only ever compared with
       other quarterbacks. Scoring changed over the years, so points are put on a common scale and every
       season is centred on zero &mdash; each manager is judged against the field he actually drafted
-      against. Keepers taken at a discounted round are excluded from draft grades and scored on their
-      own below. Busts are limited to the first three rounds, where a miss actually costs something;
-      kickers and defences are left out of steals and busts entirely.</p>
+      against.<span id="keeperNote"></span> Busts are limited to the first three rounds, where a miss
+      actually costs something; kickers and defences are left out of steals and busts entirely.</p>
     <div class="years" id="draftyears"></div>
     <div id="draftboard"></div>
     <div class="recs" id="draftrecs" style="margin-top:14px"></div>
@@ -515,16 +513,7 @@ footer b{color:var(--ink-2)}
 
   <section id="seasons">
     <div class="head"><h2>Season by Season</h2><i class="rule"></i></div>
-    <p class="note"><b>Where everyone actually finished</b>, brackets included &mdash; not just record.
-      The playoff field is the four division winners plus one wildcard per conference, taken on
-      all-play record: what your record would be if you played every team every week. That is how
-      Danny reached the 2025 semi-finals at 5&ndash;9 while Kim missed out at 9&ndash;5 &mdash; Danny
-      was beating 54.5% of the league each week, Kim 49.4%. The gold edge marks the six who made
-      the bracket; payouts go to the top three. Through 2021 the wooden spoon went to the worst
-      regular-season record rather than to the consolation bracket, so in those years record is what
-      counted, so those years are labelled <em>worst record</em>. Teams that made the bracket are
-      listed in the order they went out; everyone else is ranked by record until 2022, when the
-      consolation ladder started deciding the wooden spoon.</p>
+    <p class="note" id="seasonNote"></p>
     <div class="years" id="years"></div>
     <div class="awards" id="awards"></div>
     <div id="seasonwrap"></div>
@@ -536,18 +525,7 @@ footer b{color:var(--ink-2)}
   <div><b>Sources.</b> Everything is computed from <span id="srcLeague"></span> &mdash;
     <span id="srcGames"></span> box scores and <span id="srcPicks"></span> draft picks,
     <span id="totalPts"></span> points scored in all.</div>
-  <div><b>Reconciled against ESPN.</b> All 96 season rows in the spreadsheet match the box scores
-    exactly on wins, losses, points for and points against, as do every champion and runner-up.
-    Three fields did not, and use the ESPN figures here: playoff appearances (the sheet undercounted
-    six &mdash; six teams make the bracket every year, so the total is 54) and division titles
-    (Karen 3&rarr;2, Kaila 2&rarr;1). Every last-place finish is as the league recorded it.</div>
-  <div><b>Last place</b> means two different things by era, matching how the league actually
-    awarded it. From 2017 to 2021 it went to the worst regular-season record. From 2022 &mdash; when
-    the league grew to twelve teams and added a consolation bracket &mdash; it goes to whoever
-    finished last in the final standings. 2024 had none recorded and is filled in under the
-    2022-onward rule.</div>
-  <div><b>Seasons finishing exactly .500</b> are counted as their own category rather than as losses,
-    which moves Karen from four losing seasons to three.</div>
+  <div id="leagueNotes"></div>
 </div></footer>
 
 <script>
@@ -571,6 +549,40 @@ const YEARS = [...new Set(M.flatMap(m=>m.seasons.map(s=>s.year)))].sort();
   const yrs = BRAND.years || [];
   $("#srcLeague").textContent = "ESPN league " + BRAND.leagueId
     + " (" + yrs[0] + "\u2013" + yrs[yrs.length-1] + ")";
+})();
+
+/* ---------- copy that depends on the league ---------- */
+(function(){
+  const n=M.length, first=YEARS[0], last=YEARS[YEARS.length-1];
+  const word=k=>({1:"one",2:"two",3:"three",4:"four",5:"five",6:"six",7:"seven",8:"eight",9:"nine",
+                  10:"ten",11:"eleven",12:"twelve",13:"thirteen",14:"fourteen"})[k]||k;
+  document.querySelectorAll(".yr0").forEach(e=>e.textContent=first);
+  const sizes=[...new Set(YEARS.map(y=>E.teamsByYear[y]))];
+  const grew=sizes.length>1
+    ? " &mdash; the league grew from "+word(Math.min(...sizes))+" to "+word(Math.max(...sizes))+"."
+    : ".";
+  $("#mantelNote").innerHTML="<b>One name per year, "+word(YEARS.length)+" years running.</b> "
+    +"The small number on each plate is how many teams that title had to beat"+grew;
+  $("#mgrCount").innerHTML=word(n).charAt(0).toUpperCase()+word(n).slice(1)+" people have taken a team.";
+
+  const era=E.lastPlaceRecordThrough;
+  $("#seasonNote").innerHTML="<b>Where everyone actually finished</b>, brackets included &mdash; not "
+    +"just record. The gold edge marks who made the bracket; payouts go to the top three."
+    +(era ? " Through "+era+" the wooden spoon went to the worst regular-season record rather than to "
+           +"the consolation bracket, so in those years record is what counted and they are labelled "
+           +"<em>worst record</em>. Teams that made the bracket are listed in the order they went out; "
+           +"everyone else is ranked by record until "+(era+1)+"."
+          : " Teams are listed in the order they went out of the bracket.");
+
+  const notes=(BRAND.notes||[]);
+  const kn=$("#keeperNote");
+  if(kn) kn.innerHTML = E.keepers
+    ? " Keepers taken at a discounted round are excluded from draft grades and scored on their own below."
+    : " This league is a straight redraft, so every pick counts.";
+  $("#leagueNotes").innerHTML=notes.length
+    ? notes.map(t=>"<div>"+t+"</div>").join("")
+    : "<div><b>Everything here is computed, not typed.</b> Records, finishes, head-to-head, draft "
+      +"value and every leaderboard come straight from the box scores.</div>";
 })();
 
 /* ---------- tiles ---------- */

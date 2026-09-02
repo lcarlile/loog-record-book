@@ -1,2 +1,3 @@
 .espn-auth.json
-.espn-cache.json
+espn-auth.json
+.espn-cache*.json

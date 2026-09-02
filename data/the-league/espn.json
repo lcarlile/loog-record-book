@@ -1,0 +1,1416 @@
+{
+ "h2h": [
+  "Chase/Daniell 7-2",
+  "Chase/Danny 5-8",
+  "Chase/Eddie 5-4",
+  "Chase/Jake 3-0",
+  "Chase/Jason 1-5",
+  "Chase/Joe 0-5",
+  "Chase/Logan 2-6",
+  "Chase/Noah 5-5",
+  "Chase/Pat 3-4",
+  "Chase/Peter 0-2",
+  "Chase/Robby 4-5",
+  "Chase/Sam 0-3",
+  "Daniell/Danny 3-4",
+  "Daniell/Eddie 3-7",
+  "Daniell/Jake 1-1",
+  "Daniell/Jason 4-3",
+  "Daniell/Joe 3-4",
+  "Daniell/Logan 0-7",
+  "Daniell/Noah 4-10",
+  "Daniell/Pat 2-5",
+  "Daniell/Peter 2-0",
+  "Daniell/Robby 2-6",
+  "Daniell/Sam 3-2",
+  "Danny/Eddie 5-5",
+  "Danny/Jake 1-0",
+  "Danny/Jason 4-3",
+  "Danny/Joe 3-4",
+  "Danny/Logan 3-7",
+  "Danny/Noah 4-2",
+  "Danny/Pat 3-3",
+  "Danny/Peter 1-0",
+  "Danny/Robby 4-7",
+  "Danny/Sam 1-4",
+  "Eddie/Jake 1-1",
+  "Eddie/Jason 5-6",
+  "Eddie/Joe 2-3",
+  "Eddie/Logan 2-6",
+  "Eddie/Noah 7-4",
+  "Eddie/Pat 5-1",
+  "Eddie/Peter 2-0",
+  "Eddie/Robby 2-4",
+  "Eddie/Sam 2-1",
+  "Jake/Joe 0-1",
+  "Jake/Logan 0-2",
+  "Jake/Noah 3-0",
+  "Jake/Robby 2-0",
+  "Jake/Sam 0-1",
+  "Jason/Joe 3-2",
+  "Jason/Logan 7-4",
+  "Jason/Noah 4-3",
+  "Jason/Pat 1-2",
+  "Jason/Peter 2-1",
+  "Jason/Robby 3-4",
+  "Jason/Sam 1-0",
+  "Joe/Logan 1-5",
+  "Joe/Noah 4-6",
+  "Joe/Pat 3-2",
+  "Joe/Robby 5-5",
+  "Joe/Sam 4-1",
+  "Logan/Noah 6-1",
+  "Logan/Pat 3-2",
+  "Logan/Peter 0-1",
+  "Logan/Robby 3-9",
+  "Logan/Sam 2-3",
+  "Noah/Pat 3-2",
+  "Noah/Peter 0-2",
+  "Noah/Robby 3-4",
+  "Noah/Sam 2-1",
+  "Pat/Peter 0-1",
+  "Pat/Robby 2-4",
+  "Peter/Robby 1-2",
+  "Robby/Sam 2-1"
+ ],
+ "luck": {
+  "Logan": [
+   62.2,
+   60.1
+  ],
+  "Danny": [
+   48.8,
+   49.5
+  ],
+  "Daniell": [
+   34.1,
+   31.1
+  ],
+  "Robby": [
+   61.9,
+   53.3
+  ],
+  "Noah": [
+   45.9,
+   42.4
+  ],
+  "Jason": [
+   55.9,
+   56.8
+  ],
+  "Peter": [
+   47.1,
+   49
+  ],
+  "Eddie": [
+   53,
+   52.6
+  ],
+  "Chase": [
+   41.7,
+   50
+  ],
+  "Pat": [
+   45.1,
+   55.4
+  ],
+  "Joe": [
+   54.5,
+   54.9
+  ],
+  "Sam": [
+   50,
+   46
+  ],
+  "Jake": [
+   41.2,
+   53
+  ]
+ },
+ "winStreak": {
+  "Logan": [
+   6,
+   "2025 W1",
+   "2025 W6"
+  ],
+  "Danny": [
+   9,
+   "2023 W17",
+   "2024 W8"
+  ],
+  "Daniell": [
+   3,
+   "2023 W8",
+   "2023 W10"
+  ],
+  "Robby": [
+   12,
+   "2022 W9",
+   "2023 W4"
+  ],
+  "Noah": [
+   4,
+   "2025 W2",
+   "2025 W5"
+  ],
+  "Jason": [
+   5,
+   "2024 W3",
+   "2024 W7"
+  ],
+  "Peter": [
+   3,
+   "2021 W5",
+   "2021 W7"
+  ],
+  "Eddie": [
+   7,
+   "2021 W13",
+   "2022 W3"
+  ],
+  "Chase": [
+   5,
+   "2022 W14",
+   "2023 W1"
+  ],
+  "Pat": [
+   4,
+   "2021 W12",
+   "2021 W15"
+  ],
+  "Joe": [
+   4,
+   "2022 W5",
+   "2022 W8"
+  ],
+  "Sam": [
+   5,
+   "2024 W8",
+   "2024 W12"
+  ],
+  "Jake": [
+   3,
+   "2025 W8",
+   "2025 W10"
+  ]
+ },
+ "lossStreak": {
+  "Logan": [
+   4,
+   "2023 W14",
+   "2023 W17"
+  ],
+  "Danny": [
+   6,
+   "2023 W8",
+   "2023 W13"
+  ],
+  "Daniell": [
+   16,
+   "2022 W3",
+   "2023 W1"
+  ],
+  "Robby": [
+   5,
+   "2024 W16",
+   "2025 W3"
+  ],
+  "Noah": [
+   6,
+   "2021 W1",
+   "2021 W6"
+  ],
+  "Jason": [
+   3,
+   "2021 W16",
+   "2022 W1"
+  ],
+  "Peter": [
+   4,
+   "2021 W8",
+   "2021 W11"
+  ],
+  "Eddie": [
+   8,
+   "2024 W8",
+   "2024 W15"
+  ],
+  "Chase": [
+   10,
+   "2023 W12",
+   "2024 W4"
+  ],
+  "Pat": [
+   6,
+   "2021 W1",
+   "2021 W6"
+  ],
+  "Joe": [
+   4,
+   "2023 W13",
+   "2023 W17"
+  ],
+  "Sam": [
+   5,
+   "2024 W3",
+   "2024 W7"
+  ],
+  "Jake": [
+   4,
+   "2025 W2",
+   "2025 W5"
+  ]
+ },
+ "teamsByYear": {
+  "2021": 10,
+  "2022": 10,
+  "2023": 10,
+  "2024": 10,
+  "2025": 10
+ },
+ "highWeek": [
+  [
+   "Logan",
+   184.9,
+   "Daniell",
+   108.52,
+   2024,
+   11
+  ],
+  [
+   "Daniell",
+   184.18,
+   "Jason",
+   125.72,
+   2023,
+   5
+  ],
+  [
+   "Logan",
+   184.18,
+   "Jake",
+   127.5,
+   2025,
+   11
+  ],
+  [
+   "Logan",
+   182.94,
+   "Joe",
+   144.34,
+   2022,
+   9
+  ],
+  [
+   "Robby",
+   182,
+   "Jason",
+   119.44,
+   2024,
+   15
+  ],
+  [
+   "Logan",
+   180.04,
+   "Noah",
+   92.08,
+   2025,
+   14
+  ]
+ ],
+ "lowWeek": [
+  [
+   "Pat",
+   39.78,
+   "Eddie",
+   142.4,
+   2022,
+   17
+  ],
+  [
+   "Daniell",
+   46.9,
+   "Jason",
+   95.7,
+   2021,
+   10
+  ],
+  [
+   "Peter",
+   48.18,
+   "Robby",
+   141.36,
+   2021,
+   9
+  ],
+  [
+   "Danny",
+   56.7,
+   "Chase",
+   116.12,
+   2022,
+   17
+  ],
+  [
+   "Eddie",
+   58.22,
+   "Noah",
+   111.24,
+   2025,
+   12
+  ],
+  [
+   "Noah",
+   60.7,
+   "Logan",
+   118.58,
+   2021,
+   9
+  ]
+ ],
+ "blowout": [
+  [
+   "Jason",
+   175.26,
+   "Peter",
+   62.5,
+   2021,
+   11
+  ],
+  [
+   "Eddie",
+   142.4,
+   "Pat",
+   39.78,
+   2022,
+   17
+  ],
+  [
+   "Robby",
+   141.36,
+   "Peter",
+   48.18,
+   2021,
+   9
+  ],
+  [
+   "Jason",
+   165.62,
+   "Danny",
+   73.24,
+   2023,
+   13
+  ],
+  [
+   "Logan",
+   180.04,
+   "Noah",
+   92.08,
+   2025,
+   14
+  ]
+ ],
+ "closest": [
+  [
+   "Chase",
+   100.38,
+   "Jason",
+   100.3,
+   2023,
+   11
+  ],
+  [
+   "Eddie",
+   123.34,
+   "Noah",
+   123.24,
+   2023,
+   1
+  ],
+  [
+   "Sam",
+   135.84,
+   "Eddie",
+   135.38,
+   2024,
+   8
+  ],
+  [
+   "Danny",
+   114.92,
+   "Noah",
+   114.44,
+   2023,
+   6
+  ],
+  [
+   "Danny",
+   95.4,
+   "Daniell",
+   94.84,
+   2021,
+   9
+  ],
+  [
+   "Jason",
+   124,
+   "Joe",
+   123.32,
+   2022,
+   17
+  ]
+ ],
+ "lopsided": [
+  "Robby 9-3 Logan",
+  "Noah 10-4 Daniell",
+  "Eddie 7-3 Daniell",
+  "Logan 7-3 Danny",
+  "Robby 7-4 Danny",
+  "Eddie 7-4 Noah"
+ ],
+ "evenRivalry": [
+  "Danny 5-5 Eddie (10g)",
+  "Chase 5-5 Noah (10g)",
+  "Joe 5-5 Robby (10g)",
+  "Eddie 5-6 Jason (11g)",
+  "Joe 4-6 Noah (10g)",
+  "Chase 5-8 Danny (13g)"
+ ],
+ "weeklyHigh": {
+  "Eddie": 11,
+  "Danny": 8,
+  "Jason": 10,
+  "Peter": 1,
+  "Robby": 8,
+  "Pat": 5,
+  "Logan": 11,
+  "Joe": 7,
+  "Chase": 3,
+  "Noah": 3,
+  "Daniell": 1,
+  "Sam": 2
+ },
+ "weeklyLow": {
+  "Noah": 12,
+  "Chase": 7,
+  "Eddie": 6,
+  "Daniell": 17,
+  "Peter": 3,
+  "Logan": 1,
+  "Pat": 3,
+  "Danny": 6,
+  "Jason": 3,
+  "Joe": 5,
+  "Robby": 1,
+  "Sam": 5,
+  "Jake": 1
+ },
+ "heartbreak": {
+  "Jason": 6,
+  "Daniell": 4,
+  "Robby": 3,
+  "Pat": 4,
+  "Peter": 2,
+  "Danny": 5,
+  "Noah": 5,
+  "Eddie": 5,
+  "Logan": 3,
+  "Chase": 7,
+  "Joe": 3,
+  "Sam": 1,
+  "Jake": 2
+ },
+ "regularSeasonWeeks": 70,
+ "boxScores": 420,
+ "lastPlace": {
+  "2021": "Daniell",
+  "2022": "Daniell",
+  "2023": "Chase",
+  "2024": "Chase",
+  "2025": "Danny"
+ },
+ "lastPlaceRecordThrough": 0,
+ "lastPlaceRule": {
+  "2021-2025": "last in final standings"
+ },
+ "keepers": false,
+ "playoffYears": {
+  "Logan": [
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "Danny": [
+   2021,
+   2024
+  ],
+  "Daniell": [],
+  "Robby": [
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "Noah": [
+   2023,
+   2025
+  ],
+  "Jason": [
+   2021,
+   2022,
+   2023,
+   2024
+  ],
+  "Peter": [
+   2021
+  ],
+  "Eddie": [
+   2021,
+   2022,
+   2023
+  ],
+  "Chase": [
+   2025
+  ],
+  "Pat": [
+   2022
+  ],
+  "Joe": [
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "Sam": [
+   2024
+  ],
+  "Jake": [
+   2025
+  ]
+ },
+ "divTitles": {
+  "Logan": 3,
+  "Danny": 1,
+  "Daniell": 0,
+  "Robby": 1,
+  "Noah": 0,
+  "Jason": 0,
+  "Peter": 0,
+  "Eddie": 2,
+  "Chase": 1,
+  "Pat": 0,
+  "Joe": 2,
+  "Sam": 0,
+  "Jake": 0
+ },
+ "draftR1": [
+  [
+   2021,
+   "Chase",
+   "Christian McCaffrey"
+  ],
+  [
+   2021,
+   "Peter",
+   "Derrick Henry"
+  ],
+  [
+   2021,
+   "Logan",
+   "Dalvin Cook"
+  ],
+  [
+   2021,
+   "Noah",
+   "Davante Adams"
+  ],
+  [
+   2021,
+   "Daniell",
+   "Nick Chubb"
+  ],
+  [
+   2021,
+   "Eddie",
+   "Alvin Kamara"
+  ],
+  [
+   2021,
+   "Danny",
+   "Aaron Jones"
+  ],
+  [
+   2021,
+   "Pat",
+   "Saquon Barkley"
+  ],
+  [
+   2021,
+   "Jason",
+   "Ezekiel Elliott"
+  ],
+  [
+   2021,
+   "Robby",
+   "Jonathan Taylor"
+  ],
+  [
+   2022,
+   "Daniell",
+   "Jonathan Taylor"
+  ],
+  [
+   2022,
+   "Eddie",
+   "Christian McCaffrey"
+  ],
+  [
+   2022,
+   "Danny",
+   "Cooper Kupp"
+  ],
+  [
+   2022,
+   "Robby",
+   "Austin Ekeler"
+  ],
+  [
+   2022,
+   "Jason",
+   "Derrick Henry"
+  ],
+  [
+   2022,
+   "Joe",
+   "Dalvin Cook"
+  ],
+  [
+   2022,
+   "Logan",
+   "Justin Jefferson"
+  ],
+  [
+   2022,
+   "Pat",
+   "Ja'Marr Chase"
+  ],
+  [
+   2022,
+   "Noah",
+   "Joe Mixon"
+  ],
+  [
+   2022,
+   "Chase",
+   "Alvin Kamara"
+  ],
+  [
+   2023,
+   "Robby",
+   "Justin Jefferson"
+  ],
+  [
+   2023,
+   "Daniell",
+   "Ja'Marr Chase"
+  ],
+  [
+   2023,
+   "Joe",
+   "Christian McCaffrey"
+  ],
+  [
+   2023,
+   "Danny",
+   "Cooper Kupp"
+  ],
+  [
+   2023,
+   "Pat",
+   "Austin Ekeler"
+  ],
+  [
+   2023,
+   "Chase",
+   "Travis Kelce"
+  ],
+  [
+   2023,
+   "Noah",
+   "Tyreek Hill"
+  ],
+  [
+   2023,
+   "Logan",
+   "Bijan Robinson"
+  ],
+  [
+   2023,
+   "Jason",
+   "Derrick Henry"
+  ],
+  [
+   2023,
+   "Eddie",
+   "Saquon Barkley"
+  ],
+  [
+   2024,
+   "Chase",
+   "Christian McCaffrey"
+  ],
+  [
+   2024,
+   "Joe",
+   "Tyreek Hill"
+  ],
+  [
+   2024,
+   "Noah",
+   "CeeDee Lamb"
+  ],
+  [
+   2024,
+   "Daniell",
+   "Ja'Marr Chase"
+  ],
+  [
+   2024,
+   "Sam",
+   "Amon-Ra St. Brown"
+  ],
+  [
+   2024,
+   "Eddie",
+   "Bijan Robinson"
+  ],
+  [
+   2024,
+   "Robby",
+   "Justin Jefferson"
+  ],
+  [
+   2024,
+   "Logan",
+   "Breece Hall"
+  ],
+  [
+   2024,
+   "Danny",
+   "Jonathan Taylor"
+  ],
+  [
+   2024,
+   "Jason",
+   "Saquon Barkley"
+  ],
+  [
+   2025,
+   "Eddie",
+   "Ja'Marr Chase"
+  ],
+  [
+   2025,
+   "Logan",
+   "Jahmyr Gibbs"
+  ],
+  [
+   2025,
+   "Jake",
+   "Bijan Robinson"
+  ],
+  [
+   2025,
+   "Daniell",
+   "Saquon Barkley"
+  ],
+  [
+   2025,
+   "Danny",
+   "Justin Jefferson"
+  ],
+  [
+   2025,
+   "Noah",
+   "Christian McCaffrey"
+  ],
+  [
+   2025,
+   "Sam",
+   "Malik Nabers"
+  ],
+  [
+   2025,
+   "Joe",
+   "CeeDee Lamb"
+  ],
+  [
+   2025,
+   "Robby",
+   "Puka Nacua"
+  ],
+  [
+   2025,
+   "Chase",
+   "Ashton Jeanty"
+  ]
+ ],
+ "favourite": {
+  "Logan": [
+   "Drake London",
+   3
+  ],
+  "Danny": [
+   "Cooper Kupp",
+   3
+  ],
+  "Daniell": [
+   "Devin Singletary",
+   3
+  ],
+  "Robby": [
+   "Jerry Jeudy",
+   3
+  ],
+  "Noah": [
+   "Keenan Allen",
+   2
+  ],
+  "Jason": [
+   "Chris Godwin",
+   2
+  ],
+  "Peter": [
+   "Derrick Henry",
+   1
+  ],
+  "Eddie": [
+   "Tyler Lockett",
+   3
+  ],
+  "Chase": [
+   "Christian McCaffrey",
+   2
+  ],
+  "Pat": [
+   "Tyler Bass",
+   3
+  ],
+  "Joe": [
+   "Dalvin Cook",
+   2
+  ],
+  "Sam": [
+   "Kenneth Walker III",
+   2
+  ],
+  "Jake": [
+   "Bijan Robinson",
+   1
+  ]
+ },
+ "draftGrade": {
+  "Chase|2021": [
+   -3,
+   "B-"
+  ],
+  "Peter|2021": [
+   17.5,
+   "A-"
+  ],
+  "Logan|2021": [
+   -20.5,
+   "C"
+  ],
+  "Noah|2021": [
+   -13.5,
+   "C+"
+  ],
+  "Daniell|2021": [
+   -11,
+   "C+"
+  ],
+  "Eddie|2021": [
+   10.2,
+   "B+"
+  ],
+  "Danny|2021": [
+   20.7,
+   "A"
+  ],
+  "Pat|2021": [
+   0.7,
+   "B"
+  ],
+  "Jason|2021": [
+   8.6,
+   "B+"
+  ],
+  "Robby|2021": [
+   -9.8,
+   "C+"
+  ],
+  "Daniell|2022": [
+   0.2,
+   "B"
+  ],
+  "Eddie|2022": [
+   18.4,
+   "A-"
+  ],
+  "Danny|2022": [
+   -8.5,
+   "C+"
+  ],
+  "Robby|2022": [
+   18.9,
+   "A"
+  ],
+  "Jason|2022": [
+   4.8,
+   "B"
+  ],
+  "Joe|2022": [
+   -5.2,
+   "B-"
+  ],
+  "Logan|2022": [
+   -13.9,
+   "C"
+  ],
+  "Pat|2022": [
+   -13.5,
+   "C+"
+  ],
+  "Noah|2022": [
+   -0.9,
+   "B-"
+  ],
+  "Chase|2022": [
+   -0.3,
+   "B-"
+  ],
+  "Robby|2023": [
+   -25.2,
+   "C-"
+  ],
+  "Daniell|2023": [
+   23.5,
+   "A"
+  ],
+  "Joe|2023": [
+   15.5,
+   "A-"
+  ],
+  "Danny|2023": [
+   -21.7,
+   "C"
+  ],
+  "Pat|2023": [
+   -22.2,
+   "C-"
+  ],
+  "Chase|2023": [
+   14.7,
+   "B+"
+  ],
+  "Noah|2023": [
+   -21.9,
+   "C-"
+  ],
+  "Logan|2023": [
+   5.9,
+   "B+"
+  ],
+  "Jason|2023": [
+   16.2,
+   "A-"
+  ],
+  "Eddie|2023": [
+   15.2,
+   "A-"
+  ],
+  "Chase|2024": [
+   -11.8,
+   "C+"
+  ],
+  "Joe|2024": [
+   -6.9,
+   "B-"
+  ],
+  "Noah|2024": [
+   9.8,
+   "B+"
+  ],
+  "Daniell|2024": [
+   -28.7,
+   "D"
+  ],
+  "Sam|2024": [
+   18.5,
+   "A"
+  ],
+  "Eddie|2024": [
+   1.6,
+   "B"
+  ],
+  "Robby|2024": [
+   -1.7,
+   "B-"
+  ],
+  "Logan|2024": [
+   6.7,
+   "B+"
+  ],
+  "Danny|2024": [
+   -4.2,
+   "B-"
+  ],
+  "Jason|2024": [
+   16.9,
+   "A-"
+  ],
+  "Eddie|2025": [
+   -40.7,
+   "D"
+  ],
+  "Logan|2025": [
+   23.2,
+   "A"
+  ],
+  "Jake|2025": [
+   2.1,
+   "B"
+  ],
+  "Daniell|2025": [
+   -15.9,
+   "C"
+  ],
+  "Danny|2025": [
+   3.6,
+   "B"
+  ],
+  "Noah|2025": [
+   5,
+   "B+"
+  ],
+  "Sam|2025": [
+   0.1,
+   "B"
+  ],
+  "Joe|2025": [
+   -7.4,
+   "B-"
+  ],
+  "Robby|2025": [
+   13.5,
+   "B+"
+  ],
+  "Chase|2025": [
+   16.5,
+   "A-"
+  ]
+ },
+ "draftCareer": [
+  [
+   "Jason",
+   4,
+   "A",
+   4,
+   11.6
+  ],
+  [
+   "Peter",
+   2.1,
+   "A-",
+   1,
+   17.5
+  ],
+  [
+   "Sam",
+   2,
+   "A-",
+   2,
+   9.3
+  ],
+  [
+   "Chase",
+   1.3,
+   "B+",
+   5,
+   3.2
+  ],
+  [
+   "Eddie",
+   0.4,
+   "B+",
+   5,
+   0.9
+  ],
+  [
+   "Jake",
+   0.2,
+   "B",
+   1,
+   2.1
+  ],
+  [
+   "Logan",
+   0.1,
+   "B",
+   5,
+   0.3
+  ],
+  [
+   "Robby",
+   -0.3,
+   "B-",
+   5,
+   -0.8
+  ],
+  [
+   "Joe",
+   -0.4,
+   "B-",
+   4,
+   -1
+  ],
+  [
+   "Danny",
+   -0.8,
+   "C+",
+   5,
+   -2
+  ],
+  [
+   "Noah",
+   -1.7,
+   "C+",
+   5,
+   -4.3
+  ],
+  [
+   "Daniell",
+   -2.6,
+   "C",
+   5,
+   -6.4
+  ],
+  [
+   "Pat",
+   -3.3,
+   "C",
+   3,
+   -11.7
+  ]
+ ],
+ "bestDrafts": [
+  [
+   "Daniell",
+   2023,
+   23.5,
+   "A"
+  ],
+  [
+   "Logan",
+   2025,
+   23.2,
+   "A"
+  ],
+  [
+   "Danny",
+   2021,
+   20.7,
+   "A"
+  ],
+  [
+   "Robby",
+   2022,
+   18.9,
+   "A"
+  ],
+  [
+   "Sam",
+   2024,
+   18.5,
+   "A"
+  ],
+  [
+   "Eddie",
+   2022,
+   18.4,
+   "A-"
+  ],
+  [
+   "Peter",
+   2021,
+   17.5,
+   "A-"
+  ],
+  [
+   "Jason",
+   2024,
+   16.9,
+   "A-"
+  ]
+ ],
+ "steals": [
+  [
+   2021,
+   "Danny",
+   "Cooper Kupp",
+   "WR",
+   "R5",
+   "+209",
+   367
+  ],
+  [
+   2025,
+   "Robby",
+   "Drake Maye",
+   "QB",
+   "R13",
+   "+190",
+   351.5
+  ],
+  [
+   2022,
+   "Noah",
+   "Josh Jacobs",
+   "RB",
+   "R7",
+   "+174",
+   301.8
+  ],
+  [
+   2021,
+   "Eddie",
+   "Deebo Samuel",
+   "WR",
+   "R8",
+   "+173",
+   300.5
+  ],
+  [
+   2023,
+   "Chase",
+   "Raheem Mostert",
+   "RB",
+   "R16",
+   "+161",
+   255.2
+  ],
+  [
+   2023,
+   "Eddie",
+   "Josh Allen",
+   "QB",
+   "R3",
+   "+155",
+   392.6
+  ],
+  [
+   2023,
+   "Joe",
+   "Christian McCaffrey",
+   "RB",
+   "R1",
+   "+149",
+   357.8
+  ],
+  [
+   2025,
+   "Chase",
+   "Jaxon Smith-Njigba",
+   "WR",
+   "R3",
+   "+143",
+   300.4
+  ]
+ ],
+ "busts": [
+  [
+   2023,
+   "Noah",
+   "Nick Chubb",
+   "RB",
+   "R2",
+   "-200",
+   21.1
+  ],
+  [
+   2024,
+   "Chase",
+   "Christian McCaffrey",
+   "RB",
+   "R1",
+   "-188",
+   40.3
+  ],
+  [
+   2025,
+   "Daniell",
+   "Jayden Daniels",
+   "QB",
+   "R3",
+   "-173",
+   114.3
+  ],
+  [
+   2025,
+   "Sam",
+   "Malik Nabers",
+   "WR",
+   "R1",
+   "-167",
+   48.1
+  ],
+  [
+   2021,
+   "Logan",
+   "Calvin Ridley",
+   "WR",
+   "R2",
+   "-166",
+   55.6
+  ],
+  [
+   2024,
+   "Daniell",
+   "Isiah Pacheco",
+   "RB",
+   "R2",
+   "-163",
+   50.9
+  ],
+  [
+   2022,
+   "Pat",
+   "Javonte Williams",
+   "RB",
+   "R3",
+   "-133",
+   34
+  ],
+  [
+   2021,
+   "Peter",
+   "Lamar Jackson",
+   "QB",
+   "R2",
+   "-119",
+   240
+  ]
+ ],
+ "bestKeeps": [],
+ "keeperValue": [],
+ "draftTotals": {
+  "picks": 800,
+  "graded": 800,
+  "discountedKeepers": 0
+ },
+ "draftMethod": "A pick is worth the points it scored above what that draft slot normally returns at its position. Points are put on a common scale across seasons (scoring changed over the years) and each season is centred on zero, so a manager is measured against the field he actually drafted against. Keepers taken at a discounted round are excluded from grades and scored separately."
+}

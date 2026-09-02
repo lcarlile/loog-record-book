@@ -1,20 +1,45 @@
 {
   "slug": "loog",
   "leagueId": 1197565,
-  "years": [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
-  "out": { "site": "index.html", "fragment": "recordbook.html" },
+  "years": [
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "out": {
+    "site": "index.html",
+    "fragment": "recordbook.html"
+  },
   "brand": {
     "title": "LoOG Record Book",
     "crestLeft": "Est. 2017",
     "crestRight": "Tenth Season",
     "h1": "League of<br>Ordinary <em>Gentlemen</em>",
     "dek": "Nine seasons on the books. Every win, every collapse, every trophy &mdash; and the head-to-head ledger that settles the group chat.",
-    "description": "Nine seasons of League of Ordinary Gentlemen fantasy football - champions, all-time standings, head-to-head records and single-week extremes."
+    "description": "Nine seasons of League of Ordinary Gentlemen fantasy football - champions, all-time standings, head-to-head records and single-week extremes.",
+    "notes": [
+      "<b>Reconciled against ESPN.</b> All 96 season rows in the original spreadsheet match the box scores exactly on wins, losses, points for and points against, as do every champion and runner-up. Three fields did not, and use the ESPN figures here: playoff appearances (the sheet undercounted six &mdash; six teams make the bracket every year, so the total is 54) and division titles (Karen 3&rarr;2, Kaila 2&rarr;1). Every last-place finish is as the league recorded it.",
+      "<b>Last place</b> means two different things by era, matching how the league actually awarded it. From 2017 to 2021 it went to the worst regular-season record. From 2022 &mdash; when the league grew to twelve teams and added a consolation bracket &mdash; it goes to whoever finished last in the final standings. 2024 had none recorded and is filled in under the 2022-onward rule.",
+      "<b>Seasons finishing exactly .500</b> are counted as their own category rather than as losses, which moves Karen from four losing seasons to three."
+    ]
   },
   "rules": {
-    "lastPlace": { "recordThrough": 2021 },
-    "keepers": { "enabled": true, "costOffset": 1 },
+    "lastPlace": {
+      "recordThrough": 2021
+    },
+    "keepers": {
+      "enabled": true,
+      "costOffset": 1
+    },
     "payoutDepth": 3
   },
-  "nameOverrides": { "Daniel Johnson": "Danny" }
+  "nameOverrides": {
+    "Daniel Johnson": "Danny"
+  }
 }

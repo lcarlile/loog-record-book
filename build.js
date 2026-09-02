@@ -22,6 +22,7 @@ const tpl = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
 
 const brand = Object.assign({ leagueId: CFG.leagueId, years: CFG.years }, CFG.brand);
 const page = tpl
+  .replace('__TITLE__', brand.title)
   .replace('/*__DATA__*/', JSON.stringify({ managers, espn }))
   .replace('/*__BRAND__*/', JSON.stringify(brand));
 
@@ -35,7 +36,7 @@ const write = (rel, body) => {
 write(CFG.out.fragment, page);
 
 /* standalone document for GitHub Pages */
-const title = (page.match(/<title>([\s\S]*?)<\/title>/) || [, brand.title])[1];
+const title = brand.title;
 const links = (page.match(/<link\b[^>]*>/g) || []).join('\n');
 const body = page.replace(/<title>[\s\S]*?<\/title>\s*/, '').replace(/<link\b[^>]*>\s*/g, '');
 const DESC = brand.description || '';

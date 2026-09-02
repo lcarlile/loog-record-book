@@ -44,6 +44,11 @@ function auth() {
     const j = JSON.parse(fs.readFileSync(f, 'utf8'));
     s2 = s2 || j.espn_s2; swid = swid || j.SWID;
   }
+  if (/PASTE/i.test(s2 || '') || /PASTE/i.test(swid || '')) {
+    console.error('\n.espn-auth.json still has the placeholder values in it.'
+      + '\nReplace espn_s2 and SWID with the real cookies, save, and run again.\n');
+    process.exit(1);
+  }
   if (!s2 || !swid) {
     console.error(`
 The league is private, so this needs your ESPN cookies.
@@ -185,7 +190,7 @@ if (require.main === module) {
       console.log('\nPulling ' + SLUG + ' (ESPN league ' + LEAGUE + ')...');
       await pull();
       fs.writeFileSync(CACHE, JSON.stringify(season));
-      console.log('  cached the raw pull to .espn-cache.json');
+      console.log('  cached the raw pull to ' + path.basename(CACHE));
     }
     require('./compute.js').run({ season, YEARS, CHECK, CFG, dir: path.join(__dirname, 'data', SLUG) });
   })().catch(e => { console.error('\nFAILED:', e.message); process.exit(1); });
