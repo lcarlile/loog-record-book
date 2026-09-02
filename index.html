@@ -128,9 +128,12 @@ section{padding:96px 0 72px; scroll-margin-top:52px}
 .note b, .note strong{color:var(--ink); font-weight:400}
 
 /* ---------- the mantel: brass plates on felt ---------- */
-.mantel{background:var(--felt); margin-inline:calc(50% - 50vw);
-        padding:52px calc(50vw - 590px + 24px) 40px}
-@media (max-width:1228px){ .mantel{padding-inline:24px} }
+section#champions{background:var(--felt); border-block-color:rgba(0,0,0,.3)}
+section#champions .head h2{color:var(--felt-ink)}
+section#champions .head .rule{background:var(--felt-rule)}
+section#champions .note{color:rgba(239,233,218,.7)}
+section#champions .note b{color:var(--felt-ink)}
+.mantel{background:transparent; margin-inline:0; padding:8px 0 0}
 .mantel-rail{display:grid; grid-template-columns:repeat(9,1fr); gap:10px}
 .yr{position:relative; display:block; width:100%; text-align:center; font:inherit; cursor:pointer;
     padding:15px 10px 17px; color:#2A1F08; border:1px solid #6E4E10;
@@ -153,6 +156,7 @@ section{padding:96px 0 72px; scroll-margin-top:52px}
        font-weight:700; color:var(--gold-bright); line-height:1.25; max-width:24ch}
 .never-names{margin:9px 0 0; font-size:13px; color:rgba(239,233,218,.55); letter-spacing:.02em}
 .rail-count{display:none}
+.swipe-hint{margin-left:10px; letter-spacing:.1em; color:var(--gold-bright); font-weight:600}
 
 /* ---------- tables ---------- */
 .scroll{overflow-x:auto; border:1px solid var(--rule); border-radius:0; background:var(--surface)}
@@ -242,7 +246,8 @@ tr.cut td{border-bottom:2px dashed var(--rule)}
 .rec-card h3{font-family:"Fraunces",Georgia,serif; font-size:20px; font-weight:600; color:var(--ink);
              letter-spacing:-.01em; text-transform:none; margin-bottom:4px; line-height:1.2}
 .rec-card h3 em{display:block; font-style:normal; font-family:"Archivo",sans-serif; font-size:12px;
-                letter-spacing:.06em; color:var(--ink-3); font-weight:400; margin-top:3px}
+                letter-spacing:.06em; color:var(--ink-3); font-weight:400; margin-top:3px;
+                min-height:1.4em}
 .rec-card ol{margin:0; padding:0; list-style:none}
 .rec-card li{display:flex; align-items:baseline; gap:9px; padding:6px 0;
              border-bottom:1px dotted var(--rule-soft); min-width:0}
@@ -353,6 +358,8 @@ footer b{color:var(--ink-2)}
 .oppr .who{font-size:15.5px; font-weight:700}
 .oppr .rec{font-family:"Spline Sans Mono",monospace; font-size:15px; font-weight:600; font-variant-numeric:tabular-nums}
 .oppr .p{font-family:"Spline Sans Mono",monospace; font-size:12.5px; color:var(--ink-2); text-align:right}
+.oppr.strong{color:var(--surface)}
+.oppr.strong .p{color:rgba(255,255,255,.82)}
 .swipe{display:none; align-items:center; gap:7px; font-size:10.5px; letter-spacing:.11em;
        text-transform:uppercase; color:var(--ink-3); font-weight:700; margin:0 0 8px}
 
@@ -363,20 +370,24 @@ footer b{color:var(--ink-2)}
   section[data-tier="a"]{padding:64px 16px 56px}
 
   /* the mantel becomes a shelf you swipe */
-  .mantel{padding:34px 0 30px}
-  .mantel-rail{grid-template-columns:none; grid-auto-flow:column;
+  .mantel{padding:4px 0 0}
+  .mantel-rail{margin-inline:-16px}
+  .mantel-rail{mask-image:linear-gradient(90deg,#000 calc(100% - 44px),transparent);
+    grid-template-columns:none; grid-auto-flow:column;
     grid-auto-columns:minmax(154px,62%); gap:10px; overflow-x:auto;
     overscroll-behavior-x:contain; scroll-snap-type:x mandatory;
     scroll-padding-inline:16px; padding-inline:16px; scrollbar-width:none}
   .mantel-rail::-webkit-scrollbar{display:none}
   .mantel-rail .yr{scroll-snap-align:start}
-  .mantel-foot{margin:26px 16px 0}
-  .rail-count{display:block; margin:12px 16px 0; font-family:"Spline Sans Mono",monospace;
+  .mantel-foot{margin:26px 0 0}
+  .rail-count{display:block; margin:12px 0 0; font-family:"Spline Sans Mono",monospace;
     font-size:11px; letter-spacing:.14em; color:rgba(239,233,218,.6)}
 
   .tiles{display:grid; grid-template-columns:repeat(3,1fr)}
   .tile.opt{display:none}
   .tile{border-bottom:0; padding:14px 10px 13px}
+  .tile:nth-of-type(3){border-right:0}
+  .tile small{min-height:2.5em; letter-spacing:.09em; font-size:9.5px}
   .tile b{font-size:30px}
   .tile small{font-size:10px; letter-spacing:.1em}
   .only-wide{display:none}
@@ -435,7 +446,7 @@ footer b{color:var(--ink-2)}
 </header>
 
 <nav><div class="wrap" id="nav">
-  <a href="#champions" class="on">Champions</a>
+  <a href="#champions" class="on">The Mantel</a>
   <a href="#alltime">All-Time</a>
   <a href="#h2h">Head to Head</a>
   <a href="#managers">Managers</a>
@@ -681,7 +692,9 @@ function railCount(){
   const rail=$("#ribbon"), out=$("#railCount"); if(!rail||!out||!NARROW.matches) return;
   const plates=[...rail.children];
   const i=plates.findIndex(p=>p.offsetLeft>=rail.scrollLeft-4);
-  out.textContent=(i<0?plates.length:i+1)+" / "+plates.length;
+  const at=(i<0?plates.length:i+1);
+  const more=rail.scrollLeft + rail.clientWidth < rail.scrollWidth - 8;
+  out.innerHTML=at+" / "+plates.length+(more?' <span class="swipe-hint">swipe for more &rarr;</span>':'');
 }
 
 function drawLBTable(){
@@ -723,7 +736,7 @@ function cellColor(w,l){
   const a=(0.16+0.80*Math.pow(d,0.62)).toFixed(3);
   return "rgba(var(--"+(p>=.5?"pos":"neg")+"-rgb),"+a+")";
 }
-function cellStrong(w,l){ const g=w+l; return g? Math.abs(w/g-.5)*2>0.5 : false; }
+function cellStrong(w,l){ const g=w+l; return g? Math.abs(w/g-.5)*2>0.34 : false; }
 let h2hPick=null;
 function drawH2H(){ if(NARROW.matches) drawH2HList(); else drawH2HGrid(); }
 
@@ -747,6 +760,7 @@ function drawH2HList(){
     const [w,l]=o.r, p=w/(w+l);
     const row=el("div","oppr");
     row.style.background=cellColor(w,l);
+    if(cellStrong(w,l)) row.classList.add("strong");
     row.innerHTML='<span class="who">'+o.n+'</span>'
       +'<span class="rec">'+w+'&ndash;'+l+'</span>'
       +'<span class="p">'+pct(p)+'</span>';
@@ -893,8 +907,12 @@ function openDetail(name){
 function fact(l,v){ return '<div><small class="eyebrow">'+l+'</small><b>'+v+'</b></div>'; }
 
 /* ---------- record book ---------- */
+function subLine(c){
+  const h=c.querySelector("h3");
+  if(!h.querySelector("em")) h.insertAdjacentHTML("beforeend","<em>&nbsp;</em>");
+}
 function recCard(title, items){
-  const c=el("div","rec-card"); c.append(el("h3",null,title));
+  const c=el("div","rec-card"); c.append(el("h3",null,title)); subLine(c);
   const ol=el("ol");
   items.forEach((it,i)=>{ const li=el("li");
     li.append(el("span","i",i+1), el("span","t",it[0]), el("span","v "+(it[2]||""),it[1]));
@@ -925,7 +943,7 @@ recCard("Most points, one season", M.flatMap(m=>m.seasons.map(s=>({n:m.name,s}))
 (function(){
   const host=$("#rivalry");
   const card=(title, items)=>{
-    const c=el("div","rec-card"); c.append(el("h3",null,title));
+    const c=el("div","rec-card"); c.append(el("h3",null,title)); subLine(c);
     const ol=el("ol");
     items.forEach((it,i)=>{ const li=el("li");
       li.append(el("span","i",i+1), el("span","t",it[0]), el("span","v "+(it[2]||""), it[1]));
@@ -986,7 +1004,7 @@ drawDraft();
   c2.append(o2); host.append(c2);
 
   const mk=(title, items)=>{
-    const c=el("div","rec-card"); c.append(el("h3",null,title));
+    const c=el("div","rec-card"); c.append(el("h3",null,title)); subLine(c);
     const ol=el("ol");
     items.forEach((it,i)=>{ const li=el("li");
       li.append(el("span","i",i+1), el("span","t",it[0]), el("span","v "+(it[2]||""), it[1]));
