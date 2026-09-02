@@ -194,6 +194,11 @@ td.name{font-weight:700}
 .tag.t{background:rgba(var(--pos-rgb),.18); color:var(--brass-ink)}
 .tag.r{background:rgba(var(--neg-rgb),.15); color:var(--neg)}
 .tag.l{background:color-mix(in srgb, var(--last) 15%, transparent); color:var(--last)}
+.tag.d{background:color-mix(in srgb, var(--ink-3) 18%, transparent); color:var(--ink-2)}
+tr.po td:first-child, .mrow.po{box-shadow:inset 3px 0 0 var(--gold-bright)}
+tr.cut td{border-bottom:2px dashed var(--rule)}
+.cutlabel{display:block; margin:10px 0 2px; font-size:10px; letter-spacing:.18em;
+          text-transform:uppercase; color:var(--ink-3); font-weight:700}
 .spark{display:block; width:100%; height:68px; margin-top:10px}
 
 /* ---------- detail ---------- */
@@ -502,7 +507,8 @@ footer b{color:var(--ink-2)}
       The playoff field is the four division winners plus one wildcard per conference, taken on
       all-play record: what your record would be if you played every team every week. That is how
       Danny reached the 2025 semi-finals at 5&ndash;9 while Kim missed out at 9&ndash;5 &mdash; Danny
-      was beating 54.5% of the league each week, Kim 49.4%.</p>
+      was beating 54.5% of the league each week, Kim 49.4%. The gold edge marks the six who made
+      the bracket; payouts go to the top three.</p>
     <div class="years" id="years"></div>
     <div class="awards" id="awards"></div>
     <div id="seasonwrap"></div>
@@ -558,8 +564,10 @@ YEARS.forEach(y=>{
   d.append(el("span","y",y));
   d.append(el("span","champ",ch?ch.m.name:"&mdash;"));
   d.append(el("span","rec",ch?ch.s.w+"&ndash;"+ch.s.l:""));
+  const th=findNote(y,"Third");
   d.append(el("span","sub",
     (ru?"2nd <i>"+ru.m.name+"</i>":"2nd <i>&mdash;</i>")+"<br>"+
+    (th?"3rd <i>"+th.m.name+"</i>":"3rd <i>&mdash;</i>")+"<br>"+
     (bl?"Last <i>"+bl.m.name+"</i>":"Last <i>not recorded</i>")));
   [...d.children].forEach(c=>c.style.display="block");
   if(ch) d.onclick=()=>openDetail(ch.m.name);
@@ -583,6 +591,7 @@ const COLS=[
  {k:"pct",   t:"Win%",    v:m=>pct(m.pct), n:m=>m.pct},
  {k:"titles",t:"Titles",  pill:1},
  {k:"runnerUp",t:"2nd",   pill:1},
+ {k:"third",   t:"3rd",   pill:1},
  {k:"playoffApps",t:"PO Apps"},
  {k:"po",    t:"PO Rec",  v:m=>m.playoffW+"&ndash;"+m.playoffL, n:m=>m.playoffW/Math.max(1,m.playoffW+m.playoffL)},
  {k:"divTitles",t:"Div"},
@@ -633,6 +642,7 @@ function drawLBList(){
   });
   host.append(list);
 }
+function tagCls(n){ return n==="Champion"?"t" : n==="Runner Up"?"r" : n==="Third"?"d" : "l"; }
 function chip(label, val, gold){
   return '<span class="chip'+(gold?" gold":"")+'"><i>'+label+'</i><b>'+val+'</b></span>';
 }
@@ -792,6 +802,7 @@ M.slice().sort((a,b)=>b.pct-a.pct).forEach(m=>{
   const tr=el("div","trophies");
   const mult=(n,lbl)=> n>1 ? lbl+" &#215;"+n : lbl;
   if(m.runnerUp) tr.append(el("span","tag r",mult(m.runnerUp,"Runner-up")));
+  if(m.third)    tr.append(el("span","tag d",mult(m.third,"Third")));
   if(m.loser)    tr.append(el("span","tag l",mult(m.loser,"Last")));
   b.append(tr);
   b.insertAdjacentHTML("beforeend", spark(m));
@@ -811,7 +822,8 @@ function openDetail(name){
   host.innerHTML=
    '<div class="detail"><div class="dhead"><h3>'+name+'</h3>'
    +'<span class="k">'+m.w+'&ndash;'+m.l+' &nbsp;&middot;&nbsp; '+pct(m.pct)+'% &nbsp;&middot;&nbsp; '
-   +m.titles+' title'+(m.titles===1?'':'s')+'</span>'
+   +m.titles+' title'+(m.titles===1?'':'s')+' &nbsp;&middot;&nbsp; '
+   +(m.titles+m.runnerUp+m.third)+' in the money</span>'
    +'<button type="button" id="cl">Close</button></div>'
    + (NARROW.matches
      ? '<div class="mlist" style="padding:12px 14px">'
@@ -820,7 +832,7 @@ function openDetail(name){
          +'<span class="big">'+s.w+'&ndash;'+s.l+'</span></div>'
          +'<div class="l2" style="margin-left:0">'+pct(s.w/(s.w+s.l))+'% win rate</div>'
          +'<div class="l3" style="margin-left:0">'+chip("PF",f1(s.pf))+chip("PA",f1(s.pa))
-           +(s.note?'<span class="tag '+(s.note==="Champion"?"t":s.note==="Runner Up"?"r":"l")
+           +(s.note?'<span class="tag '+tagCls(s.note)
              +'" style="align-self:center">'+s.note+'</span>':'')+'</div></div>').join('')
        + '</div>'
      : '<div class="scroll"><table><thead><tr><th>Year</th><th>W</th><th>L</th><th>Win%</th>'
@@ -828,7 +840,7 @@ function openDetail(name){
        + m.seasons.map(s=>'<tr><td class="num">'+s.year+'</td><td class="num">'+s.w+'</td><td class="num">'+s.l+'</td>'
          +'<td class="num">'+pct(s.w/(s.w+s.l))+'</td><td class="num">'+f1(s.pf)+'</td><td class="num">'+f1(s.pa)+'</td>'
          +'<td class="num">'+f1(s.pfpg)+'</td><td>'+(s.note
-            ? '<span class="tag '+(s.note==="Champion"?"t":s.note==="Runner Up"?"r":"l")+'">'+s.note+'</span>' : '')+'</td></tr>').join('')
+            ? '<span class="tag '+tagCls(s.note)+'">'+s.note+'</span>' : '')+'</td></tr>').join('')
        +'</tbody></table></div>')
    +'<div class="facts">'
    +fact("Best season", best.w+"-"+best.l+" in "+best.year)
@@ -1012,31 +1024,37 @@ function drawSeason(){
   if(NARROW.matches){
     host.innerHTML="";
     const list=el("div","mlist");
+    const made=n=>(E.playoffYears[n]||[]).includes(curYear);
+    const lastPO=rows.reduce((acc,x,i)=>made(x.n)?i:acc,-1);
     rows.forEach((x,i)=>{
-      const b=el("button","mrow"); b.type="button";
+      const b=el("button","mrow"+(made(x.n)?" po":"")); b.type="button";
       b.innerHTML='<div class="l1"><span class="rk">'+(i+1)+'</span>'
         +'<span class="nm">'+x.n+'</span>'
         +'<span class="big">'+x.s.w+'&ndash;'+x.s.l+'</span></div>'
         +'<div class="l2">'+pct(x.s.w/(x.s.w+x.s.l))+'% win rate</div>'
         +'<div class="l3">'+chip("PF", f1(x.s.pf), false)+chip("PA", f1(x.s.pa), false)
           +chip("PF/G", f1(x.s.pfpg), false)
-          +(x.s.note?'<span class="tag '+(x.s.note==="Champion"?"t":x.s.note==="Runner Up"?"r":"l")
+          +(x.s.note?'<span class="tag '+tagCls(x.s.note)
               +'" style="align-self:center">'+x.s.note+'</span>':'')
         +'</div>';
       b.onclick=()=>openDetail(x.n);
       list.append(b);
+      if(i===lastPO) list.append(el("span","cutlabel","Missed the playoffs"));
     });
     host.append(list);
     return;
   }
   host.innerHTML='<div class="scroll"><table id="season"></table></div>';
+  const made=n=>(E.playoffYears[n]||[]).includes(curYear);
+  const lastPO=rows.reduce((acc,x,i)=>made(x.n)?i:acc,-1);
   $("#season").innerHTML='<thead><tr><th class="rank"></th><th>Manager</th><th>W</th><th>L</th>'
    +'<th>Win%</th><th>PF</th><th>PA</th><th>PF/G</th><th>Finish</th></tr></thead><tbody>'
-   +rows.map((x,i)=>'<tr><td class="rank">'+(i+1)+'</td><td class="name">'+x.n+'</td>'
+   +rows.map((x,i)=>'<tr class="'+(made(x.n)?'po ':'')+(i===lastPO?'cut':'')+'">'
+     +'<td class="rank">'+(i+1)+'</td><td class="name">'+x.n+'</td>'
      +'<td class="num">'+x.s.w+'</td><td class="num">'+x.s.l+'</td>'
      +'<td class="num">'+pct(x.s.w/(x.s.w+x.s.l))+'</td><td class="num">'+f1(x.s.pf)+'</td>'
      +'<td class="num">'+f1(x.s.pa)+'</td><td class="num">'+f1(x.s.pfpg)+'</td>'
-     +'<td>'+(x.s.note?'<span class="tag '+(x.s.note==="Champion"?"t":x.s.note==="Runner Up"?"r":"l")+'">'+x.s.note+'</span>':'')+'</td></tr>').join('')
+     +'<td>'+(x.s.note?'<span class="tag '+tagCls(x.s.note)+'">'+x.s.note+'</span>':'')+'</td></tr>').join('')
    +'</tbody>';
 }
 drawSeason();

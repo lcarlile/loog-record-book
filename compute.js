@@ -23,7 +23,8 @@ function run({ season, YEARS, CHECK }) {
     const champ = ts.find(t => t.fin === 1), ru = ts.find(t => t.fin === 2);
     const byRecord = ts.slice().sort((a, b) => (a.w - a.l) - (b.w - b.l) || a.pf - b.pf)[0];
     const byBracket = ts.find(t => t.fin === n);
-    finish[y] = { champ: champ && champ.m, ru: ru && ru.m,
+    const third = ts.find(t => t.fin === 3);
+    finish[y] = { champ: champ && champ.m, ru: ru && ru.m, third: third && third.m,
                   last: (y <= LAST_BY_RECORD_THROUGH ? byRecord : byBracket).m };
   });
 
@@ -53,7 +54,8 @@ function run({ season, YEARS, CHECK }) {
       const g = t.w + t.l;
       const note = finish[y].champ === name ? 'Champion'
                  : finish[y].ru === name ? 'Runner Up'
-                 : finish[y].last === name ? 'Biggest Loser' : null;
+                 : finish[y].last === name ? 'Biggest Loser'
+                 : finish[y].third === name ? 'Third' : null;
       return { year: y, w: t.w, l: t.l, pf: t.pf, pa: t.pa,
                pfpg: r2(t.pf / g), papg: r2(t.pa / g), note, fin: t.fin };
     });
@@ -64,6 +66,7 @@ function run({ season, YEARS, CHECK }) {
              pfpg: r2(sum('pf') / (w + l)), papg: r2(sum('pa') / (w + l)),
              titles: seasons.filter(s => s.note === 'Champion').length,
              runnerUp: seasons.filter(s => s.note === 'Runner Up').length,
+             third: seasons.filter(s => s.note === 'Third').length,
              loser: seasons.filter(s => s.note === 'Biggest Loser').length,
              winningSeasons: seasons.filter(s => s.w > s.l).length,
              losingSeasons: seasons.filter(s => s.w < s.l).length,
@@ -272,6 +275,7 @@ function run({ season, YEARS, CHECK }) {
   const tests = [
     ['one champion per season',    sum('titles') === N],
     ['one runner-up per season',   sum('runnerUp') === N],
+    ['one third place per season', sum('third') === N],
     ['one last place per season',  sum('loser') === N],
     ['wins equal losses',          sum('w') === sum('l')],
     ['playoff appearances add up', sum('playoffApps') === expectApps],

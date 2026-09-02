@@ -65,7 +65,7 @@
     "pa": 1499.86,
     "pfpg": 118,
     "papg": 107.1,
-    "note": null,
+    "note": "Third",
     "fin": 3
    },
    {
@@ -131,7 +131,8 @@
   ],
   "divTitles": 6,
   "sheetApps": 7,
-  "sheetDiv": 6
+  "sheetDiv": 6,
+  "third": 1
  },
  {
   "name": "Kaila",
@@ -205,7 +206,8 @@
   ],
   "divTitles": 1,
   "sheetApps": 2,
-  "sheetDiv": 2
+  "sheetDiv": 2,
+  "third": 0
  },
  {
   "name": "Steve",
@@ -218,7 +220,7 @@
     "pa": 1311.44,
     "pfpg": 111.3,
     "papg": 100.9,
-    "note": null,
+    "note": "Third",
     "fin": 3
    },
    {
@@ -306,7 +308,7 @@
     "pa": 1451.52,
     "pfpg": 113.7,
     "papg": 103.7,
-    "note": null,
+    "note": "Third",
     "fin": 3
    }
   ],
@@ -337,7 +339,8 @@
   ],
   "divTitles": 3,
   "sheetApps": 5,
-  "sheetDiv": 3
+  "sheetDiv": 3,
+  "third": 2
  },
  {
   "name": "Kim",
@@ -405,7 +408,7 @@
     "pa": 1502.26,
     "pfpg": 117.6,
     "papg": 107.3,
-    "note": null,
+    "note": "Third",
     "fin": 3
    },
    {
@@ -416,7 +419,7 @@
     "pa": 1503.18,
     "pfpg": 125.9,
     "papg": 107.4,
-    "note": null,
+    "note": "Third",
     "fin": 3
    },
    {
@@ -457,7 +460,8 @@
   ],
   "divTitles": 1,
   "sheetApps": 5,
-  "sheetDiv": 1
+  "sheetDiv": 1,
+  "third": 2
  },
  {
   "name": "Zach",
@@ -588,7 +592,8 @@
   ],
   "divTitles": 3,
   "sheetApps": 4,
-  "sheetDiv": 3
+  "sheetDiv": 3,
+  "third": 0
  },
  {
   "name": "Jordan",
@@ -719,7 +724,8 @@
   ],
   "divTitles": 2,
   "sheetApps": 4,
-  "sheetDiv": 2
+  "sheetDiv": 2,
+  "third": 0
  },
  {
   "name": "Conner",
@@ -850,7 +856,8 @@
   ],
   "divTitles": 1,
   "sheetApps": 4,
-  "sheetDiv": 1
+  "sheetDiv": 1,
+  "third": 0
  },
  {
   "name": "Karen",
@@ -863,7 +870,7 @@
     "pa": 1511.04,
     "pfpg": 118.7,
     "papg": 116.2,
-    "note": null,
+    "note": "Third",
     "fin": 3
    },
    {
@@ -896,7 +903,7 @@
     "pa": 1706.24,
     "pfpg": 125.4,
     "papg": 121.9,
-    "note": null,
+    "note": "Third",
     "fin": 3
    },
    {
@@ -970,7 +977,8 @@
   ],
   "divTitles": 2,
   "sheetApps": 5,
-  "sheetDiv": 3
+  "sheetDiv": 3,
+  "third": 2
  },
  {
   "name": "Danny",
@@ -1005,7 +1013,7 @@
     "pa": 1474.86,
     "pfpg": 126.3,
     "papg": 113.5,
-    "note": null,
+    "note": "Third",
     "fin": 3
    },
    {
@@ -1101,7 +1109,8 @@
   ],
   "divTitles": 1,
   "sheetApps": 5,
-  "sheetDiv": 1
+  "sheetDiv": 1,
+  "third": 1
  },
  {
   "name": "Chase",
@@ -1147,7 +1156,7 @@
     "pa": 1467.28,
     "pfpg": 119.9,
     "papg": 112.9,
-    "note": null,
+    "note": "Third",
     "fin": 3
    },
    {
@@ -1232,7 +1241,8 @@
   ],
   "divTitles": 2,
   "sheetApps": 5,
-  "sheetDiv": 2
+  "sheetDiv": 2,
+  "third": 1
  },
  {
   "name": "Caitlyn",
@@ -1304,7 +1314,8 @@
   ],
   "divTitles": 1,
   "sheetApps": 1,
-  "sheetDiv": 1
+  "sheetDiv": 1,
+  "third": 0
  },
  {
   "name": "Dan",
@@ -1431,6 +1442,7 @@
   ],
   "divTitles": 1,
   "sheetApps": 1,
-  "sheetDiv": 1
+  "sheetDiv": 1,
+  "third": 0
  }
 ]
