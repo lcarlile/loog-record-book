@@ -352,7 +352,9 @@ footer b{color:var(--ink-2)}
   /* the mantel becomes a shelf you swipe */
   .mantel{padding:4px 0 0}
   .mantel-rail{margin-inline:-16px}
-  .mantel-rail{mask-image:linear-gradient(90deg,#000 calc(100% - 44px),transparent);
+  .mantel-rail{--fade-l:0px; --fade-r:44px;
+    mask-image:linear-gradient(90deg, transparent 0, #000 var(--fade-l),
+                                #000 calc(100% - var(--fade-r)), transparent 100%);
     grid-template-columns:none; grid-auto-flow:column;
     grid-auto-columns:minmax(154px,62%); gap:10px; overflow-x:auto;
     overscroll-behavior-x:contain; scroll-snap-type:x mandatory;
@@ -674,6 +676,8 @@ function railCount(){
   const i=plates.findIndex(p=>p.offsetLeft>=rail.scrollLeft-4);
   const at=(i<0?plates.length:i+1);
   const more=rail.scrollLeft + rail.clientWidth < rail.scrollWidth - 8;
+  rail.style.setProperty("--fade-l", rail.scrollLeft > 4 ? "26px" : "0px");
+  rail.style.setProperty("--fade-r", more ? "44px" : "0px");
   out.innerHTML=at+" / "+plates.length+(more?' <span class="swipe-hint">swipe for more &rarr;</span>':'');
 }
 
