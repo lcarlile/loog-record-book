@@ -52,7 +52,13 @@ write(CFG.out.site, `<!doctype html>
 <meta property="og:type" content="website">
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${DESC}">
-<meta name="twitter:card" content="summary">
+<meta property="og:url" content="${brand.site || ''}">
+<meta property="og:image" content="${(brand.site || '') + 'og.png'}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${title}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="${(brand.site || '') + 'og.png'}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127942;</text></svg>">
 ${links}
 <style>

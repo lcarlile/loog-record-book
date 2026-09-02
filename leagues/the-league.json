@@ -10,7 +10,8 @@
   ],
   "out": {
     "site": "build/the-league/index.html",
-    "fragment": "build/the-league/fragment.html"
+    "fragment": "build/the-league/fragment.html",
+    "card": "build/the-league/og.png"
   },
   "brand": {
     "title": "The League Record Book",

@@ -14,9 +14,10 @@ esac
 
 [ -f "$SRC" ] || { echo "missing $SRC - run: node build.js --league $SLUG"; exit 1; }
 cp "$SRC" "$DEST/index.html"
+[ -f "build/the-league/og.png" ] && cp build/the-league/og.png "$DEST/og.png"
 cd "$DEST"
 if git diff --quiet; then echo "no change to publish"; exit 0; fi
-git add index.html
+git add index.html og.png
 git commit -q -m "Update record book ($(date +%Y-%m-%d))"
 git push -q origin main
 echo "published -> https://lcarlile.github.io/the-league-record-book/"
