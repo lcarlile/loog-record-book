@@ -509,9 +509,10 @@ footer b{color:var(--ink-2)}
       Danny reached the 2025 semi-finals at 5&ndash;9 while Kim missed out at 9&ndash;5 &mdash; Danny
       was beating 54.5% of the league each week, Kim 49.4%. The gold edge marks the six who made
       the bracket; payouts go to the top three. Through 2021 the wooden spoon went to the worst
-      regular-season record rather than to the consolation bracket, so in 2018, 2019 and 2020 it
-      sits mid-table rather than at the bottom &mdash; those years are labelled <em>worst
-      record</em>.</p>
+      regular-season record rather than to the consolation bracket, so in those years record is what
+      counted, so those years are labelled <em>worst record</em>. Teams that made the bracket are
+      listed in the order they went out; everyone else is ranked by record until 2022, when the
+      consolation ladder started deciding the wooden spoon.</p>
     <div class="years" id="years"></div>
     <div class="awards" id="awards"></div>
     <div id="seasonwrap"></div>
@@ -1027,15 +1028,20 @@ function drawAwards(){
 function drawSeason(){
   document.querySelectorAll("#years button").forEach(b=>b.classList.toggle("on", +b.textContent===curYear));
   drawAwards();
+  const made=n=>(E.playoffYears[n]||[]).includes(curYear);
+  const bracketEra=curYear>(E.lastPlaceRecordThrough||2021);
   const rows=M.map(m=>({n:m.name, s:m.seasons.find(x=>x.year===curYear)})).filter(x=>x.s)
-    .sort((a,b)=> (a.s.fin||99)-(b.s.fin||99)
-               || (b.s.w-b.s.l)-(a.s.w-a.s.l) || b.s.pf-a.s.pf);
+    .sort((a,b)=>{
+      const ap=made(a.n), bp=made(b.n);
+      if(ap!==bp) return ap?-1:1;                        // everyone who made the bracket first
+      if(ap||bracketEra) return (a.s.fin||99)-(b.s.fin||99);
+      return (b.s.w-b.s.l)-(a.s.w-a.s.l) || b.s.pf-a.s.pf;
+    });
+  const lastPO=rows.reduce((acc,x,i)=>made(x.n)?i:acc,-1);
   const host=$("#seasonwrap");
   if(NARROW.matches){
     host.innerHTML="";
     const list=el("div","mlist");
-    const made=n=>(E.playoffYears[n]||[]).includes(curYear);
-    const lastPO=rows.reduce((acc,x,i)=>made(x.n)?i:acc,-1);
     rows.forEach((x,i)=>{
       const b=el("button","mrow"+(made(x.n)?" po":"")); b.type="button";
       b.innerHTML='<div class="l1"><span class="rk">'+(i+1)+'</span>'
@@ -1055,10 +1061,8 @@ function drawSeason(){
     return;
   }
   host.innerHTML='<div class="scroll"><table id="season"></table></div>';
-  const made=n=>(E.playoffYears[n]||[]).includes(curYear);
-  const lastPO=rows.reduce((acc,x,i)=>made(x.n)?i:acc,-1);
-  $("#season").innerHTML='<thead><tr><th class="rank"></th><th>Manager</th><th>W</th><th>L</th>'
-   +'<th>Win%</th><th>PF</th><th>PA</th><th>PF/G</th><th>Finish</th></tr></thead><tbody>'
+  $("#season").innerHTML='<thead><tr><th class="rank">Place</th><th>Manager</th><th>W</th><th>L</th>'
+   +'<th>Win%</th><th>PF</th><th>PA</th><th>PF/G</th><th></th></tr></thead><tbody>'
    +rows.map((x,i)=>'<tr class="'+(made(x.n)?'po ':'')+(i===lastPO?'cut':'')+'">'
      +'<td class="rank">'+(i+1)+'</td><td class="name">'+x.n+'</td>'
      +'<td class="num">'+x.s.w+'</td><td class="num">'+x.s.l+'</td>'
