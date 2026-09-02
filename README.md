@@ -11,10 +11,13 @@ grades, single-week extremes, schedule luck, and season-by-season standings.
 Everything is derived from the ESPN league, so this is two commands.
 
 ```sh
-node refresh.js     # pull ESPN, recompute, rewrite data.json + espn.json
+./refresh.sh        # pull ESPN, recompute, rewrite data.json + espn.json
 node build.js       # rebuild index.html and recordbook.html
 git commit -am "2026 season" && git push
 ```
+
+`refresh.sh` finds a modern Node for you. If you would rather call it directly, any Node 18+
+works: `node refresh.js`.
 
 GitHub Pages redeploys itself. The spreadsheet is no longer needed - every figure it
 held was verified against ESPN and is now computed directly.
@@ -41,9 +44,9 @@ or create `.espn-auth.json` (gitignored, never committed):
 
 | Command | What it does |
 |---|---|
-| `node refresh.js` | full pull, rewrite the data files, cache the raw pull |
-| `node refresh.js --check` | pull and compare figure by figure against what is committed; writes nothing |
-| `node refresh.js --cached` | recompute from the last pull with no network and no cookies |
+| `./refresh.sh` | full pull, rewrite the data files, cache the raw pull |
+| `./refresh.sh --check` | pull and compare figure by figure against what is committed; writes nothing |
+| `./refresh.sh --cached` | recompute from the last pull with no network and no cookies |
 
 `--check` compares meaning rather than bytes: manager totals, every season row, and the
 leaderboards. It prints the figures that changed, so after a new season you can see exactly
@@ -51,7 +54,7 @@ what moved before writing anything.
 
 `refresh.js` runs ten structural checks before writing (one champion per season, wins
 equal losses, playoff appearances add up, and so on) and refuses to write if any fail.
-Needs Node 18+; if `node -v` is older, use `~/.nvm/versions/node/v22.22.0/bin/node`.
+`refresh.sh` picks a suitable Node itself, so the system default being old does not matter.
 
 ## Files
 
