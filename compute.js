@@ -55,7 +55,7 @@ function run({ season, YEARS, CHECK }) {
                  : finish[y].ru === name ? 'Runner Up'
                  : finish[y].last === name ? 'Biggest Loser' : null;
       return { year: y, w: t.w, l: t.l, pf: t.pf, pa: t.pa,
-               pfpg: r2(t.pf / g), papg: r2(t.pa / g), note };
+               pfpg: r2(t.pf / g), papg: r2(t.pa / g), note, fin: t.fin };
     });
     const sum = k => seasons.reduce((s, x) => s + x[k], 0);
     const w = sum('w'), l = sum('l');

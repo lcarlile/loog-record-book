@@ -10,7 +10,8 @@
     "pa": 1330.4,
     "pfpg": 123.4,
     "papg": 102.3,
-    "note": "Runner Up"
+    "note": "Runner Up",
+    "fin": 2
    },
    {
     "year": 2018,
@@ -20,7 +21,8 @@
     "pa": 1686.62,
     "pfpg": 124.1,
     "papg": 129.7,
-    "note": null
+    "note": null,
+    "fin": 5
    },
    {
     "year": 2019,
@@ -30,7 +32,8 @@
     "pa": 1461.72,
     "pfpg": 115.8,
     "papg": 112.4,
-    "note": "Runner Up"
+    "note": "Runner Up",
+    "fin": 2
    },
    {
     "year": 2020,
@@ -40,7 +43,8 @@
     "pa": 1492.12,
     "pfpg": 137.9,
     "papg": 114.8,
-    "note": "Champion"
+    "note": "Champion",
+    "fin": 1
    },
    {
     "year": 2021,
@@ -50,7 +54,8 @@
     "pa": 1622.84,
     "pfpg": 124,
     "papg": 115.9,
-    "note": "Champion"
+    "note": "Champion",
+    "fin": 1
    },
    {
     "year": 2022,
@@ -60,7 +65,8 @@
     "pa": 1499.86,
     "pfpg": 118,
     "papg": 107.1,
-    "note": null
+    "note": null,
+    "fin": 3
    },
    {
     "year": 2023,
@@ -70,7 +76,8 @@
     "pa": 1669.92,
     "pfpg": 120,
     "papg": 119.3,
-    "note": null
+    "note": null,
+    "fin": 5
    },
    {
     "year": 2024,
@@ -80,7 +87,8 @@
     "pa": 1682.92,
     "pfpg": 108.2,
     "papg": 120.2,
-    "note": null
+    "note": null,
+    "fin": 6
    },
    {
     "year": 2025,
@@ -90,7 +98,8 @@
     "pa": 1454.08,
     "pfpg": 109.6,
     "papg": 103.9,
-    "note": null
+    "note": null,
+    "fin": 9
    }
   ],
   "w": 74,
@@ -135,7 +144,8 @@
     "pa": 1562.02,
     "pfpg": 111.6,
     "papg": 111.6,
-    "note": null
+    "note": null,
+    "fin": 6
    },
    {
     "year": 2023,
@@ -145,7 +155,8 @@
     "pa": 1514.1,
     "pfpg": 111.6,
     "papg": 108.1,
-    "note": null
+    "note": null,
+    "fin": 4
    },
    {
     "year": 2024,
@@ -155,7 +166,8 @@
     "pa": 1527.84,
     "pfpg": 117.1,
     "papg": 109.1,
-    "note": null
+    "note": null,
+    "fin": 8
    },
    {
     "year": 2025,
@@ -165,7 +177,8 @@
     "pa": 1538.82,
     "pfpg": 112.1,
     "papg": 109.9,
-    "note": "Runner Up"
+    "note": "Runner Up",
+    "fin": 2
    }
   ],
   "w": 32,
@@ -205,7 +218,8 @@
     "pa": 1311.44,
     "pfpg": 111.3,
     "papg": 100.9,
-    "note": null
+    "note": null,
+    "fin": 3
    },
    {
     "year": 2018,
@@ -215,7 +229,8 @@
     "pa": 1664.94,
     "pfpg": 111.2,
     "papg": 128.1,
-    "note": null
+    "note": null,
+    "fin": 8
    },
    {
     "year": 2019,
@@ -225,7 +240,8 @@
     "pa": 1546.46,
     "pfpg": 108.1,
     "papg": 119,
-    "note": "Biggest Loser"
+    "note": "Biggest Loser",
+    "fin": 9
    },
    {
     "year": 2020,
@@ -235,7 +251,8 @@
     "pa": 1610.5,
     "pfpg": 109.1,
     "papg": 123.9,
-    "note": null
+    "note": null,
+    "fin": 10
    },
    {
     "year": 2021,
@@ -245,7 +262,8 @@
     "pa": 1639.94,
     "pfpg": 127.3,
     "papg": 117.1,
-    "note": null
+    "note": null,
+    "fin": 5
    },
    {
     "year": 2022,
@@ -255,7 +273,8 @@
     "pa": 1585.72,
     "pfpg": 125.8,
     "papg": 113.3,
-    "note": null
+    "note": null,
+    "fin": 5
    },
    {
     "year": 2023,
@@ -265,7 +284,8 @@
     "pa": 1486.24,
     "pfpg": 114,
     "papg": 106.2,
-    "note": "Runner Up"
+    "note": "Runner Up",
+    "fin": 2
    },
    {
     "year": 2024,
@@ -275,7 +295,8 @@
     "pa": 1521.8,
     "pfpg": 127.3,
     "papg": 108.7,
-    "note": "Runner Up"
+    "note": "Runner Up",
+    "fin": 2
    },
    {
     "year": 2025,
@@ -285,7 +306,8 @@
     "pa": 1451.52,
     "pfpg": 113.7,
     "papg": 103.7,
-    "note": null
+    "note": null,
+    "fin": 3
    }
   ],
   "w": 69,
@@ -328,7 +350,8 @@
     "pa": 1551.38,
     "pfpg": 118.1,
     "papg": 119.3,
-    "note": null
+    "note": null,
+    "fin": 10
    },
    {
     "year": 2019,
@@ -338,7 +361,8 @@
     "pa": 1532.24,
     "pfpg": 121.3,
     "papg": 117.9,
-    "note": null
+    "note": null,
+    "fin": 6
    },
    {
     "year": 2020,
@@ -348,7 +372,8 @@
     "pa": 1571.4,
     "pfpg": 109.9,
     "papg": 120.9,
-    "note": null
+    "note": null,
+    "fin": 6
    },
    {
     "year": 2021,
@@ -358,7 +383,8 @@
     "pa": 1508.5,
     "pfpg": 109.8,
     "papg": 107.8,
-    "note": null
+    "note": null,
+    "fin": 6
    },
    {
     "year": 2022,
@@ -368,7 +394,8 @@
     "pa": 1693.12,
     "pfpg": 102.2,
     "papg": 120.9,
-    "note": null
+    "note": null,
+    "fin": 8
    },
    {
     "year": 2023,
@@ -378,7 +405,8 @@
     "pa": 1502.26,
     "pfpg": 117.6,
     "papg": 107.3,
-    "note": null
+    "note": null,
+    "fin": 3
    },
    {
     "year": 2024,
@@ -388,7 +416,8 @@
     "pa": 1503.18,
     "pfpg": 125.9,
     "papg": 107.4,
-    "note": null
+    "note": null,
+    "fin": 3
    },
    {
     "year": 2025,
@@ -398,7 +427,8 @@
     "pa": 1520.2,
     "pfpg": 108.4,
     "papg": 108.6,
-    "note": null
+    "note": null,
+    "fin": 11
    }
   ],
   "w": 60,
@@ -440,7 +470,8 @@
     "pa": 1441.96,
     "pfpg": 101.8,
     "papg": 110.9,
-    "note": null
+    "note": null,
+    "fin": 6
    },
    {
     "year": 2018,
@@ -450,7 +481,8 @@
     "pa": 1600.72,
     "pfpg": 134.3,
     "papg": 123.1,
-    "note": "Champion"
+    "note": "Champion",
+    "fin": 1
    },
    {
     "year": 2019,
@@ -460,7 +492,8 @@
     "pa": 1501.46,
     "pfpg": 130.9,
     "papg": 115.5,
-    "note": "Champion"
+    "note": "Champion",
+    "fin": 1
    },
    {
     "year": 2020,
@@ -470,7 +503,8 @@
     "pa": 1530.1,
     "pfpg": 117.6,
     "papg": 117.7,
-    "note": null
+    "note": null,
+    "fin": 8
    },
    {
     "year": 2021,
@@ -480,7 +514,8 @@
     "pa": 1821.24,
     "pfpg": 116.4,
     "papg": 130.1,
-    "note": null
+    "note": null,
+    "fin": 8
    },
    {
     "year": 2022,
@@ -490,7 +525,8 @@
     "pa": 1440.32,
     "pfpg": 123.1,
     "papg": 102.9,
-    "note": "Runner Up"
+    "note": "Runner Up",
+    "fin": 2
    },
    {
     "year": 2023,
@@ -500,7 +536,8 @@
     "pa": 1709,
     "pfpg": 111.7,
     "papg": 122.1,
-    "note": null
+    "note": null,
+    "fin": 11
    },
    {
     "year": 2024,
@@ -510,7 +547,8 @@
     "pa": 1675.58,
     "pfpg": 125.4,
     "papg": 119.7,
-    "note": "Champion"
+    "note": "Champion",
+    "fin": 1
    },
    {
     "year": 2025,
@@ -520,7 +558,8 @@
     "pa": 1668.62,
     "pfpg": 103.6,
     "papg": 119.2,
-    "note": null
+    "note": null,
+    "fin": 8
    }
   ],
   "w": 64,
@@ -562,7 +601,8 @@
     "pa": 1333.72,
     "pfpg": 108,
     "papg": 102.6,
-    "note": "Champion"
+    "note": "Champion",
+    "fin": 1
    },
    {
     "year": 2018,
@@ -572,7 +612,8 @@
     "pa": 1489.26,
     "pfpg": 128.3,
     "papg": 114.6,
-    "note": null
+    "note": null,
+    "fin": 4
    },
    {
     "year": 2019,
@@ -582,7 +623,8 @@
     "pa": 1590.16,
     "pfpg": 110.7,
     "papg": 122.3,
-    "note": null
+    "note": null,
+    "fin": 4
    },
    {
     "year": 2020,
@@ -592,7 +634,8 @@
     "pa": 1543.6,
     "pfpg": 116.2,
     "papg": 118.7,
-    "note": null
+    "note": null,
+    "fin": 7
    },
    {
     "year": 2021,
@@ -602,7 +645,8 @@
     "pa": 1666.64,
     "pfpg": 106.6,
     "papg": 119,
-    "note": "Biggest Loser"
+    "note": "Biggest Loser",
+    "fin": 10
    },
    {
     "year": 2022,
@@ -612,7 +656,8 @@
     "pa": 1639.72,
     "pfpg": 111,
     "papg": 117.1,
-    "note": null
+    "note": null,
+    "fin": 4
    },
    {
     "year": 2023,
@@ -622,7 +667,8 @@
     "pa": 1568.92,
     "pfpg": 111.7,
     "papg": 112.1,
-    "note": null
+    "note": null,
+    "fin": 7
    },
    {
     "year": 2024,
@@ -632,7 +678,8 @@
     "pa": 1558.44,
     "pfpg": 108.5,
     "papg": 111.3,
-    "note": null
+    "note": null,
+    "fin": 4
    },
    {
     "year": 2025,
@@ -642,7 +689,8 @@
     "pa": 1389.5,
     "pfpg": 100.8,
     "papg": 99.3,
-    "note": "Biggest Loser"
+    "note": "Biggest Loser",
+    "fin": 12
    }
   ],
   "w": 60,
@@ -684,7 +732,8 @@
     "pa": 1295.78,
     "pfpg": 112.1,
     "papg": 99.7,
-    "note": null
+    "note": null,
+    "fin": 4
    },
    {
     "year": 2018,
@@ -694,7 +743,8 @@
     "pa": 1599.84,
     "pfpg": 130.5,
     "papg": 123.1,
-    "note": null
+    "note": null,
+    "fin": 6
    },
    {
     "year": 2019,
@@ -704,7 +754,8 @@
     "pa": 1723.06,
     "pfpg": 117.3,
     "papg": 132.5,
-    "note": null
+    "note": null,
+    "fin": 7
    },
    {
     "year": 2020,
@@ -714,7 +765,8 @@
     "pa": 1505.02,
     "pfpg": 122,
     "papg": 115.8,
-    "note": "Runner Up"
+    "note": "Runner Up",
+    "fin": 2
    },
    {
     "year": 2021,
@@ -724,7 +776,8 @@
     "pa": 1597.06,
     "pfpg": 115.1,
     "papg": 114.1,
-    "note": null
+    "note": null,
+    "fin": 4
    },
    {
     "year": 2022,
@@ -734,7 +787,8 @@
     "pa": 1450.06,
     "pfpg": 108.6,
     "papg": 103.6,
-    "note": null
+    "note": null,
+    "fin": 7
    },
    {
     "year": 2023,
@@ -744,7 +798,8 @@
     "pa": 1541.14,
     "pfpg": 109.3,
     "papg": 110.1,
-    "note": null
+    "note": null,
+    "fin": 10
    },
    {
     "year": 2024,
@@ -754,7 +809,8 @@
     "pa": 1598.52,
     "pfpg": 108.8,
     "papg": 114.2,
-    "note": null
+    "note": null,
+    "fin": 10
    },
    {
     "year": 2025,
@@ -764,7 +820,8 @@
     "pa": 1579.66,
     "pfpg": 110.8,
     "papg": 112.8,
-    "note": null
+    "note": null,
+    "fin": 5
    }
   ],
   "w": 60,
@@ -806,7 +863,8 @@
     "pa": 1511.04,
     "pfpg": 118.7,
     "papg": 116.2,
-    "note": null
+    "note": null,
+    "fin": 3
    },
    {
     "year": 2019,
@@ -816,7 +874,8 @@
     "pa": 1471.46,
     "pfpg": 118.7,
     "papg": 113.2,
-    "note": null
+    "note": null,
+    "fin": 5
    },
    {
     "year": 2020,
@@ -826,7 +885,8 @@
     "pa": 1563.28,
     "pfpg": 127.4,
     "papg": 120.3,
-    "note": null
+    "note": null,
+    "fin": 4
    },
    {
     "year": 2021,
@@ -836,7 +896,8 @@
     "pa": 1706.24,
     "pfpg": 125.4,
     "papg": 121.9,
-    "note": null
+    "note": null,
+    "fin": 3
    },
    {
     "year": 2022,
@@ -846,7 +907,8 @@
     "pa": 1621.22,
     "pfpg": 104,
     "papg": 115.8,
-    "note": "Biggest Loser"
+    "note": "Biggest Loser",
+    "fin": 12
    },
    {
     "year": 2023,
@@ -856,7 +918,8 @@
     "pa": 1563.6,
     "pfpg": 103.2,
     "papg": 111.7,
-    "note": null
+    "note": null,
+    "fin": 6
    },
    {
     "year": 2024,
@@ -866,7 +929,8 @@
     "pa": 1622.04,
     "pfpg": 118.1,
     "papg": 115.9,
-    "note": null
+    "note": null,
+    "fin": 7
    },
    {
     "year": 2025,
@@ -876,7 +940,8 @@
     "pa": 1685.92,
     "pfpg": 103.1,
     "papg": 120.4,
-    "note": null
+    "note": null,
+    "fin": 10
    }
   ],
   "w": 51,
@@ -918,7 +983,8 @@
     "pa": 1297.16,
     "pfpg": 94.3,
     "papg": 99.8,
-    "note": null
+    "note": null,
+    "fin": 5
    },
    {
     "year": 2018,
@@ -928,7 +994,8 @@
     "pa": 1546.18,
     "pfpg": 140.8,
     "papg": 118.9,
-    "note": "Runner Up"
+    "note": "Runner Up",
+    "fin": 2
    },
    {
     "year": 2019,
@@ -938,7 +1005,8 @@
     "pa": 1474.86,
     "pfpg": 126.3,
     "papg": 113.5,
-    "note": null
+    "note": null,
+    "fin": 3
    },
    {
     "year": 2020,
@@ -948,7 +1016,8 @@
     "pa": 1555.42,
     "pfpg": 127.2,
     "papg": 119.6,
-    "note": null
+    "note": null,
+    "fin": 5
    },
    {
     "year": 2021,
@@ -958,7 +1027,8 @@
     "pa": 1615.74,
     "pfpg": 119.8,
     "papg": 115.4,
-    "note": null
+    "note": null,
+    "fin": 7
    },
    {
     "year": 2022,
@@ -968,7 +1038,8 @@
     "pa": 1556.28,
     "pfpg": 102.5,
     "papg": 111.2,
-    "note": null
+    "note": null,
+    "fin": 10
    },
    {
     "year": 2023,
@@ -978,7 +1049,8 @@
     "pa": 1590.02,
     "pfpg": 119.9,
     "papg": 113.6,
-    "note": null
+    "note": null,
+    "fin": 8
    },
    {
     "year": 2024,
@@ -988,7 +1060,8 @@
     "pa": 1669.72,
     "pfpg": 95.8,
     "papg": 119.3,
-    "note": null
+    "note": null,
+    "fin": 11
    },
    {
     "year": 2025,
@@ -998,7 +1071,8 @@
     "pa": 1640.3,
     "pfpg": 112.7,
     "papg": 117.2,
-    "note": null
+    "note": null,
+    "fin": 4
    }
   ],
   "w": 56,
@@ -1040,7 +1114,8 @@
     "pa": 1480.24,
     "pfpg": 98.7,
     "papg": 113.9,
-    "note": "Biggest Loser"
+    "note": "Biggest Loser",
+    "fin": 8
    },
    {
     "year": 2018,
@@ -1050,7 +1125,8 @@
     "pa": 1610.66,
     "pfpg": 105.6,
     "papg": 123.9,
-    "note": "Biggest Loser"
+    "note": "Biggest Loser",
+    "fin": 9
    },
    {
     "year": 2019,
@@ -1060,7 +1136,8 @@
     "pa": 1565.24,
     "pfpg": 117.9,
     "papg": 120.4,
-    "note": null
+    "note": null,
+    "fin": 8
    },
    {
     "year": 2020,
@@ -1070,7 +1147,8 @@
     "pa": 1467.28,
     "pfpg": 119.9,
     "papg": 112.9,
-    "note": null
+    "note": null,
+    "fin": 3
    },
    {
     "year": 2021,
@@ -1080,7 +1158,8 @@
     "pa": 1789.14,
     "pfpg": 127.9,
     "papg": 127.8,
-    "note": "Runner Up"
+    "note": "Runner Up",
+    "fin": 2
    },
    {
     "year": 2022,
@@ -1090,7 +1169,8 @@
     "pa": 1691.24,
     "pfpg": 130.7,
     "papg": 120.8,
-    "note": "Champion"
+    "note": "Champion",
+    "fin": 1
    },
    {
     "year": 2023,
@@ -1100,7 +1180,8 @@
     "pa": 1560.94,
     "pfpg": 124.3,
     "papg": 111.5,
-    "note": "Champion"
+    "note": "Champion",
+    "fin": 1
    },
    {
     "year": 2024,
@@ -1110,7 +1191,8 @@
     "pa": 1690.72,
     "pfpg": 126,
     "papg": 120.8,
-    "note": null
+    "note": null,
+    "fin": 5
    },
    {
     "year": 2025,
@@ -1120,7 +1202,8 @@
     "pa": 1539.44,
     "pfpg": 115,
     "papg": 110,
-    "note": null
+    "note": null,
+    "fin": 7
    }
   ],
   "w": 56,
@@ -1162,7 +1245,8 @@
     "pa": 1435.96,
     "pfpg": 102.9,
     "papg": 102.6,
-    "note": null
+    "note": null,
+    "fin": 11
    },
    {
     "year": 2023,
@@ -1172,7 +1256,8 @@
     "pa": 1562.36,
     "pfpg": 94.9,
     "papg": 111.6,
-    "note": "Biggest Loser"
+    "note": "Biggest Loser",
+    "fin": 12
    },
    {
     "year": 2024,
@@ -1182,7 +1267,8 @@
     "pa": 1627.06,
     "pfpg": 110.5,
     "papg": 116.2,
-    "note": null
+    "note": null,
+    "fin": 9
    },
    {
     "year": 2025,
@@ -1192,7 +1278,8 @@
     "pa": 1547.94,
     "pfpg": 117.8,
     "papg": 110.6,
-    "note": null
+    "note": null,
+    "fin": 6
    }
   ],
   "w": 23,
@@ -1230,7 +1317,8 @@
     "pa": 1473.9,
     "pfpg": 93.9,
     "papg": 113.4,
-    "note": null
+    "note": null,
+    "fin": 7
    },
    {
     "year": 2018,
@@ -1240,7 +1328,8 @@
     "pa": 1695.18,
     "pfpg": 115.9,
     "papg": 130.4,
-    "note": null
+    "note": null,
+    "fin": 7
    },
    {
     "year": 2019,
@@ -1250,7 +1339,8 @@
     "pa": 1442.82,
     "pfpg": 110.8,
     "papg": 111,
-    "note": null
+    "note": null,
+    "fin": 10
    },
    {
     "year": 2020,
@@ -1260,7 +1350,8 @@
     "pa": 1575.68,
     "pfpg": 98.5,
     "papg": 121.2,
-    "note": "Biggest Loser"
+    "note": "Biggest Loser",
+    "fin": 9
    },
    {
     "year": 2021,
@@ -1270,7 +1361,8 @@
     "pa": 1623.44,
     "pfpg": 112.7,
     "papg": 116,
-    "note": null
+    "note": null,
+    "fin": 9
    },
    {
     "year": 2022,
@@ -1280,7 +1372,8 @@
     "pa": 1557.48,
     "pfpg": 97.6,
     "papg": 111.2,
-    "note": null
+    "note": null,
+    "fin": 9
    },
    {
     "year": 2023,
@@ -1290,7 +1383,8 @@
     "pa": 1602.2,
     "pfpg": 109.7,
     "papg": 114.4,
-    "note": null
+    "note": null,
+    "fin": 9
    },
    {
     "year": 2024,
@@ -1300,7 +1394,8 @@
     "pa": 1615.74,
     "pfpg": 106.6,
     "papg": 115.4,
-    "note": "Biggest Loser"
+    "note": "Biggest Loser",
+    "fin": 12
    },
    {
     "year": 2025,
@@ -1310,7 +1405,8 @@
     "pa": 1589.04,
     "pfpg": 121.2,
     "papg": 113.5,
-    "note": "Champion"
+    "note": "Champion",
+    "fin": 1
    }
   ],
   "w": 48,

@@ -1,0 +1,14 @@
+{
+"note": "rankCalculatedFinal from ESPN - the bracket as actually played. Playoff field is the four division winners plus one wildcard per conference by all-play record.",
+"order": {
+"2017": ["Jordan","Logan","Steve","Conner","Danny","Zach","Dan","Chase"],
+"2018": ["Zach","Danny","Karen","Jordan","Logan","Conner","Dan","Steve","Chase","Kim"],
+"2019": ["Zach","Logan","Danny","Jordan","Karen","Kim","Conner","Chase","Steve","Dan"],
+"2020": ["Logan","Conner","Chase","Karen","Danny","Kim","Jordan","Zach","Dan","Steve"],
+"2021": ["Logan","Chase","Karen","Conner","Steve","Kim","Danny","Zach","Dan","Jordan"],
+"2022": ["Chase","Zach","Logan","Jordan","Steve","Kaila","Conner","Kim","Dan","Danny","Caitlyn","Karen"],
+"2023": ["Chase","Steve","Kim","Kaila","Logan","Karen","Jordan","Danny","Dan","Conner","Zach","Caitlyn"],
+"2024": ["Zach","Steve","Kim","Jordan","Chase","Logan","Karen","Kaila","Caitlyn","Conner","Danny","Dan"],
+"2025": ["Dan","Kaila","Steve","Danny","Conner","Caitlyn","Chase","Zach","Logan","Karen","Kim","Jordan"]
+}
+}

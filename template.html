@@ -498,7 +498,11 @@ footer b{color:var(--ink-2)}
 
   <section id="seasons">
     <div class="head"><h2>Season by Season</h2><i class="rule"></i></div>
-    <p class="note">Final standings for any year, sorted by record then points scored.</p>
+    <p class="note"><b>Where everyone actually finished</b>, brackets included &mdash; not just record.
+      The playoff field is the four division winners plus one wildcard per conference, taken on
+      all-play record: what your record would be if you played every team every week. That is how
+      Danny reached the 2025 semi-finals at 5&ndash;9 while Kim missed out at 9&ndash;5 &mdash; Danny
+      was beating 54.5% of the league each week, Kim 49.4%.</p>
     <div class="years" id="years"></div>
     <div class="awards" id="awards"></div>
     <div id="seasonwrap"></div>
@@ -1002,7 +1006,8 @@ function drawSeason(){
   document.querySelectorAll("#years button").forEach(b=>b.classList.toggle("on", +b.textContent===curYear));
   drawAwards();
   const rows=M.map(m=>({n:m.name, s:m.seasons.find(x=>x.year===curYear)})).filter(x=>x.s)
-    .sort((a,b)=> (b.s.w-b.s.l)-(a.s.w-a.s.l) || b.s.pf-a.s.pf);
+    .sort((a,b)=> (a.s.fin||99)-(b.s.fin||99)
+               || (b.s.w-b.s.l)-(a.s.w-a.s.l) || b.s.pf-a.s.pf);
   const host=$("#seasonwrap");
   if(NARROW.matches){
     host.innerHTML="";
