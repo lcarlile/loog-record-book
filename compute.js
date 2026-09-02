@@ -15,6 +15,11 @@ function run({ season, YEARS, CHECK, CFG, dir }) {
   const RULES = (CFG && CFG.rules) || {};
   const LAST_BY_RECORD_THROUGH = (RULES.lastPlace && RULES.lastPlace.recordThrough) || 0;
   const KEEPERS = !!(RULES.keepers && RULES.keepers.enabled);
+  /* Some leagues only play/acknowledge the first N rounds of the consolation ladder;
+     ESPN schedules a final round regardless. When set, the wooden spoon goes to whoever
+     loses every one of those N rounds, and the teams below the playoff cut are ranked
+     by that record rather than by ESPN's final placing. */
+  const CONS_ROUNDS = (RULES.lastPlace && RULES.lastPlace.consolationRounds) || 0;
   const KEEPER_OFFSET = (RULES.keepers && RULES.keepers.costOffset) || 1;
   const OUT = dir || __dirname;
   fs.mkdirSync(OUT, { recursive: true });
@@ -22,15 +27,35 @@ function run({ season, YEARS, CHECK, CFG, dir }) {
   const names = [...new Set(YEARS.flatMap(y => season[y].teams.map(t => t.m)))];
 
   /* ---- per-season finishes ---- */
-  const finish = {};                                   // year -> {champ, ru, last}
+  const finish = {};                                   // year -> {champ, ru, third, last}
   YEARS.forEach(y => {
     const ts = season[y].teams, n = ts.length;
     const champ = ts.find(t => t.fin === 1), ru = ts.find(t => t.fin === 2);
     const byRecord = ts.slice().sort((a, b) => (a.w - a.l) - (b.w - b.l) || a.pf - b.pf)[0];
     const byBracket = ts.find(t => t.fin === n);
     const third = ts.find(t => t.fin === 3);
+
+    let last = (y <= LAST_BY_RECORD_THROUGH ? byRecord : byBracket);
+    if (CONS_ROUNDS) {
+      const cons = season[y].sched.filter(g => g.tier === 'LOSERS_CONSOLATION_LADDER');
+      const wks = [...new Set(cons.map(g => g.wk))].sort((a, b) => a - b).slice(0, CONS_ROUNDS);
+      const rec = {};
+      cons.filter(g => wks.includes(g.wk) && g.as !== g.bs).forEach(g => {
+        const w = g.as > g.bs ? g.a : g.b, l = g.as > g.bs ? g.b : g.a;
+        (rec[w] = rec[w] || [0, 0])[0]++; (rec[l] = rec[l] || [0, 0])[1]++;
+      });
+      const winless = Object.keys(rec).filter(m => rec[m][0] === 0);
+      if (winless.length === 1) last = ts.find(t => t.m === winless[0]) || last;
+      /* re-rank below the playoff cut: consolation wins, then record, then points */
+      const inBracket = new Set(season[y].sched
+        .filter(g => g.tier === 'WINNERS_BRACKET').flatMap(g => [g.a, g.b]));
+      const below = ts.filter(t => !inBracket.has(t.m))
+        .sort((a, b) => ((rec[b.m] || [0])[0] - (rec[a.m] || [0])[0])
+                     || ((b.w - b.l) - (a.w - a.l)) || (b.pf - a.pf));
+      below.forEach((t, i) => t.fin = inBracket.size + i + 1);
+    }
     finish[y] = { champ: champ && champ.m, ru: ru && ru.m, third: third && third.m,
-                  last: (y <= LAST_BY_RECORD_THROUGH ? byRecord : byBracket).m };
+                  last: last.m };
   });
 
   /* ---- playoffs & divisions ---- */
@@ -258,6 +283,7 @@ function run({ season, YEARS, CHECK, CFG, dir }) {
           [`${LAST_BY_RECORD_THROUGH + 1}-${LAST}`]: 'last in final standings' }
       : { [`${YEARS[0]}-${LAST}`]: 'last in final standings' },
     keepers: KEEPERS,
+    consolationRounds: CONS_ROUNDS,
     playoffYears, divTitles,
     draftR1, favourite, draftGrade, draftCareer, bestDrafts,
     steals, busts, bestKeeps, keeperValue,

@@ -23,7 +23,8 @@
   },
   "rules": {
     "lastPlace": {
-      "recordThrough": null
+      "recordThrough": null,
+      "consolationRounds": 2
     },
     "keepers": {
       "enabled": false

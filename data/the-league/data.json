@@ -485,7 +485,7 @@
     "pfpg": 112.82,
     "papg": 120.17,
     "note": null,
-    "fin": 7
+    "fin": 9
    },
    {
     "year": 2025,
@@ -496,7 +496,7 @@
     "pfpg": 107.09,
     "papg": 115.41,
     "note": null,
-    "fin": 7
+    "fin": 9
    }
   ],
   "w": 35,
@@ -536,7 +536,7 @@
     "pfpg": 123.76,
     "papg": 119.11,
     "note": null,
-    "fin": 9
+    "fin": 8
    },
    {
     "year": 2022,
@@ -558,7 +558,7 @@
     "pfpg": 115.15,
     "papg": 113.68,
     "note": null,
-    "fin": 8
+    "fin": 7
    }
   ],
   "w": 19,
@@ -607,7 +607,7 @@
     "pfpg": 114.71,
     "papg": 125.58,
     "note": null,
-    "fin": 8
+    "fin": 7
    }
   ],
   "w": 12,
@@ -683,7 +683,7 @@
     "pfpg": 99.5,
     "papg": 122.62,
     "note": null,
-    "fin": 8
+    "fin": 7
    },
    {
     "year": 2022,
@@ -716,7 +716,7 @@
     "pfpg": 106.39,
     "papg": 117.27,
     "note": null,
-    "fin": 8
+    "fin": 7
    },
    {
     "year": 2025,
@@ -766,7 +766,7 @@
     "pfpg": 110.49,
     "papg": 123.02,
     "note": null,
-    "fin": 7
+    "fin": 9
    },
    {
     "year": 2022,
@@ -798,8 +798,8 @@
     "pa": 1741.92,
     "pfpg": 123.68,
     "papg": 124.42,
-    "note": "Biggest Loser",
-    "fin": 10
+    "note": null,
+    "fin": 8
    },
    {
     "year": 2025,
@@ -824,7 +824,7 @@
   "titles": 0,
   "runnerUp": 1,
   "third": 0,
-  "loser": 2,
+  "loser": 1,
   "winningSeasons": 0,
   "losingSeasons": 3,
   "tiedSeasons": 2,
@@ -870,7 +870,7 @@
     "pfpg": 113.42,
     "papg": 119.95,
     "note": null,
-    "fin": 7
+    "fin": 8
    },
    {
     "year": 2024,
@@ -880,8 +880,8 @@
     "pa": 1666.24,
     "pfpg": 108.94,
     "papg": 119.02,
-    "note": null,
-    "fin": 9
+    "note": "Biggest Loser",
+    "fin": 10
    },
    {
     "year": 2025,
@@ -892,7 +892,7 @@
     "pfpg": 106.75,
     "papg": 116.44,
     "note": null,
-    "fin": 9
+    "fin": 8
    }
   ],
   "w": 24,
@@ -906,7 +906,7 @@
   "titles": 0,
   "runnerUp": 0,
   "third": 0,
-  "loser": 2,
+  "loser": 3,
   "winningSeasons": 0,
   "losingSeasons": 4,
   "tiedSeasons": 1,

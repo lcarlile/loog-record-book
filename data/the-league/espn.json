@@ -526,7 +526,7 @@
   "2021": "Dan",
   "2022": "Dan",
   "2023": "Chase",
-  "2024": "Chase",
+  "2024": "Dan",
   "2025": "Danny"
  },
  "lastPlaceRecordThrough": 0,
@@ -534,6 +534,7 @@
   "2021-2025": "last in final standings"
  },
  "keepers": false,
+ "consolationRounds": 2,
  "playoffYears": {
   "Logan": [
    2021,
