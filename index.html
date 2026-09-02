@@ -630,7 +630,7 @@ YEARS.forEach(y=>{
   d.append(el("span","sub",
     (ru?"2nd <i>"+ru.m.name+"</i>":"2nd <i>&mdash;</i>")+"<br>"+
     (th?"3rd <i>"+th.m.name+"</i>":"3rd <i>&mdash;</i>")+"<br>"+
-    (bl? (y<=(E.lastPlaceRecordThrough||2021)?"Worst ":"Last ")+"<i>"+bl.m.name+"</i>"
+    (bl? (y<=(E.lastPlaceRecordThrough||0)?"Worst ":"Last ")+"<i>"+bl.m.name+"</i>"
        : "Last <i>not recorded</i>")));
   [...d.children].forEach(c=>c.style.display="block");
   if(ch) d.onclick=()=>openDetail(ch.m.name);
@@ -710,7 +710,7 @@ function tagCls(n){ return n==="Champion"?"t" : n==="Runner Up"?"r" : n==="Third
 // lost the consolation bracket. Label it for what it actually means that season.
 function tagText(note, year){
   if(note!=="Biggest Loser") return note;
-  return year<=(E.lastPlaceRecordThrough||2021) ? "Worst record" : "Biggest loser";
+  return year<=(E.lastPlaceRecordThrough||0) ? "Worst record" : "Biggest loser";
 }
 function chip(label, val, gold){
   return '<span class="chip'+(gold?" gold":"")+'"><i>'+label+'</i><b>'+val+'</b></span>';
@@ -1048,10 +1048,12 @@ drawDraft();
     ['<b>'+p[2]+'</b> <em>'+p[1]+', '+p[0]+' '+p[4]+' &middot; '+p[6]+' pts</em>', p[5], "p"]));
   mk("Biggest busts <em>&mdash; rounds 1&ndash;3 only</em>", E.busts.map(p=>
     ['<b>'+p[2]+'</b> <em>'+p[1]+', '+p[0]+' '+p[4]+' &middot; '+p[6]+' pts</em>', p[5], "n"]));
-  mk("Best keepers <em>&mdash; points above what the keeper round costs</em>", E.bestKeeps.map(k=>
-    ['<b>'+k[2]+'</b> <em>'+k[1]+', '+k[0]+' '+k[3]+' &middot; '+k[5]+' pts</em>', k[4], "p"]));
-  mk("Keeper value <em>&mdash; average of that, per manager</em>", E.keeperValue.map(k=>
-    ['<b>'+k[0]+'</b> <em>'+k[2]+' kept</em>', (k[1]>0?'+':'')+k[1], k[1]>=0?"p":"n"]));
+  if(E.keepers){
+    mk("Best keepers <em>&mdash; points above what the keeper round costs</em>", E.bestKeeps.map(k=>
+      ['<b>'+k[2]+'</b> <em>'+k[1]+', '+k[0]+' '+k[3]+' &middot; '+k[5]+' pts</em>', k[4], "p"]));
+    mk("Keeper value <em>&mdash; average of that, per manager</em>", E.keeperValue.map(k=>
+      ['<b>'+k[0]+'</b> <em>'+k[2]+' kept</em>', (k[1]>0?'+':'')+k[1], k[1]>=0?"p":"n"]));
+  }
   mk("Career draft grade <em>&mdash; adjusted for how many drafts</em>", E.draftCareer.map(c=>
     ['<b>'+c[0]+'</b> <em>'+c[3]+' drafts &middot; '+(c[4]>0?'+':'')+c[4].toFixed(1)+' raw</em>', c[2],
      c[1]>=0?"p":"n"]));
@@ -1100,7 +1102,7 @@ function drawSeason(){
   document.querySelectorAll("#years button").forEach(b=>b.classList.toggle("on", +b.textContent===curYear));
   drawAwards();
   const made=n=>(E.playoffYears[n]||[]).includes(curYear);
-  const bracketEra=curYear>(E.lastPlaceRecordThrough||2021);
+  const bracketEra=curYear>(E.lastPlaceRecordThrough||0);
   const rows=M.map(m=>({n:m.name, s:m.seasons.find(x=>x.year===curYear)})).filter(x=>x.s)
     .sort((a,b)=>{
       const ap=made(a.n), bp=made(b.n);

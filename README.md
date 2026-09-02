@@ -14,7 +14,7 @@ only the id, seasons, rules and branding differ.
 | League | Config | Seasons | Page |
 |---|---|---|---|
 | League of Ordinary Gentlemen | `leagues/loog.json` | 2017- | `/` |
-| The League | `leagues/the-league.json` | 2021- | `/the-league/` |
+| The League | `leagues/the-league.json` | 2021- | [own repo](https://lcarlile.github.io/the-league-record-book/) |
 
 ## Updating after a season
 
@@ -24,6 +24,7 @@ node build.js
 
 ./refresh.sh --league the-league    # the other league
 node build.js --league the-league
+./publish.sh the-league             # pushes to its own site repo
 
 git commit -am "2026 season" && git push
 ```

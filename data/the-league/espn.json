@@ -1,6 +1,6 @@
 {
  "h2h": [
-  "Chase/Daniell 7-2",
+  "Chase/Dan 7-2",
   "Chase/Danny 5-8",
   "Chase/Eddie 5-4",
   "Chase/Jake 3-0",
@@ -12,17 +12,17 @@
   "Chase/Peter 0-2",
   "Chase/Robby 4-5",
   "Chase/Sam 0-3",
-  "Daniell/Danny 3-4",
-  "Daniell/Eddie 3-7",
-  "Daniell/Jake 1-1",
-  "Daniell/Jason 4-3",
-  "Daniell/Joe 3-4",
-  "Daniell/Logan 0-7",
-  "Daniell/Noah 4-10",
-  "Daniell/Pat 2-5",
-  "Daniell/Peter 2-0",
-  "Daniell/Robby 2-6",
-  "Daniell/Sam 3-2",
+  "Dan/Danny 3-4",
+  "Dan/Eddie 3-7",
+  "Dan/Jake 1-1",
+  "Dan/Jason 4-3",
+  "Dan/Joe 3-4",
+  "Dan/Logan 0-7",
+  "Dan/Noah 4-10",
+  "Dan/Pat 2-5",
+  "Dan/Peter 2-0",
+  "Dan/Robby 2-6",
+  "Dan/Sam 3-2",
   "Danny/Eddie 5-5",
   "Danny/Jake 1-0",
   "Danny/Jason 4-3",
@@ -82,7 +82,7 @@
    48.8,
    49.5
   ],
-  "Daniell": [
+  "Dan": [
    34.1,
    31.1
   ],
@@ -138,7 +138,7 @@
    "2023 W17",
    "2024 W8"
   ],
-  "Daniell": [
+  "Dan": [
    3,
    "2023 W8",
    "2023 W10"
@@ -205,7 +205,7 @@
    "2023 W8",
    "2023 W13"
   ],
-  "Daniell": [
+  "Dan": [
    16,
    "2022 W3",
    "2023 W1"
@@ -272,13 +272,13 @@
   [
    "Logan",
    184.9,
-   "Daniell",
+   "Dan",
    108.52,
    2024,
    11
   ],
   [
-   "Daniell",
+   "Dan",
    184.18,
    "Jason",
    125.72,
@@ -328,7 +328,7 @@
    17
   ],
   [
-   "Daniell",
+   "Dan",
    46.9,
    "Jason",
    95.7,
@@ -446,7 +446,7 @@
   [
    "Danny",
    95.4,
-   "Daniell",
+   "Dan",
    94.84,
    2021,
    9
@@ -462,8 +462,8 @@
  ],
  "lopsided": [
   "Robby 9-3 Logan",
-  "Noah 10-4 Daniell",
-  "Eddie 7-3 Daniell",
+  "Noah 10-4 Dan",
+  "Eddie 7-3 Dan",
   "Logan 7-3 Danny",
   "Robby 7-4 Danny",
   "Eddie 7-4 Noah"
@@ -487,14 +487,14 @@
   "Joe": 7,
   "Chase": 3,
   "Noah": 3,
-  "Daniell": 1,
+  "Dan": 1,
   "Sam": 2
  },
  "weeklyLow": {
   "Noah": 12,
   "Chase": 7,
   "Eddie": 6,
-  "Daniell": 17,
+  "Dan": 17,
   "Peter": 3,
   "Logan": 1,
   "Pat": 3,
@@ -507,7 +507,7 @@
  },
  "heartbreak": {
   "Jason": 6,
-  "Daniell": 4,
+  "Dan": 4,
   "Robby": 3,
   "Pat": 4,
   "Peter": 2,
@@ -523,8 +523,8 @@
  "regularSeasonWeeks": 70,
  "boxScores": 420,
  "lastPlace": {
-  "2021": "Daniell",
-  "2022": "Daniell",
+  "2021": "Dan",
+  "2022": "Dan",
   "2023": "Chase",
   "2024": "Chase",
   "2025": "Danny"
@@ -546,7 +546,7 @@
    2021,
    2024
   ],
-  "Daniell": [],
+  "Dan": [],
   "Robby": [
    2021,
    2022,
@@ -594,7 +594,7 @@
  "divTitles": {
   "Logan": 3,
   "Danny": 1,
-  "Daniell": 0,
+  "Dan": 0,
   "Robby": 1,
   "Noah": 0,
   "Jason": 0,
@@ -629,7 +629,7 @@
   ],
   [
    2021,
-   "Daniell",
+   "Dan",
    "Nick Chubb"
   ],
   [
@@ -659,7 +659,7 @@
   ],
   [
    2022,
-   "Daniell",
+   "Dan",
    "Jonathan Taylor"
   ],
   [
@@ -714,7 +714,7 @@
   ],
   [
    2023,
-   "Daniell",
+   "Dan",
    "Ja'Marr Chase"
   ],
   [
@@ -774,7 +774,7 @@
   ],
   [
    2024,
-   "Daniell",
+   "Dan",
    "Ja'Marr Chase"
   ],
   [
@@ -824,7 +824,7 @@
   ],
   [
    2025,
-   "Daniell",
+   "Dan",
    "Saquon Barkley"
   ],
   [
@@ -867,7 +867,7 @@
    "Cooper Kupp",
    3
   ],
-  "Daniell": [
+  "Dan": [
    "Devin Singletary",
    3
   ],
@@ -929,7 +929,7 @@
    -13.5,
    "C+"
   ],
-  "Daniell|2021": [
+  "Dan|2021": [
    -11,
    "C+"
   ],
@@ -953,7 +953,7 @@
    -9.8,
    "C+"
   ],
-  "Daniell|2022": [
+  "Dan|2022": [
    0.2,
    "B"
   ],
@@ -997,7 +997,7 @@
    -25.2,
    "C-"
   ],
-  "Daniell|2023": [
+  "Dan|2023": [
    23.5,
    "A"
   ],
@@ -1045,7 +1045,7 @@
    9.8,
    "B+"
   ],
-  "Daniell|2024": [
+  "Dan|2024": [
    -28.7,
    "D"
   ],
@@ -1085,7 +1085,7 @@
    2.1,
    "B"
   ],
-  "Daniell|2025": [
+  "Dan|2025": [
    -15.9,
    "C"
   ],
@@ -1193,7 +1193,7 @@
    -4.3
   ],
   [
-   "Daniell",
+   "Dan",
    -2.6,
    "C",
    5,
@@ -1209,7 +1209,7 @@
  ],
  "bestDrafts": [
   [
-   "Daniell",
+   "Dan",
    2023,
    23.5,
    "A"
@@ -1352,7 +1352,7 @@
   ],
   [
    2025,
-   "Daniell",
+   "Dan",
    "Jayden Daniels",
    "QB",
    "R3",
@@ -1379,7 +1379,7 @@
   ],
   [
    2024,
-   "Daniell",
+   "Dan",
    "Isiah Pacheco",
    "RB",
    "R2",

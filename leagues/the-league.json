@@ -9,8 +9,8 @@
     2025
   ],
   "out": {
-    "site": "the-league/index.html",
-    "fragment": "the-league/fragment.html"
+    "site": "build/the-league/index.html",
+    "fragment": "build/the-league/fragment.html"
   },
   "brand": {
     "title": "The League Record Book",
@@ -18,7 +18,8 @@
     "crestRight": "Sixth Season",
     "h1": "The<br><em>League</em>",
     "dek": "Five seasons on the books. Every win, every collapse, every trophy &mdash; and the head-to-head ledger that settles the group chat.",
-    "description": "Five seasons of The League fantasy football - champions, all-time standings, head-to-head records and single-week extremes."
+    "description": "Five seasons of The League fantasy football - champions, all-time standings, head-to-head records and single-week extremes.",
+    "site": "https://lcarlile.github.io/the-league-record-book/"
   },
   "rules": {
     "lastPlace": {
@@ -29,5 +30,7 @@
     },
     "payoutDepth": 3
   },
-  "nameOverrides": {}
+  "nameOverrides": {
+    "Daniell Six": "Dan"
+  }
 }
