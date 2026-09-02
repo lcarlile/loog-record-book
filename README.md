@@ -42,10 +42,14 @@ or create `.espn-auth.json` (gitignored, never committed):
 | Command | What it does |
 |---|---|
 | `node refresh.js` | full pull, rewrite the data files, cache the raw pull |
-| `node refresh.js --check` | pull and compare against what is committed; writes nothing |
+| `node refresh.js --check` | pull and compare figure by figure against what is committed; writes nothing |
 | `node refresh.js --cached` | recompute from the last pull with no network and no cookies |
 
-`refresh.js` runs nine structural checks before writing (one champion per season, wins
+`--check` compares meaning rather than bytes: manager totals, every season row, and the
+leaderboards. It prints the figures that changed, so after a new season you can see exactly
+what moved before writing anything.
+
+`refresh.js` runs ten structural checks before writing (one champion per season, wins
 equal losses, playoff appearances add up, and so on) and refuses to write if any fail.
 Needs Node 18+; if `node -v` is older, use `~/.nvm/versions/node/v22.22.0/bin/node`.
 

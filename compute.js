@@ -293,24 +293,58 @@ function run({ season, YEARS, CHECK }) {
     console.error('\n' + failed + ' check(s) failed - not writing. Something is wrong with the pull.\n');
     process.exit(1);
   }
-  const targets = { 'data.json': managers, 'espn.json': espn };
-  let diffs = 0;
-  for (const [file, value] of Object.entries(targets)) {
-    const next = JSON.stringify(value, null, 1);
-    const prev = fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : null;
-    if (CHECK) {
-      const same = prev === next;
-      console.log(`  ${file}: ${same ? 'identical to committed' : 'DIFFERS from committed'}`);
-      if (!same) diffs++;
-    } else {
-      fs.writeFileSync(file, next);
-      console.log(`  wrote ${file}`);
-    }
+  /* --check does a semantic diff, not a byte diff: field order and formatting are noise,
+     a changed number is not. */
+  function semanticDiff(prevM, prevE) {
+    const d = [];
+    const byName = Object.fromEntries(prevM.map(m => [m.name, m]));
+    managers.forEach(m => {
+      const p = byName[m.name];
+      if (!p) { d.push(`manager ${m.name} is new`); return; }
+      ['w','l','titles','runnerUp','third','loser','playoffApps','playoffW','playoffL','divTitles']
+        .forEach(k => { if (p[k] !== m[k]) d.push(`${m.name}.${k}: ${p[k]} -> ${m[k]}`); });
+      if (p.seasons.length !== m.seasons.length)
+        d.push(`${m.name}: ${p.seasons.length} seasons -> ${m.seasons.length}`);
+      m.seasons.forEach(s => {
+        const q = p.seasons.find(x => x.year === s.year);
+        if (!q) { d.push(`${m.name} ${s.year} is new`); return; }
+        ['w','l','fin','note'].forEach(k => {
+          if (q[k] !== s[k]) d.push(`${m.name} ${s.year}.${k}: ${q[k]} -> ${s[k]}`); });
+        if (Math.abs((q.pf||0) - s.pf) > 0.02) d.push(`${m.name} ${s.year}.pf: ${q.pf} -> ${s.pf}`);
+      });
+    });
+    prevM.forEach(p => { if (!managers.some(m => m.name === p.name)) d.push(`manager ${p.name} vanished`); });
+    const cmp = (k, f) => {
+      const A = JSON.stringify((prevE[k]||[]).map(f)), B = JSON.stringify((espn[k]||[]).map(f));
+      if (A !== B) d.push(`espn.${k} changed`);
+    };
+    cmp('h2h', x => x); cmp('steals', x => x[2]); cmp('busts', x => x[2]);
+    cmp('bestKeeps', x => x[2]); cmp('draftCareer', x => x[0] + ':' + x[2]);
+    cmp('bestDrafts', x => x[0] + x[1]); cmp('lopsided', x => x); cmp('evenRivalry', x => x);
+    ['weeklyHigh','weeklyLow','heartbreak','luck','playoffYears','divTitles','lastPlace'].forEach(k => {
+      if (JSON.stringify(prevE[k]) !== JSON.stringify(espn[k])) d.push(`espn.${k} changed`); });
+    if (Object.keys(prevE.draftGrade||{}).length !== Object.keys(espn.draftGrade||{}).length)
+      d.push('espn.draftGrade count changed');
+    return d;
   }
   if (CHECK) {
-    console.log(diffs ? '\nDiffs found - run without --check to update, then rebuild.\n'
-                      : '\nReproduces the committed data exactly.\n');
-    process.exit(diffs ? 1 : 0);
+    const haveBoth = fs.existsSync('data.json') && fs.existsSync('espn.json');
+    if (!haveBoth) { console.log('\nNothing committed to compare against.\n'); process.exit(0); }
+    const d = semanticDiff(JSON.parse(fs.readFileSync('data.json', 'utf8')),
+                           JSON.parse(fs.readFileSync('espn.json', 'utf8')));
+    if (!d.length) {
+      console.log('\nReproduces every committed figure. Nothing written.\n');
+      process.exit(0);
+    }
+    console.log('\n' + d.length + ' difference(s) against the committed data:');
+    d.slice(0, 40).forEach(x => console.log('  ' + x));
+    if (d.length > 40) console.log('  ... and ' + (d.length - 40) + ' more');
+    console.log('\nIf these are expected (a new season), run without --check.\n');
+    process.exit(1);
+  }
+  for (const [file, value] of Object.entries({ 'data.json': managers, 'espn.json': espn })) {
+    fs.writeFileSync(file, JSON.stringify(value, null, 1));
+    console.log(`  wrote ${file}`);
   }
   console.log('\nNow run:  node build.js\n');
 }
