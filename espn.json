@@ -395,38 +395,12 @@
   ]
  ],
  "closest": [
-  [
-   "Chase",
-   108.88,
-   "Logan",
-   108.8,
-   2024,
-   16
-  ],
-  [
-   "Kaila",
-   96.82,
-   "Logan",
-   96.7,
-   2025,
-   13
-  ],
-  [
-   "Steve",
-   119.6,
-   "Caitlyn",
-   119.44,
-   2025,
-   15
-  ],
-  [
-   "Jordan",
-   114.02,
-   "Danny",
-   113.82,
-   2025,
-   3
-  ]
+  "Danny 9-9 Jordan (18g)",
+  "Chase 9-9 Dan (18g)",
+  "Conner 7-7 Karen (14g)",
+  "Dan 6-6 Zach (12g)",
+  "Conner 6-6 Zach (12g)",
+  "Kim 6-6 Logan (12g)"
  ],
  "lastPlace": {
   "2017": "Chase",
@@ -536,5 +510,603 @@
  "lastPlaceRule": {
   "2017-2021": "worst regular-season record",
   "2022-2025": "last in final standings"
- }
+ },
+ "draftR1": [
+  [
+   2017,
+   "Steve",
+   "David Johnson"
+  ],
+  [
+   2017,
+   "Jordan",
+   "Le'Veon Bell"
+  ],
+  [
+   2017,
+   "Conner",
+   "Antonio Brown"
+  ],
+  [
+   2017,
+   "Chase",
+   "Julio Jones"
+  ],
+  [
+   2017,
+   "Danny",
+   "Aaron Rodgers"
+  ],
+  [
+   2017,
+   "Zach",
+   "Odell Beckham Jr."
+  ],
+  [
+   2017,
+   "Logan",
+   "LeSean McCoy"
+  ],
+  [
+   2017,
+   "Dan",
+   "Jordy Nelson"
+  ],
+  [
+   2018,
+   "Chase",
+   "Le'Veon Bell"
+  ],
+  [
+   2018,
+   "Dan",
+   "Alvin Kamara"
+  ],
+  [
+   2018,
+   "Zach",
+   "Julio Jones"
+  ],
+  [
+   2018,
+   "Danny",
+   "Todd Gurley"
+  ],
+  [
+   2018,
+   "Conner",
+   "Antonio Brown"
+  ],
+  [
+   2018,
+   "Steve",
+   "DeAndre Hopkins"
+  ],
+  [
+   2018,
+   "Logan",
+   "David Johnson"
+  ],
+  [
+   2018,
+   "Jordan",
+   "Ezekiel Elliott"
+  ],
+  [
+   2018,
+   "Kim",
+   "Odell Beckham Jr."
+  ],
+  [
+   2018,
+   "Karen",
+   "Saquon Barkley"
+  ],
+  [
+   2019,
+   "Zach",
+   "Michael Thomas"
+  ],
+  [
+   2019,
+   "Danny",
+   "Ezekiel Elliott"
+  ],
+  [
+   2019,
+   "Karen",
+   "David Johnson"
+  ],
+  [
+   2019,
+   "Jordan",
+   "Melvin Gordon III"
+  ],
+  [
+   2019,
+   "Logan",
+   "Davante Adams"
+  ],
+  [
+   2019,
+   "Conner",
+   "Alvin Kamara"
+  ],
+  [
+   2019,
+   "Dan",
+   "Saquon Barkley"
+  ],
+  [
+   2019,
+   "Steve",
+   "Le'Veon Bell"
+  ],
+  [
+   2019,
+   "Chase",
+   "Joe Mixon"
+  ],
+  [
+   2019,
+   "Kim",
+   "Christian McCaffrey"
+  ],
+  [
+   2020,
+   "Dan",
+   "Julio Jones"
+  ],
+  [
+   2020,
+   "Steve",
+   "Michael Thomas"
+  ],
+  [
+   2020,
+   "Chase",
+   "Christian McCaffrey"
+  ],
+  [
+   2020,
+   "Conner",
+   "Saquon Barkley"
+  ],
+  [
+   2020,
+   "Kim",
+   "Ezekiel Elliott"
+  ],
+  [
+   2020,
+   "Karen",
+   "Dalvin Cook"
+  ],
+  [
+   2020,
+   "Jordan",
+   "JuJu Smith-Schuster"
+  ],
+  [
+   2020,
+   "Danny",
+   "Davante Adams"
+  ],
+  [
+   2020,
+   "Logan",
+   "Alvin Kamara"
+  ],
+  [
+   2020,
+   "Zach",
+   "Clyde Edwards-Helaire"
+  ],
+  [
+   2021,
+   "Steve",
+   "Christian McCaffrey"
+  ],
+  [
+   2021,
+   "Chase",
+   "Dalvin Cook"
+  ],
+  [
+   2021,
+   "Dan",
+   "Alvin Kamara"
+  ],
+  [
+   2021,
+   "Logan",
+   "Ezekiel Elliott"
+  ],
+  [
+   2021,
+   "Karen",
+   "Tyreek Hill"
+  ],
+  [
+   2021,
+   "Zach",
+   "Saquon Barkley"
+  ],
+  [
+   2021,
+   "Jordan",
+   "Nick Chubb"
+  ],
+  [
+   2021,
+   "Danny",
+   "Jonathan Taylor"
+  ],
+  [
+   2021,
+   "Conner",
+   "Aaron Jones Sr."
+  ],
+  [
+   2021,
+   "Kim",
+   "Davante Adams"
+  ],
+  [
+   2022,
+   "Conner",
+   "Jonathan Taylor"
+  ],
+  [
+   2022,
+   "Chase",
+   "Christian McCaffrey"
+  ],
+  [
+   2022,
+   "Kim",
+   "Austin Ekeler"
+  ],
+  [
+   2022,
+   "Caitlyn",
+   "Leonard Fournette"
+  ],
+  [
+   2022,
+   "Danny",
+   "Dalvin Cook"
+  ],
+  [
+   2022,
+   "Dan",
+   "Ezekiel Elliott"
+  ],
+  [
+   2022,
+   "Kaila",
+   "Joe Mixon"
+  ],
+  [
+   2022,
+   "Logan",
+   "Alvin Kamara"
+  ],
+  [
+   2022,
+   "Jordan",
+   "Javonte Williams"
+  ],
+  [
+   2022,
+   "Karen",
+   "Najee Harris"
+  ],
+  [
+   2022,
+   "Steve",
+   "Davante Adams"
+  ],
+  [
+   2022,
+   "Zach",
+   "Saquon Barkley"
+  ],
+  [
+   2023,
+   "Danny",
+   "Justin Jefferson"
+  ],
+  [
+   2023,
+   "Dan",
+   "Christian McCaffrey"
+  ],
+  [
+   2023,
+   "Karen",
+   "Austin Ekeler"
+  ],
+  [
+   2023,
+   "Conner",
+   "Bijan Robinson"
+  ],
+  [
+   2023,
+   "Zach",
+   "Travis Kelce"
+  ],
+  [
+   2023,
+   "Logan",
+   "Tyreek Hill"
+  ],
+  [
+   2023,
+   "Jordan",
+   "Jaylen Waddle"
+  ],
+  [
+   2023,
+   "Chase",
+   "Nick Chubb"
+  ],
+  [
+   2023,
+   "Kim",
+   "Saquon Barkley"
+  ],
+  [
+   2023,
+   "Steve",
+   "Tony Pollard"
+  ],
+  [
+   2023,
+   "Caitlyn",
+   "Davante Adams"
+  ],
+  [
+   2023,
+   "Kaila",
+   "Josh Jacobs"
+  ],
+  [
+   2024,
+   "Chase",
+   "Christian McCaffrey"
+  ],
+  [
+   2024,
+   "Dan",
+   "Tyreek Hill"
+  ],
+  [
+   2024,
+   "Caitlyn",
+   "Bijan Robinson"
+  ],
+  [
+   2024,
+   "Logan",
+   "CeeDee Lamb"
+  ],
+  [
+   2024,
+   "Kim",
+   "Ja'Marr Chase"
+  ],
+  [
+   2024,
+   "Zach",
+   "Justin Jefferson"
+  ],
+  [
+   2024,
+   "Conner",
+   "A.J. Brown"
+  ],
+  [
+   2024,
+   "Steve",
+   "Jahmyr Gibbs"
+  ],
+  [
+   2024,
+   "Jordan",
+   "Puka Nacua"
+  ],
+  [
+   2024,
+   "Kaila",
+   "Derrick Henry"
+  ],
+  [
+   2024,
+   "Karen",
+   "Kyren Williams"
+  ],
+  [
+   2024,
+   "Danny",
+   "Stefon Diggs"
+  ],
+  [
+   2025,
+   "Steve",
+   "Ja'Marr Chase"
+  ],
+  [
+   2025,
+   "Dan",
+   "Bijan Robinson"
+  ],
+  [
+   2025,
+   "Kaila",
+   "Jahmyr Gibbs"
+  ],
+  [
+   2025,
+   "Chase",
+   "CeeDee Lamb"
+  ],
+  [
+   2025,
+   "Logan",
+   "Justin Jefferson"
+  ],
+  [
+   2025,
+   "Conner",
+   "Derrick Henry"
+  ],
+  [
+   2025,
+   "Kim",
+   "Christian McCaffrey"
+  ],
+  [
+   2025,
+   "Danny",
+   "Amon-Ra St. Brown"
+  ],
+  [
+   2025,
+   "Zach",
+   "Puka Nacua"
+  ],
+  [
+   2025,
+   "Karen",
+   "Saquon Barkley"
+  ],
+  [
+   2025,
+   "Caitlyn",
+   "Ashton Jeanty"
+  ],
+  [
+   2025,
+   "Jordan",
+   "Josh Jacobs"
+  ]
+ ],
+ "draftedEveryYear": [
+  "Aaron Rodgers",
+  "Keenan Allen",
+  "Travis Kelce",
+  "Mike Evans",
+  "Davante Adams",
+  "Dak Prescott",
+  "Stefon Diggs",
+  "Amari Cooper",
+  "Derrick Henry",
+  "Joe Mixon",
+  "Tyreek Hill",
+  "Christian McCaffrey",
+  "Baltimore Ravens D/ST"
+ ],
+ "favourite": {
+  "Steve": [
+   "DeAndre Hopkins",
+   3
+  ],
+  "Jordan": [
+   "Allen Robinson",
+   3
+  ],
+  "Conner": [
+   "Antonio Brown",
+   3
+  ],
+  "Chase": [
+   "Keenan Allen",
+   3
+  ],
+  "Danny": [
+   "Derrick Henry",
+   4
+  ],
+  "Zach": [
+   "Justin Jefferson",
+   4
+  ],
+  "Logan": [
+   "Robert Woods",
+   3
+  ],
+  "Dan": [
+   "Drake London",
+   4
+  ],
+  "Kim": [
+   "Tom Brady",
+   3
+  ],
+  "Karen": [
+   "Tyreek Hill",
+   5
+  ],
+  "Caitlyn": [
+   "Davante Adams",
+   2
+  ],
+  "Kaila": [
+   "Nico Collins",
+   3
+  ]
+ },
+ "weeklyHigh": {
+  "Logan": 19,
+  "Chase": 16,
+  "Steve": 13,
+  "Dan": 12,
+  "Jordan": 11,
+  "Karen": 11,
+  "Zach": 10,
+  "Danny": 10,
+  "Conner": 8,
+  "Kim": 7,
+  "Kaila": 3,
+  "Caitlyn": 2
+ },
+ "weeklyLow": {
+  "Dan": 16,
+  "Steve": 15,
+  "Jordan": 15,
+  "Danny": 11,
+  "Zach": 11,
+  "Kim": 11,
+  "Chase": 10,
+  "Conner": 10,
+  "Caitlyn": 9,
+  "Karen": 6,
+  "Logan": 6,
+  "Kaila": 2
+ },
+ "heartbreak": {
+  "Logan": 13,
+  "Conner": 10,
+  "Danny": 9,
+  "Jordan": 9,
+  "Karen": 7,
+  "Caitlyn": 7,
+  "Kaila": 7,
+  "Zach": 6,
+  "Chase": 5,
+  "Steve": 5,
+  "Kim": 4,
+  "Dan": 3
+ },
+ "lopsided": [
+  "Zach 12-2 Karen",
+  "Logan 10-2 Dan",
+  "Jordan 12-4 Dan",
+  "Danny 8-3 Chase",
+  "Kim 8-3 Dan",
+  "Steve 13-5 Kim"
+ ],
+ "regularSeasonWeeks": 122
 }

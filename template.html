@@ -198,6 +198,28 @@ footer{margin-top:72px; border-top:1px solid var(--rule); padding:26px 0 60px; c
 footer .wrap{display:grid; gap:9px}
 footer b{color:var(--ink-2)}
 
+/* ---------- awards strip ---------- */
+.awards{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1px;
+        background:var(--rule); border:1px solid var(--rule); border-radius:3px;
+        overflow:hidden; margin-bottom:16px}
+.award{background:var(--surface); padding:13px 15px}
+.award small{display:block; font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+             color:var(--ink-3); font-weight:700}
+.award b{display:block; font-family:"Fraunces",Georgia,serif; font-size:19px; font-weight:600; margin-top:5px}
+.award i{font-style:normal; font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-3)}
+
+/* ---------- draft board ---------- */
+.board{border:1px solid var(--rule); border-radius:3px; background:var(--surface); overflow:hidden}
+.pick{display:grid; grid-template-columns:34px 92px 1fr; gap:12px; align-items:baseline;
+      padding:9px 14px; border-bottom:1px solid var(--rule-soft)}
+.pick:last-child{border-bottom:0}
+.pick:nth-child(odd){background:rgba(var(--pos-rgb),.03)}
+.pick .no{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-3)}
+.pick .mgr{font-weight:700; font-size:14px}
+.pick .plr{font-size:14px; color:var(--ink-2)}
+.pick.first .no{color:var(--brass-ink); font-weight:600}
+.pick.first .plr{color:var(--ink); font-weight:500}
+
 /* ---------- responsive list components ---------- */
 .only-narrow{display:none}
 .msort{display:none; align-items:center; gap:10px; margin-bottom:14px}
@@ -274,6 +296,9 @@ footer b{color:var(--ink-2)}
   .cards{gap:10px}
   .recs{gap:10px}
   .rec-card li{padding:8px 0}
+  .pick{grid-template-columns:30px 78px 1fr; gap:9px; padding:10px 12px}
+  .pick .mgr,.pick .plr{font-size:13.5px}
+  .awards{grid-template-columns:1fr 1fr}
   .luck-row{grid-template-columns:64px 1fr 52px; gap:8px}
   .luck-row .nm{font-size:13px}
   .legend{font-size:12px}
@@ -296,6 +321,7 @@ footer b{color:var(--ink-2)}
   <a href="#alltime">All-Time</a>
   <a href="#h2h">Head to Head</a>
   <a href="#managers">Managers</a>
+  <a href="#draft">The Draft</a>
   <a href="#records">Record Book</a>
   <a href="#luck">Luck</a>
   <a href="#seasons">Seasons</a>
@@ -330,6 +356,7 @@ footer b{color:var(--ink-2)}
       <span class="ramp" id="ramp"></span>
       <span>Winning record</span>
     </div>
+    <div class="recs" id="rivalry" style="margin-top:26px"></div>
   </section>
 
   <section id="managers">
@@ -338,6 +365,15 @@ footer b{color:var(--ink-2)}
       by season &mdash; the dotted rule is .500. Click for the full career.</p>
     <div class="cards" id="cards"></div>
     <div id="detail"></div>
+  </section>
+
+  <section id="draft">
+    <div class="head"><h2>The Draft</h2><i class="rule"></i></div>
+    <p class="note">Nine drafts, 1,464 picks. Round one of every year, plus the players this
+      league cannot stop taking.</p>
+    <div class="years" id="draftyears"></div>
+    <div id="draftboard"></div>
+    <div class="recs" id="draftrecs" style="margin-top:14px"></div>
   </section>
 
   <section id="records">
@@ -359,6 +395,7 @@ footer b{color:var(--ink-2)}
     <div class="head"><h2>Season by Season</h2><i class="rule"></i></div>
     <p class="note">Final standings for any year, sorted by record then points scored.</p>
     <div class="years" id="years"></div>
+    <div class="awards" id="awards"></div>
     <div id="seasonwrap"></div>
   </section>
 
@@ -639,6 +676,8 @@ function openDetail(name){
    +fact("Division titles", m.divTitles)
    +fact("Winning / .500 / losing", m.winningSeasons+" / "+m.tiedSeasons+" / "+m.losingSeasons)
    +fact("Longest win streak", ws[0]+" &nbsp;<em style='font-style:normal;color:var(--ink-3);font-size:12px'>"+ws[1]+"&ndash;"+ws[2]+"</em>")
+   +fact("Weekly highs", (E.weeklyHigh[name]||0)+" <em style='font-style:normal;color:var(--ink-3);font-size:12px'>top score of the week</em>")
+   +fact("Favourite pick", E.favourite[name] ? E.favourite[name][0]+" <em style='font-style:normal;color:var(--ink-3);font-size:12px'>&times;"+E.favourite[name][1]+"</em>" : "&mdash;")
    +fact("Longest skid", ls[0]+" &nbsp;<em style='font-style:normal;color:var(--ink-3);font-size:12px'>"+ls[1]+"&ndash;"+ls[2]+"</em>")
    +'</div></div>';
   $("#cl").onclick=()=>{ host.innerHTML=""; document.querySelectorAll(".card").forEach(c=>c.setAttribute("aria-expanded","false")); };
@@ -667,9 +706,70 @@ recCard("Longest losing skid", Object.entries(E.lossStreak).sort((a,b)=>b[1][0]-
 recCard("Best single season",  M.flatMap(m=>m.seasons.map(s=>({n:m.name,s})))
   .sort((a,b)=>(b.s.w/(b.s.w+b.s.l))-(a.s.w/(a.s.w+a.s.l))).slice(0,6)
   .map(x=>['<b>'+x.n+'</b> <em>'+x.s.year+'</em>', x.s.w+'&ndash;'+x.s.l, "p"]));
+recCard("Most weekly highs <em>&mdash; league&rsquo;s top score that week</em>",
+  Object.entries(E.weeklyHigh).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([n,c])=>['<b>'+n+'</b>', c, "p"]));
+recCard("Most weekly lows <em>&mdash; league&rsquo;s worst score that week</em>",
+  Object.entries(E.weeklyLow).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([n,c])=>['<b>'+n+'</b>', c, "n"]));
 recCard("Most points, one season", M.flatMap(m=>m.seasons.map(s=>({n:m.name,s})))
   .sort((a,b)=>b.s.pf-a.s.pf).slice(0,6)
   .map(x=>['<b>'+x.n+'</b> <em>'+x.s.year+'</em>', Math.round(x.s.pf), "p"]));
+
+/* ---------- rivalries ---------- */
+(function(){
+  const host=$("#rivalry");
+  const card=(title, items)=>{
+    const c=el("div","rec-card"); c.append(el("h3",null,title));
+    const ol=el("ol");
+    items.forEach((it,i)=>{ const li=el("li");
+      li.append(el("span","i",i+1), el("span","t",it[0]), el("span","v "+(it[2]||""), it[1]));
+      ol.append(li); });
+    c.append(ol); host.append(c);
+  };
+  const parse=(str)=>{ // "Zach 12-2 Karen"  /  "Danny 9-9 Jordan (18g)"
+    const m=str.match(/^(\S+)\s+(\d+)-(\d+)\s+(\S+)(?:\s+\((\d+)g\))?$/);
+    return m? {a:m[1], w:+m[2], l:+m[3], b:m[4]} : null;
+  };
+  card("Most lopsided matchup", E.lopsided.map(t=>{ const r=parse(t);
+    return ['<b>'+r.a+'</b> owns '+r.b, r.w+'&ndash;'+r.l, "p"]; }));
+  card("Dead-even rivalry", E.closest.map(t=>{ const r=parse(t);
+    return ['<b>'+r.a+'</b> vs '+r.b, r.w+'&ndash;'+r.l, ""]; }));
+  card("Heartbreak losses <em>&mdash; beaten by under 5</em>",
+    Object.entries(E.heartbreak).sort((a,b)=>b[1]-a[1]).slice(0,6)
+      .map(([n,c])=>['<b>'+n+'</b>', c, "n"]));
+})();
+
+/* ---------- the draft ---------- */
+let draftYear=YEARS[YEARS.length-1];
+YEARS.forEach(y=>{ const b=el("button",null,y); b.type="button";
+  b.onclick=()=>{ draftYear=y; drawDraft(); }; $("#draftyears").append(b); });
+function drawDraft(){
+  document.querySelectorAll("#draftyears button")
+    .forEach(b=>b.classList.toggle("on", +b.textContent===draftYear));
+  const picks=E.draftR1.filter(p=>p[0]===draftYear);
+  $("#draftboard").innerHTML='<div class="board">'
+    + picks.map((p,i)=>'<div class="pick'+(i===0?' first':'')+'">'
+        +'<span class="no">'+(i+1)+'</span><span class="mgr">'+p[1]+'</span>'
+        +'<span class="plr">'+p[2]+'</span></div>').join('')
+    +'</div>';
+}
+drawDraft();
+(function(){
+  const host=$("#draftrecs");
+  const c1=el("div","rec-card"); c1.append(el("h3",null,"Drafted every single year"));
+  const o1=el("ol");
+  E.draftedEveryYear.forEach((n,i)=>{ const li=el("li");
+    li.append(el("span","i",i+1), el("span","t","<b>"+n+"</b>"), el("span","v p","9"));
+    o1.append(li); });
+  c1.append(o1); host.append(c1);
+
+  const c2=el("div","rec-card"); c2.append(el("h3",null,"Each manager&rsquo;s favourite pick"));
+  const o2=el("ol");
+  Object.entries(E.favourite).sort((a,b)=>b[1][1]-a[1][1]).forEach(([m,[p,n]],i)=>{
+    const li=el("li");
+    li.append(el("span","i",i+1), el("span","t","<b>"+m+"</b> <em>"+p+"</em>"), el("span","v p",n+"&times;"));
+    o2.append(li); });
+  c2.append(o2); host.append(c2);
+})();
 
 /* ---------- luck ---------- */
 const L=Object.entries(E.luck).map(([n,[act,exp]])=>({n,act,exp,d:+(act-exp).toFixed(1)}))
@@ -692,8 +792,27 @@ L.forEach(x=>{
 let curYear=YEARS[YEARS.length-1];
 YEARS.forEach(y=>{ const b=el("button",null,y); b.type="button";
   b.onclick=()=>{ curYear=y; drawSeason(); }; $("#years").append(b); });
+function drawAwards(){
+  const yr=M.map(m=>({n:m.name, s:m.seasons.find(x=>x.year===curYear), m}))
+            .filter(x=>x.s);
+  const prev=x=>x.m.seasons.find(z=>z.year===curYear-1);
+  const top=yr.slice().sort((a,b)=>b.s.pf-a.s.pf)[0];
+  const missed=yr.filter(x=>!(E.playoffYears[x.n]||[]).includes(curYear));
+  const unlucky=missed.slice().sort((a,b)=>b.s.pf-a.s.pf)[0];
+  const delta=x=>{ const p=prev(x); return p? (x.s.w-x.s.l)-(p.w-p.l) : null; };
+  const moved=yr.filter(x=>delta(x)!==null).sort((a,b)=>delta(b)-delta(a));
+  const up=moved[0], down=moved[moved.length-1];
+  const A=(label,name,detail)=> name
+    ? '<div class="award"><small>'+label+'</small><b>'+name+'</b><i>'+detail+'</i></div>' : '';
+  $("#awards").innerHTML=
+     A("Most points", top.n, Math.round(top.s.pf)+" points")
+   + A("Best team to miss out", unlucky&&unlucky.n, unlucky?Math.round(unlucky.s.pf)+" points, no playoffs":"")
+   + (up&&delta(up)>0? A("Most improved", up.n, "+"+delta(up)+" wins on "+(curYear-1)) : "")
+   + (down&&delta(down)<0? A("Biggest fall", down.n, delta(down)+" wins on "+(curYear-1)) : "");
+}
 function drawSeason(){
   document.querySelectorAll("#years button").forEach(b=>b.classList.toggle("on", +b.textContent===curYear));
+  drawAwards();
   const rows=M.map(m=>({n:m.name, s:m.seasons.find(x=>x.year===curYear)})).filter(x=>x.s)
     .sort((a,b)=> (b.s.w-b.s.l)-(a.s.w-a.s.l) || b.s.pf-a.s.pf);
   const host=$("#seasonwrap");
