@@ -1,48 +1,65 @@
 <title>LoOG Record Book</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=Archivo:wdth,wght@62..125,400..700&family=Spline+Sans+Mono:wght@400;500;600&display=swap">
 <style>
 :root{
-  --bg:#EFF0EC; --surface:#F7F8F5; --sunk:#E4E6E0; --rule:#CDCFC8; --rule-soft:#DEE0DA;
-  --ink:#171A1F; --ink-2:#4F555E; --ink-3:#7C838C;
-  --pos:#B8862B; --pos-rgb:184,134,43;
-  --neg:#2F6DA4; --neg-rgb:47,109,164;
-  --last:#8A322C;
-  --brass-ink:#8A6317;
-  --shadow:0 1px 2px rgba(23,26,31,.06), 0 8px 24px -12px rgba(23,26,31,.18);
+  --bg:#EDEAE1; --surface:#F6F3EA; --sunk:#DFDACB; --rule:#B9B2A2; --rule-soft:#D6D0C0;
+  --ink:#191713; --ink-2:#57514A; --ink-3:#787166; --ink-4:#8A8378;
+  --felt:#1F3D34; --felt-ink:#EFE9DA; --felt-rule:rgba(239,233,218,.18);
+  --pos:#9A6E12; --pos-rgb:154,110,18; --gold-bright:#C79A3A;
+  --neg:#7A2231; --neg-rgb:122,34,49;
+  --last:#7A2231;
+  --brass-ink:#9A6E12;
+  --shadow:0 1px 2px rgba(25,23,19,.07), 0 10px 28px -14px rgba(25,23,19,.22);
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --bg:#14171C; --surface:#1B1F26; --sunk:#101317; --rule:#2C323B; --rule-soft:#242A32;
-    --ink:#E7E8E3; --ink-2:#A6ACB5; --ink-3:#79808A;
-    --pos:#B8892C; --pos-rgb:184,137,44;
-    --neg:#4E8CC4; --neg-rgb:78,140,196;
-    --last:#C4675C;
-    --brass-ink:#D2A241;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+    --bg:#12100D; --surface:#1A1712; --sunk:#0C0A08; --rule:#39332A; --rule-soft:#282319;
+    --ink:#EDE7D9; --ink-2:#ADA595; --ink-3:#8C8478; --ink-4:#6E675C;
+    --felt:#16302A; --felt-ink:#EFE9DA; --felt-rule:rgba(239,233,218,.16);
+    --pos:#D9A93F; --pos-rgb:217,169,63; --gold-bright:#EFC66A;
+    --neg:#C4606C; --neg-rgb:196,96,108;
+    --last:#C4606C;
+    --brass-ink:#D9A93F;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 28px -14px rgba(0,0,0,.65);
   }
 }
 :root[data-theme="dark"]{
-  --bg:#14171C; --surface:#1B1F26; --sunk:#101317; --rule:#2C323B; --rule-soft:#242A32;
-  --ink:#E7E8E3; --ink-2:#A6ACB5; --ink-3:#79808A;
-  --pos:#B8892C; --pos-rgb:184,137,44;
-  --neg:#4E8CC4; --neg-rgb:78,140,196;
-  --last:#C4675C;
-  --brass-ink:#D2A241;
-  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  --bg:#12100D; --surface:#1A1712; --sunk:#0C0A08; --rule:#39332A; --rule-soft:#282319;
+  --ink:#EDE7D9; --ink-2:#ADA595; --ink-3:#8C8478; --ink-4:#6E675C;
+  --felt:#16302A; --felt-ink:#EFE9DA; --felt-rule:rgba(239,233,218,.16);
+  --pos:#D9A93F; --pos-rgb:217,169,63; --gold-bright:#EFC66A;
+  --neg:#C4606C; --neg-rgb:196,96,108;
+  --last:#C4606C;
+  --brass-ink:#D9A93F;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 28px -14px rgba(0,0,0,.65);
 }
 
 *{box-sizing:border-box}
-body{background:var(--bg); color:var(--ink); font-family:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif;
-     font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased}
-.wrap{max-width:1140px; margin:0 auto; padding:0 24px}
+html,body{overflow-x:clip}
+body::before{
+  content:""; position:fixed; inset:0; z-index:1; pointer-events:none;
+  opacity:.045; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) body::before{mix-blend-mode:screen; opacity:.03}
+}
+:root[data-theme="dark"] body::before{mix-blend-mode:screen; opacity:.03}
+body{background:var(--bg); color:var(--ink); font-family:"Archivo",-apple-system,"Segoe UI",system-ui,sans-serif;
+     font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px; margin:0 auto; padding:0 24px}
 h1,h2,h3{font-family:"Fraunces","Iowan Old Style",Georgia,serif; text-wrap:balance; margin:0; font-weight:600}
-.num{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace; font-variant-numeric:tabular-nums}
-.eyebrow{font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);
-         font-weight:700; font-family:"Karla",sans-serif}
+h1,.head h2{font-variation-settings:"opsz" 96,"SOFT" 0,"WONK" 1}
+.num,.tile b{font-variant-numeric:tabular-nums lining-nums}
+.num{font-family:"Spline Sans Mono",ui-monospace,SFMono-Regular,Menlo,monospace; font-variant-numeric:tabular-nums}
+.eyebrow{font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-3);
+         font-weight:700; font-family:"Archivo",sans-serif; font-variation-settings:"wdth" 88}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--pos); outline-offset:2px; border-radius:2px}
+:focus-visible{outline:2px solid var(--ink); outline-offset:2px; border-radius:2px;
+               box-shadow:0 0 0 5px var(--gold-bright)}
+.masthead :focus-visible, nav :focus-visible, .mantel :focus-visible{outline-color:var(--felt-ink)}
 
 /* ---------- masthead ---------- */
 .masthead{border-bottom:1px solid var(--rule); background:var(--surface)}
@@ -50,51 +67,75 @@ a{color:inherit}
 .crest{display:flex; align-items:center; gap:10px; margin-bottom:20px}
 .crest span{font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3); font-weight:700}
 .crest .bar{height:1px; background:var(--rule); flex:1}
-h1{font-size:clamp(34px,6.2vw,68px); line-height:1.02; letter-spacing:-.02em; font-weight:800}
+h1{font-size:clamp(44px,11vw,124px); line-height:.86; letter-spacing:-.035em; font-weight:900}
 h1 em{font-style:normal; color:var(--brass-ink)}
-.dek{margin:14px 0 0; max-width:60ch; color:var(--ink-2); font-size:16px}
+.dek{margin:20px 0 0; max-width:56ch; color:var(--ink-2); font-size:17px; line-height:1.6}
 .tiles{display:flex; flex-wrap:wrap; gap:0; margin-top:32px; border-top:1px solid var(--rule)}
 .tile{flex:1 1 150px; padding:18px 20px 16px; border-right:1px solid var(--rule-soft)}
 .tile:last-child{border-right:0}
-.tile b{display:block; font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums;
-        font-size:30px; font-weight:500; letter-spacing:-.02em; line-height:1}
+.tile b{display:block; font-family:"Fraunces",Georgia,serif; font-variant-numeric:tabular-nums lining-nums;
+        font-size:44px; font-weight:700; letter-spacing:-.02em; line-height:1}
 .tile small{display:block; margin-top:7px; font-size:11px; letter-spacing:.13em;
             text-transform:uppercase; color:var(--ink-3); font-weight:700}
 
 /* ---------- nav ---------- */
-nav{position:sticky; top:0; z-index:40; background:var(--bg); border-bottom:1px solid var(--rule)}
-nav .wrap{display:flex; gap:2px; overflow-x:auto; scrollbar-width:none}
+nav{position:sticky; top:0; z-index:40; background:var(--felt); border-bottom:2px solid var(--gold-bright)}
+nav .wrap{display:flex; gap:2px; overflow-x:auto; scrollbar-width:none; scroll-snap-type:x proximity;
+          mask-image:linear-gradient(90deg,transparent,#000 16px,#000 calc(100% - 28px),transparent)}
 nav .wrap::-webkit-scrollbar{display:none}
-nav a{padding:13px 14px; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
-      font-weight:700; color:var(--ink-3); text-decoration:none; white-space:nowrap;
-      border-bottom:2px solid transparent; transition:color .15s, border-color .15s}
-nav a:hover{color:var(--ink)}
-nav a.on{color:var(--ink); border-bottom-color:var(--pos)}
+nav a{padding:14px 14px; font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+      font-weight:700; color:rgba(239,233,218,.62); text-decoration:none; white-space:nowrap;
+      scroll-snap-align:start; border-bottom:2px solid transparent; transition:color .15s, border-color .15s}
+nav a:hover{color:var(--felt-ink)}
+nav a.on{color:var(--gold-bright); border-bottom-color:var(--gold-bright)}
+
+/* ---------- section tiers: event / browse / appendix ---------- */
+section[data-tier="a"]{
+  margin-inline:calc(50% - 50vw);
+  padding:104px calc(50vw - 590px + 24px) 96px;
+  background:var(--sunk); border-block:1px solid var(--rule);
+}
+@media (max-width:1228px){ section[data-tier="a"]{padding-inline:24px} }
+[data-tier="c"] .recs{grid-template-columns:repeat(auto-fill,minmax(400px,1fr)); gap:34px 40px}
+[data-tier="c"] .rec-card{background:none; border:0; border-top:2px solid var(--ink); padding:14px 0 0}
 
 /* ---------- sections ---------- */
-section{padding:64px 0 8px; scroll-margin-top:52px}
+section{padding:96px 0 16px; scroll-margin-top:52px}
 .head{display:flex; align-items:baseline; gap:16px; margin-bottom:6px}
-.head h2{font-size:clamp(23px,3vw,31px); letter-spacing:-.015em}
+.head h2{font-size:clamp(28px,4vw,44px); letter-spacing:-.02em; font-weight:700}
 .head .rule{flex:1; height:1px; background:var(--rule)}
-.note{color:var(--ink-2); font-size:14px; max-width:66ch; margin:0 0 26px}
+.note{color:var(--ink-2); font-size:17px; line-height:1.6; max-width:64ch; margin:0 0 34px}
+.note b, .note strong{color:var(--ink); font-weight:400}
 
-/* ---------- champions ribbon ---------- */
-.ribbon{display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr)); gap:1px;
-        background:var(--rule); border:1px solid var(--rule); border-radius:3px; overflow:hidden}
-.yr{background:var(--surface); padding:16px 12px 14px; text-align:center; position:relative}
-.yr .y{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.1em;
-       color:var(--ink-3); font-weight:600}
-.yr .champ{font-family:"Fraunces",Georgia,serif; font-size:19px; font-weight:600;
-           margin-top:9px; color:var(--brass-ink); line-height:1.15}
-.yr .rec{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink-3); margin-top:3px}
-.yr .sub{margin-top:11px; padding-top:9px; border-top:1px dotted var(--rule);
-         font-size:11px; color:var(--ink-3); line-height:1.5}
-.yr .sub i{font-style:normal; color:var(--ink-2)}
-.yr .field{position:absolute; top:8px; right:9px; font-family:"IBM Plex Mono",monospace;
-           font-size:9.5px; color:var(--ink-3); opacity:.8}
+/* ---------- the mantel: brass plates on felt ---------- */
+.mantel{background:var(--felt); margin-inline:calc(50% - 50vw);
+        padding:52px calc(50vw - 590px + 24px) 40px}
+@media (max-width:1228px){ .mantel{padding-inline:24px} }
+.mantel-rail{display:grid; grid-template-columns:repeat(9,1fr); gap:10px}
+.yr{position:relative; display:block; width:100%; text-align:center; font:inherit; cursor:pointer;
+    padding:15px 10px 17px; color:#2A1F08; border:1px solid #6E4E10;
+    background:linear-gradient(163deg,#E6C878 0%,#B8862B 40%,#8A6317 56%,#D9AF52 78%,#F0DCA4 100%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.45), 0 2px 0 rgba(0,0,0,.35);
+    transition:filter .15s}
+.yr:hover{filter:brightness(1.07)}
+.yr .y{font-family:"Spline Sans Mono",monospace; font-size:11px; letter-spacing:.14em;
+       font-weight:500; opacity:.72}
+.yr .champ{font-family:"Fraunces",Georgia,serif; font-size:23px; font-weight:700; margin-top:8px;
+           line-height:1.1; text-shadow:0 1px 0 rgba(255,255,255,.38)}
+.yr .rec{font-family:"Spline Sans Mono",monospace; font-size:11px; margin-top:4px; opacity:.7}
+.yr .sub{margin-top:10px; padding-top:8px; border-top:1px solid rgba(42,31,8,.25);
+         font-size:10.5px; line-height:1.5; opacity:.78}
+.yr .sub i{font-style:normal; font-weight:700}
+.yr .field{position:absolute; top:7px; right:8px; font-family:"Spline Sans Mono",monospace;
+           font-size:9.5px; opacity:.6}
+.mantel-foot{margin-top:34px; border-top:2px solid var(--gold-bright); padding-top:22px}
+.never{margin:0; font-family:"Fraunces",Georgia,serif; font-size:clamp(19px,2.4vw,26px);
+       font-weight:700; color:var(--gold-bright); line-height:1.25; max-width:24ch}
+.never-names{margin:9px 0 0; font-size:13px; color:rgba(239,233,218,.55); letter-spacing:.02em}
+.rail-count{display:none}
 
 /* ---------- tables ---------- */
-.scroll{overflow-x:auto; border:1px solid var(--rule); border-radius:3px; background:var(--surface)}
+.scroll{overflow-x:auto; border:1px solid var(--rule); border-radius:0; background:var(--surface)}
 table{border-collapse:collapse; width:100%; font-size:14px}
 th,td{padding:9px 11px; text-align:right; white-space:nowrap; border-bottom:1px solid var(--rule-soft)}
 th:first-child,td:first-child{text-align:left}
@@ -109,8 +150,8 @@ td.name{font-weight:700}
 .sortable th.act::after{content:"\25BE"; margin-left:4px; font-size:9px}
 .sortable th.act.asc::after{content:"\25B4"}
 .rank{color:var(--ink-3); font-size:12px; width:1px; padding-right:0}
-.pill{display:inline-block; min-width:20px; padding:1px 6px; border-radius:2px; font-size:11.5px;
-      font-weight:700; font-family:"IBM Plex Mono",monospace}
+.pill{display:inline-block; min-width:20px; padding:1px 6px; border-radius:0; font-size:11.5px;
+      font-weight:700; font-family:"Spline Sans Mono",monospace}
 .pill.gold{background:rgba(var(--pos-rgb),.16); color:var(--brass-ink)}
 .pill.zero{color:var(--ink-3)}
 
@@ -119,77 +160,92 @@ td.name{font-weight:700}
 .h2h th{background:transparent; border:0; position:static; padding:5px 7px; font-size:10.5px}
 .h2h th.col{writing-mode:vertical-rl; transform:rotate(180deg); padding:7px 4px; text-align:left}
 .h2h th.row{text-align:right; font-weight:700; color:var(--ink); font-size:12px; text-transform:none; letter-spacing:0}
-.h2h td{border:0; border-radius:2px; text-align:center; padding:7px 6px; min-width:52px;
-        font-family:"IBM Plex Mono",monospace; font-weight:500; color:var(--ink)}
+.h2h td{border:0; border-radius:0; text-align:center; padding:7px 6px; min-width:52px;
+        font-family:"Spline Sans Mono",monospace; font-weight:500; color:var(--ink)}
 .h2h td.self{background:repeating-linear-gradient(45deg,transparent,transparent 3px,var(--rule-soft) 3px,var(--rule-soft) 4px)}
 .h2h td.hot{outline:2px solid var(--ink); outline-offset:-2px}
+.h2h tr.xr td, .h2h td.xc{outline:1px solid var(--ink); outline-offset:-1px}
 .legend{display:flex; align-items:center; gap:12px; margin:18px 0 0; flex-wrap:wrap;
         font-size:11.5px; color:var(--ink-3)}
-.ramp{display:flex; height:9px; width:190px; border-radius:2px; overflow:hidden}
+.ramp{display:flex; height:9px; width:190px; border-radius:0; overflow:hidden}
 .ramp i{flex:1}
 
 /* ---------- manager cards ---------- */
 .cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(258px,1fr)); gap:14px}
-.card{background:var(--surface); border:1px solid var(--rule); border-radius:3px; padding:16px 16px 12px;
-      text-align:left; font:inherit; color:inherit; cursor:pointer; width:100%;
-      transition:border-color .15s, transform .15s, box-shadow .15s}
-.card:hover{border-color:var(--ink-3); transform:translateY(-2px); box-shadow:var(--shadow)}
+.card{background:var(--surface); border:1px solid var(--rule); border-top:3px solid var(--rule);
+      border-radius:0; padding:0 16px 12px; text-align:left; font:inherit; color:inherit;
+      cursor:pointer; width:100%; transition:border-color .15s, background .15s}
+.card:hover{background:var(--sunk); border-color:var(--ink)}
+.card.has-title{border-top-color:var(--gold-bright)}
+.card.has-last{border-top-color:var(--neg)}
+.foil{display:block; margin:0 -16px 13px; padding:6px 16px 5px; color:#2A1F08;
+      font-size:10.5px; letter-spacing:.14em; font-weight:700; text-transform:uppercase;
+      background:linear-gradient(160deg,#E0BC6A,#B8862B 42%,#8A6317 58%,#D9AF52)}
+.card .pad-top{display:block; height:16px}
 .card[aria-expanded="true"]{border-color:var(--pos)}
 .card .top{display:flex; justify-content:space-between; align-items:baseline; gap:8px}
 .card .who{font-family:"Fraunces",Georgia,serif; font-size:21px; font-weight:600}
-.card .pct{font-family:"IBM Plex Mono",monospace; font-size:15px; font-weight:600}
-.card .rec{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-3); margin-top:2px}
+.card .pct{font-family:"Spline Sans Mono",monospace; font-size:15px; font-weight:600}
+.card .rec{font-family:"Spline Sans Mono",monospace; font-size:12px; color:var(--ink-3); margin-top:2px}
 .card .trophies{display:flex; gap:4px; margin-top:10px; min-height:19px; flex-wrap:wrap}
 .tag{font-size:10px; letter-spacing:.07em; text-transform:uppercase; font-weight:700;
-     padding:2px 6px; border-radius:2px}
+     padding:2px 6px; border-radius:0}
 .tag.t{background:rgba(var(--pos-rgb),.18); color:var(--brass-ink)}
 .tag.r{background:rgba(var(--neg-rgb),.15); color:var(--neg)}
 .tag.l{background:color-mix(in srgb, var(--last) 15%, transparent); color:var(--last)}
-.spark{display:block; width:100%; height:52px; margin-top:10px}
+.spark{display:block; width:100%; height:68px; margin-top:10px}
 
 /* ---------- detail ---------- */
-.detail{margin-top:16px; border:1px solid var(--pos); border-radius:3px; background:var(--surface); overflow:hidden}
+.detail{margin-top:16px; border:1px solid var(--pos); border-radius:0; background:var(--surface); overflow:hidden}
 .detail .dhead{display:flex; flex-wrap:wrap; align-items:baseline; gap:14px; padding:16px 18px;
                border-bottom:1px solid var(--rule); background:var(--sunk)}
 .detail .dhead h3{font-size:26px}
-.detail .dhead .k{font-family:"IBM Plex Mono",monospace; font-size:12.5px; color:var(--ink-2)}
+.detail .dhead .k{font-family:"Spline Sans Mono",monospace; font-size:12.5px; color:var(--ink-2)}
 .detail .dhead button{margin-left:auto; background:none; border:1px solid var(--rule); color:var(--ink-2);
-                      font:inherit; font-size:12px; padding:4px 11px; border-radius:2px; cursor:pointer}
+                      font:inherit; font-size:12px; padding:4px 11px; border-radius:0; cursor:pointer}
 .detail .dhead button:hover{color:var(--ink); border-color:var(--ink-3)}
 .detail .scroll{border:0; border-radius:0}
 .facts{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
        border-top:1px solid var(--rule); background:var(--surface)}
 .facts div{padding:13px 18px; border-right:1px solid var(--rule-soft)}
-.facts b{display:block; font-family:"IBM Plex Mono",monospace; font-size:16px; font-weight:500; margin-top:3px}
+.facts b{display:block; font-family:"Spline Sans Mono",monospace; font-size:16px; font-weight:500; margin-top:3px}
 
 /* ---------- records ---------- */
 .recs{display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:14px}
-.rec-card{background:var(--surface); border:1px solid var(--rule); border-radius:3px; padding:15px 17px 13px}
-.rec-card h3{font-size:13px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3);
-             font-family:"Karla",sans-serif; font-weight:700; margin-bottom:11px}
+.rec-card{background:var(--surface); border:1px solid var(--rule); border-radius:0; padding:15px 17px 13px}
+.rec-card h3{font-family:"Fraunces",Georgia,serif; font-size:20px; font-weight:600; color:var(--ink);
+             letter-spacing:-.01em; text-transform:none; margin-bottom:4px; line-height:1.2}
+.rec-card h3 em{display:block; font-style:normal; font-family:"Archivo",sans-serif; font-size:12px;
+                letter-spacing:.06em; color:var(--ink-3); font-weight:400; margin-top:3px}
 .rec-card ol{margin:0; padding:0; list-style:none}
 .rec-card li{display:flex; align-items:baseline; gap:9px; padding:6px 0; border-bottom:1px dotted var(--rule-soft)}
 .rec-card li:last-child{border-bottom:0}
-.rec-card li .i{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink-3); width:14px; flex:none}
+.rec-card li .i{font-family:"Spline Sans Mono",monospace; font-size:11px; color:var(--ink-3); width:14px; flex:none}
 .rec-card li .t{flex:1; font-size:13.5px; line-height:1.4}
+.rec-card li:first-child{padding:12px 0 13px; align-items:baseline}
+.rec-card li:first-child .i{display:none}
+.rec-card li:first-child .t{font-size:17px}
+.rec-card li:first-child .v{font-family:"Fraunces",Georgia,serif; font-size:28px; font-weight:700}
+.rec-card li:nth-child(n+2) .t{color:var(--ink-2)}
 .rec-card li .t b{font-weight:700}
 .rec-card li .t em{font-style:normal; color:var(--ink-3); font-size:12px}
-.rec-card li .v{font-family:"IBM Plex Mono",monospace; font-size:14px; font-weight:600; flex:none}
+.rec-card li .v{font-family:"Spline Sans Mono",monospace; font-size:14px; font-weight:600; flex:none}
 .v.p{color:var(--brass-ink)} .v.n{color:var(--neg)}
 
 /* ---------- luck ---------- */
 .luck{display:grid; gap:3px}
 .luck-row{display:grid; grid-template-columns:74px 1fr 62px; align-items:center; gap:10px}
 .luck-row .nm{font-size:13px; font-weight:700; text-align:right}
-.luck-bar{position:relative; height:22px; background:var(--sunk); border-radius:2px}
+.luck-bar{position:relative; height:30px; border-radius:0;
+          background:linear-gradient(90deg,rgba(var(--neg-rgb),.09),transparent 50%,rgba(var(--pos-rgb),.09))}
 .luck-bar .mid{position:absolute; left:50%; top:0; bottom:0; width:1px; background:var(--rule)}
-.luck-bar .b{position:absolute; top:4px; bottom:4px; border-radius:2px}
-.luck-row .val{font-family:"IBM Plex Mono",monospace; font-size:12.5px; text-align:right}
+.luck-bar .b{position:absolute; top:4px; bottom:4px; border-radius:0}
+.luck-row .val{font-family:"Spline Sans Mono",monospace; font-size:12.5px; text-align:right}
 
 /* ---------- season browser ---------- */
 .years{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:18px}
-.years button{font:inherit; font-family:"IBM Plex Mono",monospace; font-size:13px; padding:5px 12px;
-              background:var(--surface); border:1px solid var(--rule); border-radius:2px;
+.years button{font:inherit; font-family:"Spline Sans Mono",monospace; font-size:13px; padding:5px 12px;
+              background:var(--surface); border:1px solid var(--rule); border-radius:0;
               color:var(--ink-2); cursor:pointer; transition:.15s}
 .years button:hover{color:var(--ink); border-color:var(--ink-3)}
 .years button.on{background:var(--ink); color:var(--bg); border-color:var(--ink)}
@@ -200,26 +256,26 @@ footer b{color:var(--ink-2)}
 
 /* ---------- awards strip ---------- */
 .awards{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1px;
-        background:var(--rule); border:1px solid var(--rule); border-radius:3px;
+        background:var(--rule); border:1px solid var(--rule); border-radius:0;
         overflow:hidden; margin-bottom:16px}
 .award{background:var(--surface); padding:13px 15px}
 .award small{display:block; font-size:10px; letter-spacing:.12em; text-transform:uppercase;
              color:var(--ink-3); font-weight:700}
 .award b{display:block; font-family:"Fraunces",Georgia,serif; font-size:19px; font-weight:600; margin-top:5px}
-.award i{font-style:normal; font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-3)}
+.award i{font-style:normal; font-family:"Spline Sans Mono",monospace; font-size:12px; color:var(--ink-3)}
 
 /* ---------- draft board ---------- */
-.board{border:1px solid var(--rule); border-radius:3px; background:var(--surface); overflow:hidden}
+.board{border:1px solid var(--rule); border-radius:0; background:var(--surface); overflow:hidden}
 .pick{display:grid; grid-template-columns:34px 92px 1fr 34px; gap:12px; align-items:baseline;
       padding:9px 14px; border-bottom:1px solid var(--rule-soft)}
 .pick:last-child{border-bottom:0}
-.pick:nth-child(odd){background:rgba(var(--pos-rgb),.03)}
-.pick .no{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-3)}
+.pick:nth-child(odd){background:transparent}
+.pick .no{font-family:"Spline Sans Mono",monospace; font-size:12px; color:var(--ink-3)}
 .pick .mgr{font-weight:700; font-size:14px}
 .pick .plr{font-size:14px; color:var(--ink-2)}
 .pick.first .no{color:var(--brass-ink); font-weight:600}
 .pick.first .plr{color:var(--ink); font-weight:500}
-.pick .gr{font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600; text-align:right;
+.pick .gr{font-family:"Spline Sans Mono",monospace; font-size:12px; font-weight:600; text-align:right;
           color:var(--ink-3)}
 .pick .gr.gA{color:var(--brass-ink)}
 .pick .gr.gD{color:var(--last)}
@@ -230,52 +286,67 @@ footer b{color:var(--ink-2)}
 .msort label{font-size:11px; letter-spacing:.13em; text-transform:uppercase;
              color:var(--ink-3); font-weight:700; flex:none}
 .msort select{font:inherit; font-size:15px; flex:1; min-height:44px; padding:9px 11px;
-              border:1px solid var(--rule); border-radius:3px; background:var(--surface); color:var(--ink)}
+              border:1px solid var(--rule); border-radius:0; background:var(--surface); color:var(--ink)}
 
 .mlist{display:grid; gap:8px}
 .mrow{display:block; width:100%; text-align:left; font:inherit; color:inherit; cursor:pointer;
-      background:var(--surface); border:1px solid var(--rule); border-radius:3px; padding:13px 14px}
+      background:var(--surface); border:1px solid var(--rule); border-radius:0; padding:13px 14px}
 .mrow:active{border-color:var(--pos)}
 .mrow .l1{display:flex; align-items:baseline; gap:10px}
-.mrow .rk{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-3);
+.mrow .rk{font-family:"Spline Sans Mono",monospace; font-size:12px; color:var(--ink-3);
           min-width:17px; flex:none}
 .mrow .nm{font-family:"Fraunces",Georgia,serif; font-size:20px; font-weight:600; flex:1; line-height:1.1}
-.mrow .big{font-family:"IBM Plex Mono",monospace; font-size:17px; font-weight:600; flex:none}
-.mrow .l2{margin-top:4px; margin-left:27px; font-family:"IBM Plex Mono",monospace;
+.mrow .big{font-family:"Spline Sans Mono",monospace; font-size:17px; font-weight:600; flex:none}
+.mrow .l2{margin-top:4px; margin-left:27px; font-family:"Spline Sans Mono",monospace;
           font-size:12.5px; color:var(--ink-3)}
 .mrow .l3{margin-top:10px; margin-left:27px; display:flex; gap:5px; flex-wrap:wrap}
 .chip{display:inline-flex; align-items:baseline; gap:5px; background:var(--sunk);
-      border-radius:2px; padding:4px 8px; font-family:"IBM Plex Mono",monospace;
+      border-radius:0; padding:4px 8px; font-family:"Spline Sans Mono",monospace;
       font-size:12.5px; font-variant-numeric:tabular-nums}
-.chip i{font-style:normal; font-family:"Karla",sans-serif; font-size:9.5px; letter-spacing:.09em;
+.chip i{font-style:normal; font-family:"Archivo",sans-serif; font-size:9.5px; letter-spacing:.09em;
         text-transform:uppercase; color:var(--ink-3); font-weight:700}
 .chip.gold{background:rgba(var(--pos-rgb),.16)} .chip.gold b{color:var(--brass-ink)}
 
 .picker{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px}
-.picker button{font:inherit; font-size:14px; min-height:40px; padding:7px 14px; border-radius:3px;
+.picker button{font:inherit; font-size:14px; min-height:40px; padding:7px 14px; border-radius:0;
                border:1px solid var(--rule); background:var(--surface); color:var(--ink-2); cursor:pointer}
 .picker button.on{background:var(--ink); color:var(--bg); border-color:var(--ink); font-weight:700}
 .oppr{display:grid; grid-template-columns:1fr auto 52px; gap:10px; align-items:center;
-      padding:11px 13px; border-radius:3px; border:1px solid var(--rule-soft)}
+      padding:11px 13px; border-radius:0; border:1px solid var(--rule-soft)}
 .oppr .who{font-size:15.5px; font-weight:700}
-.oppr .rec{font-family:"IBM Plex Mono",monospace; font-size:15px; font-weight:600; font-variant-numeric:tabular-nums}
-.oppr .p{font-family:"IBM Plex Mono",monospace; font-size:12.5px; color:var(--ink-2); text-align:right}
+.oppr .rec{font-family:"Spline Sans Mono",monospace; font-size:15px; font-weight:600; font-variant-numeric:tabular-nums}
+.oppr .p{font-family:"Spline Sans Mono",monospace; font-size:12.5px; color:var(--ink-2); text-align:right}
 .swipe{display:none; align-items:center; gap:7px; font-size:10.5px; letter-spacing:.11em;
        text-transform:uppercase; color:var(--ink-3); font-weight:700; margin:0 0 8px}
 
 @media (max-width:700px){
   .wrap{padding:0 16px}
-  body{font-size:16px}
-  section{padding-top:48px; scroll-margin-top:48px}
+  body{font-size:17px}
+  section{padding-top:64px; scroll-margin-top:48px}
+  section[data-tier="a"]{padding:64px 16px 56px}
+
+  /* the mantel becomes a shelf you swipe */
+  .mantel{padding:34px 0 30px}
+  .mantel-rail{grid-template-columns:none; grid-auto-flow:column;
+    grid-auto-columns:minmax(154px,62%); gap:10px; overflow-x:auto;
+    overscroll-behavior-x:contain; scroll-snap-type:x mandatory;
+    scroll-padding-inline:16px; padding-inline:16px; scrollbar-width:none}
+  .mantel-rail::-webkit-scrollbar{display:none}
+  .mantel-rail .yr{scroll-snap-align:start}
+  .mantel-foot{margin:26px 16px 0}
+  .rail-count{display:block; margin:12px 16px 0; font-family:"Spline Sans Mono",monospace;
+    font-size:11px; letter-spacing:.14em; color:rgba(239,233,218,.6)}
+
+  .tiles{display:grid; grid-template-columns:repeat(3,1fr)}
+  .tile.opt{display:none}
+  .tile{border-bottom:0; padding:14px 10px 13px}
+  .tile b{font-size:30px}
+  .tile small{font-size:10px; letter-spacing:.1em}
   .only-wide{display:none}
   .only-narrow{display:inline}
   .msort{display:flex}
 
-  .tiles{display:grid; grid-template-columns:1fr 1fr}
-  .tile{border-bottom:1px solid var(--rule-soft); padding:14px 16px 13px}
-  .tile:nth-child(2n){border-right:0}
-  .tile:last-child:nth-child(odd){grid-column:1 / -1}
-  .tile b{font-size:26px}
+  .tile:last-child{border-right:0}
 
   /* champions: two roomy columns instead of nine cramped ones */
   .ribbon{grid-template-columns:1fr 1fr}
@@ -333,11 +404,18 @@ footer b{color:var(--ink-2)}
 
 <main class="wrap">
 
-  <section id="champions">
-    <div class="head"><h2>Hall of Champions</h2><i class="rule"></i></div>
-    <p class="note">One name per year, nine years running. The small number in the corner is how many
-      teams that title had to beat &mdash; the league grew from eight to twelve.</p>
-    <div class="ribbon" id="ribbon"></div>
+  <section id="champions" data-tier="a">
+    <div class="head"><h2>The Mantel</h2><i class="rule"></i></div>
+    <p class="note"><b>One name per year, nine years running.</b> The small number on each plate is how
+      many teams that title had to beat &mdash; the league grew from eight to twelve.</p>
+    <div class="mantel">
+      <div class="mantel-rail" id="ribbon"></div>
+      <p class="rail-count" id="railCount"></p>
+      <div class="mantel-foot">
+        <p class="never" id="never"></p>
+        <p class="never-names" id="neverNames"></p>
+      </div>
+    </div>
   </section>
 
   <section id="alltime">
@@ -348,7 +426,7 @@ footer b{color:var(--ink-2)}
     <div id="lbwrap"></div>
   </section>
 
-  <section id="h2h">
+  <section id="h2h" data-tier="a">
     <div class="head"><h2>Head to Head</h2><i class="rule"></i></div>
     <p class="note"><span class="only-wide">Every meeting since 2017, pulled from the ESPN box scores.
       Read across the row: that manager's record against each opponent.</span><span class="only-narrow">Every
@@ -385,14 +463,14 @@ footer b{color:var(--ink-2)}
     <div class="recs" id="draftrecs" style="margin-top:14px"></div>
   </section>
 
-  <section id="records">
+  <section id="records" data-tier="c">
     <div class="head"><h2>The Record Book</h2><i class="rule"></i></div>
     <p class="note">Single-week extremes from 788 box scores &mdash; the things a season-totals sheet can't
       tell you.</p>
     <div class="recs" id="recs"></div>
   </section>
 
-  <section id="luck">
+  <section id="luck" data-tier="c">
     <div class="head"><h2>Luck of the Schedule</h2><i class="rule"></i></div>
     <p class="note">Every week, compare each manager's score against <em>everyone</em> that week, not
       just their opponent. That gives the record they deserved. The bar is what they actually got,
@@ -411,8 +489,8 @@ footer b{color:var(--ink-2)}
 </main>
 
 <footer><div class="wrap">
-  <div><b>Sources.</b> Season records from the league record-book spreadsheet; weekly box scores,
-    head-to-head and streaks pulled from ESPN league 1197565 (2017&ndash;2025).</div>
+  <div><b>Sources.</b> Everything is computed from ESPN league 1197565 (2017&ndash;2025) &mdash; 788
+    box scores and 1,464 draft picks, <span id="totalPts"></span> points scored in all.</div>
   <div><b>Reconciled against ESPN.</b> All 96 season rows in the spreadsheet match the box scores
     exactly on wins, losses, points for and points against, as do every champion and runner-up.
     Three fields did not, and use the ESPN figures here: playoff appearances (the sheet undercounted
@@ -440,27 +518,39 @@ const YEARS = [...new Set(M.flatMap(m=>m.seasons.map(s=>s.year)))].sort();
 /* ---------- tiles ---------- */
 const totalW = M.reduce((s,m)=>s+m.w,0);
 const allPF  = M.reduce((s,m)=>s+m.pf,0);
-[[YEARS.length,"Seasons played"],[M.length,"Managers all-time"],
- [totalW.toLocaleString(),"Games decided"],
- [Math.round(allPF).toLocaleString(),"Points scored"],
- [new Set(M.filter(m=>m.titles).map(m=>m.name)).size,"Different champions"]
-].forEach(([v,l])=>{ const t=el("div","tile"); t.append(el("b",null,v), el("small",null,l)); $("#tiles").append(t); });
+const champs=new Set(M.filter(m=>m.titles).map(m=>m.name)).size;
+[[YEARS.length,"Seasons on the books",""],
+ [champs,"Different champions",""],
+ [M.length-champs,"Never won a title",""],
+ [M.length,"Managers all-time","opt"],
+ [totalW.toLocaleString(),"Games decided","opt"]
+].forEach(([v,l,c])=>{ const t=el("div","tile "+c); t.append(el("b",null,v), el("small",null,l)); $("#tiles").append(t); });
 
 /* ---------- champions ribbon ---------- */
 const seasonOf = (n,y)=> byName[n].seasons.find(s=>s.year===y);
 const findNote = (y,note)=> M.map(m=>({m,s:m.seasons.find(s=>s.year===y&&s.note===note)})).find(x=>x.s);
 YEARS.forEach(y=>{
   const ch=findNote(y,"Champion"), ru=findNote(y,"Runner Up"), bl=findNote(y,"Biggest Loser");
-  const d=el("div","yr");
-  d.append(el("div","field",E.teamsByYear[y]+"&nbsp;tm"));
-  d.append(el("div","y",y));
-  d.append(el("div","champ",ch?ch.m.name:"&mdash;"));
-  d.append(el("div","rec",ch?ch.s.w+"&ndash;"+ch.s.l:""));
-  d.append(el("div","sub",
+  const d=el("button","yr"); d.type="button";
+  d.append(el("span","field",E.teamsByYear[y]+"&nbsp;tm"));
+  d.append(el("span","y",y));
+  d.append(el("span","champ",ch?ch.m.name:"&mdash;"));
+  d.append(el("span","rec",ch?ch.s.w+"&ndash;"+ch.s.l:""));
+  d.append(el("span","sub",
     (ru?"2nd <i>"+ru.m.name+"</i>":"2nd <i>&mdash;</i>")+"<br>"+
     (bl?"Last <i>"+bl.m.name+"</i>":"Last <i>not recorded</i>")));
+  [...d.children].forEach(c=>c.style.display="block");
+  if(ch) d.onclick=()=>openDetail(ch.m.name);
   $("#ribbon").append(d);
 });
+(function(){
+  const none=M.filter(m=>!m.titles && !m.runnerUp).map(m=>m.name);
+  const noTitle=M.filter(m=>!m.titles).map(m=>m.name);
+  $("#never").innerHTML=noTitle.length
+    ? noTitle.length+" of "+M.length+" have never taken one home."
+    : "Everyone has one.";
+  $("#neverNames").textContent=noTitle.join(" &middot; ").replace(/&middot;/g,"\u00b7");
+})();
 
 /* ---------- all-time table ---------- */
 const COLS=[
@@ -515,7 +605,6 @@ function drawLBList(){
         +chip("2nd", m.runnerUp, false)
         +chip("Playoffs", m.playoffW+"&ndash;"+m.playoffL, false)
         +chip("Div", m.divTitles, false)
-        +chip("PF/G", f1(m.pfpg), false)
       +'</div>';
     b.onclick=()=>openDetail(m.name);
     list.append(b);
@@ -524,6 +613,12 @@ function drawLBList(){
 }
 function chip(label, val, gold){
   return '<span class="chip'+(gold?" gold":"")+'"><i>'+label+'</i><b>'+val+'</b></span>';
+}
+function railCount(){
+  const rail=$("#ribbon"), out=$("#railCount"); if(!rail||!out||!NARROW.matches) return;
+  const plates=[...rail.children];
+  const i=plates.findIndex(p=>p.offsetLeft>=rail.scrollLeft-4);
+  out.textContent=(i<0?plates.length:i+1)+" / "+plates.length;
 }
 
 function drawLBTable(){
@@ -558,13 +653,14 @@ drawLB();
 const H={};
 E.h2h.forEach(p=>{ const [pair,rec]=p.split(" "); const [a,b]=pair.split("/"); const [w,l]=rec.split("-").map(Number);
   (H[a]=H[a]||{})[b]=[w,l]; (H[b]=H[b]||{})[a]=[l,w]; });
-const NAMES=M.map(m=>m.name);
+const NAMES=M.slice().sort((a,b)=>b.pct-a.pct).map(m=>m.name);
 function cellColor(w,l){
   const g=w+l; if(!g) return "transparent";
   const p=w/g, d=Math.abs(p-.5)*2;
-  const a=(0.10+0.62*d).toFixed(3);
+  const a=(0.16+0.80*Math.pow(d,0.62)).toFixed(3);
   return "rgba(var(--"+(p>=.5?"pos":"neg")+"-rgb),"+a+")";
 }
+function cellStrong(w,l){ const g=w+l; return g? Math.abs(w/g-.5)*2>0.5 : false; }
 let h2hPick=null;
 function drawH2H(){ if(NARROW.matches) drawH2HList(); else drawH2HGrid(); }
 
@@ -611,6 +707,7 @@ function drawH2HGrid(){
       const rec=(H[r]||{})[c];
       const td=el("td",null, rec? rec[0]+"&ndash;"+rec[1] : "&middot;");
       if(rec){ td.style.background=cellColor(rec[0],rec[1]);
+               if(cellStrong(rec[0],rec[1])){ td.style.color="var(--surface)"; td.style.fontWeight="600"; }
                td.title=r+" is "+rec[0]+"-"+rec[1]+" against "+c; }
       else td.style.color="var(--ink-3)";
       tr.append(td);
@@ -618,6 +715,15 @@ function drawH2HGrid(){
     tb.append(tr);
   });
   t.append(tb);
+  t.addEventListener("pointerover", e=>{
+    const cell=e.target.closest("td,th"); if(!cell||!t.contains(cell)) return;
+    const i=[...cell.parentNode.children].indexOf(cell);
+    t.querySelectorAll(".xr,.xc").forEach(n=>n.classList.remove("xr","xc"));
+    cell.parentNode.classList.add("xr");
+    t.querySelectorAll("tr").forEach(tr=>{ const c=tr.children[i]; if(c) c.classList.add("xc"); });
+  });
+  t.addEventListener("pointerleave", ()=>
+    t.querySelectorAll(".xr,.xc").forEach(n=>n.classList.remove("xr","xc")));
 }
 drawH2H();
 (function(){ const ramp=$("#ramp");
@@ -627,29 +733,42 @@ drawH2H();
 
 /* ---------- sparkline ---------- */
 function spark(m){
-  const S=m.seasons, W=240,Hh=52,pad=6, LO=0.18, HI=0.90;
+  const S=m.seasons, W=240,Hh=68,pad=7, LO=0.18, HI=0.90;
   const x=i=>pad+i*(W-2*pad)/Math.max(1,S.length-1);
   const y=v=>{ const t=Math.min(1,Math.max(0,(v-LO)/(HI-LO))); return Hh-pad-t*(Hh-2*pad); };
   const pts=S.map((s,i)=>[x(i), y(s.w/(s.w+s.l))]);
   const d=pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");
+  const mid=y(.5), x0=pts[0][0], x1=pts[pts.length-1][0];
+  const area=d+" L"+x1.toFixed(1)+" "+mid.toFixed(1)+" L"+x0.toFixed(1)+" "+mid.toFixed(1)+" Z";
   const last=pts[pts.length-1], lastP=S[S.length-1];
   const up=lastP.w>=lastP.l;
+  const uid="cl"+m.name;
   return '<svg class="spark" viewBox="0 0 '+W+' '+Hh+'" preserveAspectRatio="none" aria-hidden="true">'
-    +'<line x1="0" y1="'+y(.5)+'" x2="'+W+'" y2="'+y(.5)+'" stroke="var(--rule)" stroke-width="1" stroke-dasharray="2 3"/>'
-    +'<path d="'+d+'" fill="none" stroke="var(--ink-3)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>'
-    +'<circle cx="'+last[0].toFixed(1)+'" cy="'+last[1].toFixed(1)+'" r="3.6" fill="var(--'+(up?"pos":"neg")+')" stroke="var(--surface)" stroke-width="2"/>'
+    +'<defs>'
+      +'<clipPath id="'+uid+'a"><rect x="0" y="0" width="'+W+'" height="'+mid.toFixed(1)+'"/></clipPath>'
+      +'<clipPath id="'+uid+'b"><rect x="0" y="'+mid.toFixed(1)+'" width="'+W+'" height="'+(Hh-mid).toFixed(1)+'"/></clipPath>'
+    +'</defs>'
+    +'<path d="'+area+'" fill="rgba(var(--pos-rgb),.20)" clip-path="url(#'+uid+'a)"/>'
+    +'<path d="'+area+'" fill="rgba(var(--neg-rgb),.17)" clip-path="url(#'+uid+'b)"/>'
+    +'<line x1="0" y1="'+mid+'" x2="'+W+'" y2="'+mid+'" stroke="var(--rule)" stroke-width="1" stroke-dasharray="2 3"/>'
+    +'<path d="'+d+'" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>'
+    +'<circle cx="'+last[0].toFixed(1)+'" cy="'+last[1].toFixed(1)+'" r="4" fill="var(--'+(up?"gold-bright":"neg")+')" stroke="var(--surface)" stroke-width="2"/>'
     +'</svg>';
 }
 
 /* ---------- manager cards ---------- */
 M.slice().sort((a,b)=>b.pct-a.pct).forEach(m=>{
   const b=el("button","card"); b.type="button"; b.setAttribute("aria-expanded","false"); b.dataset.n=m.name;
+  if(m.titles) b.classList.add("has-title"); else if(m.loser) b.classList.add("has-last");
+  if(m.titles){
+    const yrs=m.seasons.filter(s=>s.note==="Champion").map(s=>s.year).join(" &middot; ");
+    b.append(el("span","foil","Champion &middot; "+yrs));
+  } else b.append(el("span","pad-top"));
   const top=el("div","top");
   top.append(el("span","who",m.name), el("span","pct num",pct(m.pct)));
   b.append(top, el("div","rec",m.w+"&ndash;"+m.l+" &middot; "+m.seasons.length+" seasons"));
   const tr=el("div","trophies");
   const mult=(n,lbl)=> n>1 ? lbl+" &#215;"+n : lbl;
-  if(m.titles)   tr.append(el("span","tag t",mult(m.titles,"Champion")));
   if(m.runnerUp) tr.append(el("span","tag r",mult(m.runnerUp,"Runner-up")));
   if(m.loser)    tr.append(el("span","tag l",mult(m.loser,"Last")));
   b.append(tr);
@@ -661,6 +780,8 @@ M.slice().sort((a,b)=>b.pct-a.pct).forEach(m=>{
 function openDetail(name){
   const m=byName[name], host=$("#detail");
   document.querySelectorAll(".card").forEach(c=>c.setAttribute("aria-expanded", String(c.dataset.n===name)));
+  const card=[...document.querySelectorAll(".card")].find(c=>c.dataset.n===name);
+  if(NARROW.matches && card) card.after(host); else $("#managers").append(host);
   const best=m.seasons.slice().sort((a,b)=>(b.w-b.l)-(a.w-a.l))[0];
   const worst=m.seasons.slice().sort((a,b)=>(a.w-a.l)-(b.w-b.l))[0];
   const hi=m.seasons.slice().sort((a,b)=>b.pf-a.pf)[0];
@@ -670,14 +791,24 @@ function openDetail(name){
    +'<span class="k">'+m.w+'&ndash;'+m.l+' &nbsp;&middot;&nbsp; '+pct(m.pct)+'% &nbsp;&middot;&nbsp; '
    +m.titles+' title'+(m.titles===1?'':'s')+'</span>'
    +'<button type="button" id="cl">Close</button></div>'
-   +'<p class="swipe" style="padding:12px 18px 0;margin:0">Swipe the table sideways for more &rarr;</p>'
-   +'<div class="scroll"><table><thead><tr><th>Year</th><th>W</th><th>L</th><th>Win%</th>'
-   +'<th>PF</th><th>PA</th><th>PF/G</th><th>Finish</th></tr></thead><tbody>'
-   + m.seasons.map(s=>'<tr><td class="num">'+s.year+'</td><td class="num">'+s.w+'</td><td class="num">'+s.l+'</td>'
-     +'<td class="num">'+pct(s.w/(s.w+s.l))+'</td><td class="num">'+f1(s.pf)+'</td><td class="num">'+f1(s.pa)+'</td>'
-     +'<td class="num">'+f1(s.pfpg)+'</td><td>'+(s.note
-        ? '<span class="tag '+(s.note==="Champion"?"t":s.note==="Runner Up"?"r":"l")+'">'+s.note+'</span>' : '')+'</td></tr>').join('')
-   +'</tbody></table></div><div class="facts">'
+   + (NARROW.matches
+     ? '<div class="mlist" style="padding:12px 14px">'
+       + m.seasons.map(s=>'<div class="mrow" style="cursor:default">'
+         +'<div class="l1"><span class="nm" style="font-size:18px">'+s.year+'</span>'
+         +'<span class="big">'+s.w+'&ndash;'+s.l+'</span></div>'
+         +'<div class="l2" style="margin-left:0">'+pct(s.w/(s.w+s.l))+'% win rate</div>'
+         +'<div class="l3" style="margin-left:0">'+chip("PF",f1(s.pf))+chip("PA",f1(s.pa))
+           +(s.note?'<span class="tag '+(s.note==="Champion"?"t":s.note==="Runner Up"?"r":"l")
+             +'" style="align-self:center">'+s.note+'</span>':'')+'</div></div>').join('')
+       + '</div>'
+     : '<div class="scroll"><table><thead><tr><th>Year</th><th>W</th><th>L</th><th>Win%</th>'
+       +'<th>PF</th><th>PA</th><th>PF/G</th><th>Finish</th></tr></thead><tbody>'
+       + m.seasons.map(s=>'<tr><td class="num">'+s.year+'</td><td class="num">'+s.w+'</td><td class="num">'+s.l+'</td>'
+         +'<td class="num">'+pct(s.w/(s.w+s.l))+'</td><td class="num">'+f1(s.pf)+'</td><td class="num">'+f1(s.pa)+'</td>'
+         +'<td class="num">'+f1(s.pfpg)+'</td><td>'+(s.note
+            ? '<span class="tag '+(s.note==="Champion"?"t":s.note==="Runner Up"?"r":"l")+'">'+s.note+'</span>' : '')+'</td></tr>').join('')
+       +'</tbody></table></div>')
+   +'<div class="facts">'
    +fact("Best season", best.w+"-"+best.l+" in "+best.year)
    +fact("Worst season", worst.w+"-"+worst.l+" in "+worst.year)
    +fact("Most points", Math.round(hi.pf)+" in "+hi.year)
@@ -895,6 +1026,12 @@ function syncLayout(){
 NARROW.addEventListener("change", syncLayout);
 addEventListener("resize", syncLayout, {passive:true});
 addEventListener("orientationchange", syncLayout);
+
+(function(){ const n=$("#totalPts"); if(n) n.textContent=Math.round(allPF).toLocaleString(); })();
+
+(function(){ const rail=$("#ribbon");
+  if(rail){ rail.addEventListener("scroll", ()=>requestAnimationFrame(railCount), {passive:true}); railCount(); }
+})();
 
 /* ---------- nav highlight ---------- */
 const links=[...document.querySelectorAll("#nav a")];
