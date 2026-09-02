@@ -210,7 +210,7 @@ footer b{color:var(--ink-2)}
 
 /* ---------- draft board ---------- */
 .board{border:1px solid var(--rule); border-radius:3px; background:var(--surface); overflow:hidden}
-.pick{display:grid; grid-template-columns:34px 92px 1fr; gap:12px; align-items:baseline;
+.pick{display:grid; grid-template-columns:34px 92px 1fr 34px; gap:12px; align-items:baseline;
       padding:9px 14px; border-bottom:1px solid var(--rule-soft)}
 .pick:last-child{border-bottom:0}
 .pick:nth-child(odd){background:rgba(var(--pos-rgb),.03)}
@@ -219,6 +219,10 @@ footer b{color:var(--ink-2)}
 .pick .plr{font-size:14px; color:var(--ink-2)}
 .pick.first .no{color:var(--brass-ink); font-weight:600}
 .pick.first .plr{color:var(--ink); font-weight:500}
+.pick .gr{font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600; text-align:right;
+          color:var(--ink-3)}
+.pick .gr.gA{color:var(--brass-ink)}
+.pick .gr.gD{color:var(--last)}
 
 /* ---------- responsive list components ---------- */
 .only-narrow{display:none}
@@ -296,7 +300,7 @@ footer b{color:var(--ink-2)}
   .cards{gap:10px}
   .recs{gap:10px}
   .rec-card li{padding:8px 0}
-  .pick{grid-template-columns:30px 78px 1fr; gap:9px; padding:10px 12px}
+  .pick{grid-template-columns:26px 70px 1fr 30px; gap:8px; padding:10px 11px}
   .pick .mgr,.pick .plr{font-size:13.5px}
   .awards{grid-template-columns:1fr 1fr}
   .luck-row{grid-template-columns:64px 1fr 52px; gap:8px}
@@ -369,8 +373,10 @@ footer b{color:var(--ink-2)}
 
   <section id="draft">
     <div class="head"><h2>The Draft</h2><i class="rule"></i></div>
-    <p class="note">Nine drafts, 1,464 picks. Round one of every year, plus the players this
-      league cannot stop taking.</p>
+    <p class="note">Nine drafts, 1,464 picks. Round one of every year, with each manager&rsquo;s grade
+      for that draft. A grade compares where a player was taken to where he actually finished among
+      players at his position that season &mdash; taken as the 5th running back and finishing 2nd is
+      +3. Keepers kept at a discount are excluded, since a round-cheaper keeper is not a draft pick.</p>
     <div class="years" id="draftyears"></div>
     <div id="draftboard"></div>
     <div class="recs" id="draftrecs" style="margin-top:14px"></div>
@@ -677,6 +683,8 @@ function openDetail(name){
    +fact("Winning / .500 / losing", m.winningSeasons+" / "+m.tiedSeasons+" / "+m.losingSeasons)
    +fact("Longest win streak", ws[0]+" &nbsp;<em style='font-style:normal;color:var(--ink-3);font-size:12px'>"+ws[1]+"&ndash;"+ws[2]+"</em>")
    +fact("Weekly highs", (E.weeklyHigh[name]||0)+" <em style='font-style:normal;color:var(--ink-3);font-size:12px'>top score of the week</em>")
+   +fact("Draft grade", (function(){ const c=E.draftCareer.find(x=>x[0]===name);
+        return c? c[2]+" <em style='font-style:normal;color:var(--ink-3);font-size:12px'>"+(c[1]>0?"+":"")+c[1].toFixed(2)+" per pick</em>" : "&mdash;"; })())
    +fact("Favourite pick", E.favourite[name] ? E.favourite[name][0]+" <em style='font-style:normal;color:var(--ink-3);font-size:12px'>&times;"+E.favourite[name][1]+"</em>" : "&mdash;")
    +fact("Longest skid", ls[0]+" &nbsp;<em style='font-style:normal;color:var(--ink-3);font-size:12px'>"+ls[1]+"&ndash;"+ls[2]+"</em>")
    +'</div></div>';
@@ -731,7 +739,7 @@ recCard("Most points, one season", M.flatMap(m=>m.seasons.map(s=>({n:m.name,s}))
   };
   card("Most lopsided matchup", E.lopsided.map(t=>{ const r=parse(t);
     return ['<b>'+r.a+'</b> owns '+r.b, r.w+'&ndash;'+r.l, "p"]; }));
-  card("Dead-even rivalry", E.closest.map(t=>{ const r=parse(t);
+  card("Dead-even rivalry", E.evenRivalry.map(t=>{ const r=parse(t);
     return ['<b>'+r.a+'</b> vs '+r.b, r.w+'&ndash;'+r.l, ""]; }));
   card("Heartbreak losses <em>&mdash; beaten by under 5</em>",
     Object.entries(E.heartbreak).sort((a,b)=>b[1]-a[1]).slice(0,6)
@@ -746,10 +754,14 @@ function drawDraft(){
   document.querySelectorAll("#draftyears button")
     .forEach(b=>b.classList.toggle("on", +b.textContent===draftYear));
   const picks=E.draftR1.filter(p=>p[0]===draftYear);
+  const gr=m=>E.draftGrade[m+"|"+draftYear];
   $("#draftboard").innerHTML='<div class="board">'
-    + picks.map((p,i)=>'<div class="pick'+(i===0?' first':'')+'">'
+    + picks.map((p,i)=>{ const g=gr(p[1]);
+        return '<div class="pick'+(i===0?' first':'')+'">'
         +'<span class="no">'+(i+1)+'</span><span class="mgr">'+p[1]+'</span>'
-        +'<span class="plr">'+p[2]+'</span></div>').join('')
+        +'<span class="plr">'+p[2]+'</span>'
+        +(g?'<span class="gr g'+g[1][0]+'" title="Draft grade for '+draftYear+'">'+g[1]+'</span>':'<span class="gr"></span>')
+        +'</div>'; }).join('')
     +'</div>';
 }
 drawDraft();
@@ -769,6 +781,24 @@ drawDraft();
     li.append(el("span","i",i+1), el("span","t","<b>"+m+"</b> <em>"+p+"</em>"), el("span","v p",n+"&times;"));
     o2.append(li); });
   c2.append(o2); host.append(c2);
+
+  const mk=(title, items)=>{
+    const c=el("div","rec-card"); c.append(el("h3",null,title));
+    const ol=el("ol");
+    items.forEach((it,i)=>{ const li=el("li");
+      li.append(el("span","i",i+1), el("span","t",it[0]), el("span","v "+(it[2]||""), it[1]));
+      ol.append(li); });
+    c.append(ol); host.append(c);
+  };
+  mk("Biggest steals <em>&mdash; value over draft slot</em>", E.steals.map(p=>
+    ['<b>'+p[2]+'</b> <em>'+p[1]+', '+p[0]+' '+p[4]+'</em>', p[5], "p"]));
+  mk("Biggest busts <em>&mdash; taken early, never paid off</em>", E.busts.map(p=>
+    ['<b>'+p[2]+'</b> <em>'+p[1]+', '+p[0]+' '+p[4]+'</em>', p[5], "n"]));
+  mk("Best keepers <em>&mdash; points from a kept player</em>", E.bestKeeps.map(k=>
+    ['<b>'+k[2]+'</b> <em>'+k[1]+', '+k[0]+' '+k[3]+'</em>', Math.round(k[4]), "p"]));
+  mk("Career draft grade", E.draftCareer.map(c=>
+    ['<b>'+c[0]+'</b> <em>'+(c[1]>0?'+':'')+c[1].toFixed(2)+' per pick</em>', c[2],
+     c[1]>=0?"p":"n"]));
 })();
 
 /* ---------- luck ---------- */
