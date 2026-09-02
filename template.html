@@ -508,7 +508,10 @@ footer b{color:var(--ink-2)}
       all-play record: what your record would be if you played every team every week. That is how
       Danny reached the 2025 semi-finals at 5&ndash;9 while Kim missed out at 9&ndash;5 &mdash; Danny
       was beating 54.5% of the league each week, Kim 49.4%. The gold edge marks the six who made
-      the bracket; payouts go to the top three.</p>
+      the bracket; payouts go to the top three. Through 2021 the wooden spoon went to the worst
+      regular-season record rather than to the consolation bracket, so in 2018, 2019 and 2020 it
+      sits mid-table rather than at the bottom &mdash; those years are labelled <em>worst
+      record</em>.</p>
     <div class="years" id="years"></div>
     <div class="awards" id="awards"></div>
     <div id="seasonwrap"></div>
@@ -568,7 +571,8 @@ YEARS.forEach(y=>{
   d.append(el("span","sub",
     (ru?"2nd <i>"+ru.m.name+"</i>":"2nd <i>&mdash;</i>")+"<br>"+
     (th?"3rd <i>"+th.m.name+"</i>":"3rd <i>&mdash;</i>")+"<br>"+
-    (bl?"Last <i>"+bl.m.name+"</i>":"Last <i>not recorded</i>")));
+    (bl? (y<=(E.lastPlaceRecordThrough||2021)?"Worst ":"Last ")+"<i>"+bl.m.name+"</i>"
+       : "Last <i>not recorded</i>")));
   [...d.children].forEach(c=>c.style.display="block");
   if(ch) d.onclick=()=>openDetail(ch.m.name);
   $("#ribbon").append(d);
@@ -643,6 +647,12 @@ function drawLBList(){
   host.append(list);
 }
 function tagCls(n){ return n==="Champion"?"t" : n==="Runner Up"?"r" : n==="Third"?"d" : "l"; }
+// through 2021 the wooden spoon went to the worst regular-season record; from 2022 to whoever
+// lost the consolation bracket. Label it for what it actually means that season.
+function tagText(note, year){
+  if(note!=="Biggest Loser") return note;
+  return year<=(E.lastPlaceRecordThrough||2021) ? "Worst record" : "Biggest loser";
+}
 function chip(label, val, gold){
   return '<span class="chip'+(gold?" gold":"")+'"><i>'+label+'</i><b>'+val+'</b></span>';
 }
@@ -833,14 +843,14 @@ function openDetail(name){
          +'<div class="l2" style="margin-left:0">'+pct(s.w/(s.w+s.l))+'% win rate</div>'
          +'<div class="l3" style="margin-left:0">'+chip("PF",f1(s.pf))+chip("PA",f1(s.pa))
            +(s.note?'<span class="tag '+tagCls(s.note)
-             +'" style="align-self:center">'+s.note+'</span>':'')+'</div></div>').join('')
+             +'" style="align-self:center">'+tagText(s.note,s.year)+'</span>':'')+'</div></div>').join('')
        + '</div>'
      : '<div class="scroll"><table><thead><tr><th>Year</th><th>W</th><th>L</th><th>Win%</th>'
        +'<th>PF</th><th>PA</th><th>PF/G</th><th>Finish</th></tr></thead><tbody>'
        + m.seasons.map(s=>'<tr><td class="num">'+s.year+'</td><td class="num">'+s.w+'</td><td class="num">'+s.l+'</td>'
          +'<td class="num">'+pct(s.w/(s.w+s.l))+'</td><td class="num">'+f1(s.pf)+'</td><td class="num">'+f1(s.pa)+'</td>'
          +'<td class="num">'+f1(s.pfpg)+'</td><td>'+(s.note
-            ? '<span class="tag '+tagCls(s.note)+'">'+s.note+'</span>' : '')+'</td></tr>').join('')
+            ? '<span class="tag '+tagCls(s.note)+'">'+tagText(s.note,s.year)+'</span>' : '')+'</td></tr>').join('')
        +'</tbody></table></div>')
    +'<div class="facts">'
    +fact("Best season", best.w+"-"+best.l+" in "+best.year)
@@ -1035,7 +1045,7 @@ function drawSeason(){
         +'<div class="l3">'+chip("PF", f1(x.s.pf), false)+chip("PA", f1(x.s.pa), false)
           +chip("PF/G", f1(x.s.pfpg), false)
           +(x.s.note?'<span class="tag '+tagCls(x.s.note)
-              +'" style="align-self:center">'+x.s.note+'</span>':'')
+              +'" style="align-self:center">'+tagText(x.s.note,curYear)+'</span>':'')
         +'</div>';
       b.onclick=()=>openDetail(x.n);
       list.append(b);
@@ -1054,7 +1064,7 @@ function drawSeason(){
      +'<td class="num">'+x.s.w+'</td><td class="num">'+x.s.l+'</td>'
      +'<td class="num">'+pct(x.s.w/(x.s.w+x.s.l))+'</td><td class="num">'+f1(x.s.pf)+'</td>'
      +'<td class="num">'+f1(x.s.pa)+'</td><td class="num">'+f1(x.s.pfpg)+'</td>'
-     +'<td>'+(x.s.note?'<span class="tag '+tagCls(x.s.note)+'">'+x.s.note+'</span>':'')+'</td></tr>').join('')
+     +'<td>'+(x.s.note?'<span class="tag '+tagCls(x.s.note)+'">'+tagText(x.s.note,curYear)+'</span>':'')+'</td></tr>').join('')
    +'</tbody>';
 }
 drawSeason();

@@ -246,6 +246,7 @@ function run({ season, YEARS, CHECK }) {
     lopsided, evenRivalry, weeklyHigh, weeklyLow, heartbreak: hb,
     regularSeasonWeeks: Object.keys(regWk).length,
     lastPlace: Object.fromEntries(YEARS.map(y => [y, finish[y].last])),
+    lastPlaceRecordThrough: LAST_BY_RECORD_THROUGH,
     lastPlaceRule: { [`${YEARS[0]}-${LAST_BY_RECORD_THROUGH}`]: 'worst regular-season record',
                      [`${LAST_BY_RECORD_THROUGH + 1}-${LAST}`]: 'last in final standings' },
     playoffYears, divTitles,
