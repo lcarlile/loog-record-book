@@ -73,4 +73,20 @@ ${body}
 </body>
 </html>
 `);
+/* ---------- the rewind: its own page, one per league ---------- */
+if (CFG.out.tape) {
+  const { build: tapeRows } = require('./tape-data.js');
+  const rows = tapeRows(SLUG);
+  const rtpl = fs.readFileSync(path.join(__dirname, 'tape-template.html'), 'utf8');
+  const rdesc = `A season-by-season career retrospective for every manager in ${brand.title.replace(/ Record Book$/, '')}.`;
+  write(CFG.out.tape, rtpl
+    .replace(/__TITLE__/g, brand.title.replace(/ Record Book$/, '') + ' \u00b7 The Tape')
+    .replace(/__DESC__/g, rdesc)
+    .replace('/*__CSS__*/', fs.readFileSync(path.join(__dirname, 'tape.css'), 'utf8'))
+    .replace('/*__JS__*/', fs.readFileSync(path.join(__dirname, 'tape.js'), 'utf8'))
+    .replace('/*__DATA__*/', JSON.stringify(rows))
+    .replace('/*__LEAGUES__*/', JSON.stringify({ [SLUG]: brand.leagueName || brand.title }))
+    .replace('/*__BACK__*/', JSON.stringify(brand.backHref || null)));
+}
+
 console.log(`\n  built ${SLUG} (${managers.length} managers, ${CFG.years.length} seasons)\n`);

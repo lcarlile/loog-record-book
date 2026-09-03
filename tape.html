@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>LoOG · The Tape</title>
+<meta name="description" content="A season-by-season career retrospective for every manager in LoOG.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="LoOG · The Tape">
+<meta property="og:description" content="A season-by-season career retrospective for every manager in LoOG.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127942;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Spline+Sans+Mono:wght@400;500&display=swap">
+<style>:root{
+  --ink:#F3EFE5; --ink-2:#B4AC9B; --ink-3:#7E7666;
+  --ground:#12100D; --felt:#1F3D34; --felt-2:#16302A;
+  --brass:#C79A3A; --brass-2:#E0BC6A; --oxblood:#9A3141;
+  --disp:"Fraunces",Georgia,serif; --sans:"Archivo","Helvetica Neue",system-ui,sans-serif;
+  --mono:"Spline Sans Mono",ui-monospace,Menlo,monospace;
+  --pad:clamp(22px,5vw,64px); --acc:#C79A3A; --acc2:#F2DCA0;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.5 var(--sans);
+  -webkit-font-smoothing:antialiased;overscroll-behavior:none}
+#app{min-height:100dvh}
+
+/* ---------- picker ---------- */
+.pick{max-width:900px;margin:0 auto;padding:clamp(28px,7vw,72px) var(--pad) 80px}
+.pick h1{font:900 clamp(38px,9vw,72px)/.95 var(--disp);margin:0 0 10px;letter-spacing:-.03em}
+.pick .dek{color:var(--ink-2);max-width:52ch;font-size:clamp(16px,1.7vw,19px);margin:0 0 34px}
+.pick h2{font:600 clamp(12px,1.2vw,13.5px)/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-3);margin:34px 0 13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:9px}
+.who{appearance:none;text-align:left;cursor:pointer;padding:14px 15px;
+  background:#1B1813;border:1px solid #2C271F;color:var(--ink);
+  transition:background .16s,border-color .16s,transform .16s}
+.who:hover{background:#231F18;border-color:var(--acc);transform:translateY(-2px)}
+.who b{display:block;font:700 clamp(20px,1.8vw,23px)/1.1 var(--disp);margin-bottom:4px}
+.who span{font:500 clamp(12px,1.2vw,13px)/1 var(--mono);color:var(--ink-3)}
+
+/* ---------- deck ---------- */
+.deck{position:fixed;inset:0;display:flex;flex-direction:column}
+.bars{display:flex;gap:4px;padding:12px var(--pad) 0;flex:0 0 auto}
+.bars,.top,.nav>*{max-width:none}
+.top{max-width:none}
+.bars i{flex:1;height:3px;background:rgba(255,255,255,.16);overflow:hidden}
+.bars i b{display:block;height:100%;width:0;background:var(--acc2)}
+.bars i.on b{width:100%;transition:width .45s ease}
+.bars i.done b{width:100%}
+.top{display:flex;align-items:center;gap:12px;padding:14px var(--pad) 0;flex:0 0 auto}
+.top .who2{font:600 clamp(12px,1.2vw,14px)/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.topnav{margin-left:auto;display:flex;gap:8px;align-items:center}
+.top button,.top .topnav a{appearance:none;background:transparent;border:1px solid #302B23;
+  color:var(--ink-3);cursor:pointer;font:600 clamp(11px,1.1vw,12.5px)/1 var(--sans);letter-spacing:.14em;
+  text-transform:uppercase;padding:9px 13px}
+.top .topnav a{text-decoration:none;display:inline-flex;align-items:center}
+.top button:hover,.top .topnav a:hover{color:var(--ink);border-color:var(--acc)}
+.card{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(16px,4vh,40px) var(--pad) clamp(64px,9vh,92px);overflow-y:auto}
+.inner{width:100%;max-width:1060px;margin-inline:auto}
+.card.mid{align-items:center}
+.card.mid .eyebrow{text-align:center}
+.nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-between;
+  align-items:center;padding:14px var(--pad) 20px;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(18,16,13,.9) 55%)}
+.nav span{font:500 clamp(12px,1.2vw,14px)/1 var(--mono);color:var(--ink-3)}
+.nav em{font-style:normal;color:var(--ink-2)}
+
+/* ---------- card type ---------- */
+.eyebrow{font:600 clamp(12px,1.35vw,14px)/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;
+  color:var(--acc2);margin-bottom:clamp(12px,2.4vh,22px)}
+.hero{font:900 clamp(44px,12.5vw,116px)/.9 var(--disp);letter-spacing:-.035em;margin:0}
+.sub{font:400 clamp(19px,2.5vw,29px)/1.4 var(--disp);color:var(--ink-2);
+  margin:clamp(12px,2.2vh,20px) 0 0;max-width:24ch}
+.big{font:900 clamp(34px,8vw,78px)/.95 var(--disp);letter-spacing:-.03em;margin:0}
+.lede{font:400 clamp(17px,1.9vw,22px)/1.5 var(--sans);color:var(--ink-2);
+  margin:clamp(14px,2.4vh,22px) 0 0;max-width:34ch}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(124px,1fr));
+  gap:clamp(14px,3vw,34px);margin-top:clamp(20px,3.6vh,38px);max-width:720px}
+.stat .n{font:900 clamp(36px,5.2vw,60px)/1 var(--disp);letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums}
+.stat .k{font:600 clamp(11.5px,1.15vw,13px)/1.3 var(--sans);letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-3);margin-top:8px}
+
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,400px));justify-content:start;
+  gap:clamp(14px,3vw,26px);margin-top:clamp(20px,3.4vh,34px);max-width:760px}
+.box{border:1px solid #2C271F;background:#191611;padding:clamp(16px,3vw,24px)}
+.box .k{font:600 clamp(11.5px,1.15vw,13px)/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:11px}
+.box .v{font:900 clamp(27px,3.6vw,42px)/1.04 var(--disp);letter-spacing:-.025em}
+.box .m{font:500 clamp(13px,1.25vw,15px)/1 var(--mono);color:var(--ink-2);margin-top:9px}
+.box.good{border-color:#4A5F3C} .box.bad{border-color:#5E3038}
+.box.good .v{color:#B9D69B} .box.bad .v{color:#E9A6AE}
+
+/* ---------- the case ---------- */
+/* The case used to float as a small island on the page ground, which is what made
+   it read as tacked on. It now sits in a room: a wall behind it that bleeds the full
+   width, and a floor that runs off both edges and down to the bottom of the screen. */
+.card.room{justify-content:flex-end;padding-bottom:0;
+  background:linear-gradient(180deg,#16130F 0%,#1B1712 46%,#221D16 78%,#282219 100%)}
+.card.room .eyebrow{position:absolute;top:clamp(58px,9vh,86px);left:0;right:0;text-align:center}
+.roomWrap{position:relative;display:flex;flex-direction:column;align-items:center;width:100%}
+/* the pool of light the case throws onto its own wall */
+.roomWrap::before{content:"";position:absolute;
+  left:calc(-1 * var(--pad));right:calc(-1 * var(--pad));
+  top:-120vh;bottom:0;z-index:0;pointer-events:none;
+  background:radial-gradient(42% 30% at 50% 92%,rgba(255,208,140,.16),transparent 72%)}
+.caseWrap{position:relative;z-index:1;max-width:min(680px,100%);width:100%;margin:0 auto}
+.floor{position:relative;z-index:1;align-self:stretch;   /* the room centres its children */
+  margin-inline:calc(-1 * var(--pad));justify-content:center;
+  padding:clamp(16px,2.2vh,24px) var(--pad) clamp(56px,7.5vh,78px)}
+.case{position:relative;padding:12px;
+  background:linear-gradient(158deg,#6B4A25,#3A2714 26%,#5C3F1F 52%,#2E1F10 78%,#4A331A);
+  box-shadow:0 1px 0 rgba(255,225,170,.28) inset,0 26px 46px -22px rgba(0,0,0,.7)}
+.crown{height:12px;margin:-12px -12px 10px;
+  background:linear-gradient(180deg,#7A552B,#4A331A 60%,#2B1D0F);
+  box-shadow:0 1px 0 rgba(255,228,175,.3) inset}
+.felt{position:relative;min-height:clamp(236px,34vh,376px);padding:20px 16px 16px;
+  display:flex;flex-direction:column;justify-content:center;
+  background:radial-gradient(120% 78% at 50% 0%,rgba(255,226,170,.20),rgba(255,226,170,0) 62%),
+    linear-gradient(178deg,var(--felt),var(--felt-2));
+  box-shadow:0 0 0 1px rgba(0,0,0,.45) inset,0 16px 34px -12px rgba(0,0,0,.75) inset}
+.lights{position:absolute;top:0;left:0;right:0;height:4px;filter:blur(1px);
+  background:linear-gradient(90deg,transparent,rgba(255,231,186,.95) 12%,transparent 13%,
+    transparent 30%,rgba(255,231,186,.95) 38%,transparent 39%,transparent 58%,
+    rgba(255,231,186,.95) 64%,transparent 65%,transparent 82%,rgba(255,231,186,.95) 88%,transparent 89%)}
+.shelf{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;
+  padding:0 4px 14px;margin-bottom:16px}
+.shelf::after{content:"";position:absolute;left:-8px;right:-8px;bottom:0;height:6px;
+  background:linear-gradient(180deg,#8A6230,#5A3E1D 55%,#33230F);
+  box-shadow:0 1px 0 rgba(255,230,180,.4) inset,0 6px 14px -4px rgba(0,0,0,.65)}
+.shelf:last-of-type{margin-bottom:2px}
+.plate{position:relative;width:clamp(104px,15vw,124px);padding:11px 9px 10px;text-align:center;overflow:hidden;
+  box-shadow:0 2px 0 rgba(0,0,0,.35),0 12px 20px -10px rgba(0,0,0,.7),
+    0 0 0 1px rgba(0,0,0,.3) inset,0 1px 0 rgba(255,255,255,.42) inset}
+.plate::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(114deg,transparent 34%,rgba(255,255,255,.42) 44%,
+    rgba(255,255,255,.06) 50%,transparent 58%)}
+.plate .yr{font:500 12px/1 var(--mono);opacity:.72}
+.plate .big2{font:900 clamp(27px,3.2vw,32px)/1.02 var(--disp);margin:4px 0 2px;letter-spacing:-.02em}
+.plate .lab{font:700 10px/1 var(--sans);letter-spacing:.13em;text-transform:uppercase;opacity:.78}
+.plate .rec{font:500 12px/1 var(--mono);margin-top:6px;padding-top:6px;opacity:.72;
+  border-top:1px solid rgba(0,0,0,.22)}
+.gold{background:linear-gradient(152deg,#C9A24B,#F0D896 17%,#B8862B 41%,#E0BC6A 57%,#8E6A22);color:#33240A}
+.silver{background:linear-gradient(152deg,#A8AEB5,#EDF1F5 17%,#8C939B 41%,#D4D9DF 57%,#767D85);color:#20252A;width:clamp(96px,13.5vw,112px)}
+.bronze{background:linear-gradient(152deg,#A2673A,#E0A87E 17%,#8A5227 41%,#C68A5C 57%,#71401D);color:#2B1607;width:clamp(96px,13.5vw,112px)}
+.silver .big2,.bronze .big2{font-size:23px}
+.plaque{margin:12px auto 0;width:max-content;padding:8px 22px;
+  background:linear-gradient(152deg,#C9A24B,#EAD08A 20%,#A87C27 55%,#D9B45E 78%,#8E6A22);
+  color:#2E200A;font:700 clamp(13px,1.4vw,15px)/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;
+  box-shadow:0 2px 0 rgba(0,0,0,.4),0 0 0 1px rgba(0,0,0,.3) inset,0 1px 0 rgba(255,255,255,.45) inset}
+/* paper on a porcelain ledge */
+.floor{display:flex;flex-wrap:wrap;gap:clamp(11px,1.6vw,16px);align-items:flex-end;
+  background:linear-gradient(180deg,rgba(0,0,0,.5),transparent 30%),
+    linear-gradient(180deg,#9A9384 0 7px,#847D6F 7px,#6B6558 58%,#544F44);
+  box-shadow:0 1px 0 rgba(255,246,225,.35) inset}
+.loo{position:relative;width:clamp(100px,14vw,118px);padding:15px 8px 18px;text-align:center;
+  background:#FBFAF6;color:#4A463E;border-radius:2px;
+  background-image:radial-gradient(circle at 50% 50%,rgba(120,110,95,.055) 1.1px,transparent 1.6px),
+    radial-gradient(circle at 50% 50%,rgba(120,110,95,.04) 1px,transparent 1.5px);
+  background-size:11px 11px,11px 11px;background-position:0 0,5.5px 5.5px;
+  clip-path:polygon(0 0,100% 0,100% 89%,94% 96%,87% 90%,79% 97%,71% 91%,63% 98%,
+    55% 92%,47% 98%,39% 91%,31% 97%,23% 90%,15% 96%,7% 90%,0 96%);
+  box-shadow:0 10px 16px -12px rgba(0,0,0,.5)}
+.loo::before{content:"";position:absolute;left:7px;right:7px;top:7px;
+  border-top:2px dotted rgba(0,0,0,.16)}
+.loo:nth-child(odd){transform:rotate(-2.2deg)} .loo:nth-child(even){transform:rotate(1.6deg)}
+.loo .yr{font:500 12px/1 var(--mono);opacity:.7}
+.loo .lab{font:700 9.5px/1.25 var(--sans);letter-spacing:.11em;text-transform:uppercase;
+  margin-top:5px;color:#8A4450}
+.loo .rec{font:500 12px/1 var(--mono);margin-top:6px;padding-top:6px;opacity:.66;
+  border-top:1px solid rgba(0,0,0,.1)}
+.web{position:absolute;width:clamp(84px,16vw,116px);height:clamp(84px,16vw,116px);opacity:.3;pointer-events:none;color:#EFEDE4}
+.web.tl{top:0;left:0} .web.tr{top:0;right:0;transform:scaleX(-1)}
+.web.bl{bottom:0;left:0;transform:scaleY(-1)}
+.dust{display:flex;align-items:center;justify-content:center;flex:1;padding:0 26px;
+  font:400 italic clamp(16px,2vw,21px)/1.5 var(--disp);color:rgba(240,236,224,.42);text-align:center}
+
+/* ---------- motion ---------- */
+.in{opacity:0;transform:translateY(14px);animation:rise .5s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.pop{opacity:0;transform:scale(.9) translateY(10px);animation:pop .42s cubic-bezier(.2,.9,.3,1.1) forwards}
+@keyframes pop{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .in,.pop{animation:none;opacity:1;transform:none}
+  .bars i.on b{transition:none}
+}
+
+/* ---------- career strip ---------- */
+.strip{display:flex;gap:clamp(3px,.5vw,7px);margin-top:clamp(22px,3.4vh,36px);width:100%}
+.strip .cell{flex:1 1 0;min-width:0}
+.strip .bar{height:clamp(56px,9vh,88px);border-radius:2px;position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 1px 0 rgba(255,255,255,.10) inset}
+.strip .bar span{position:relative;z-index:1;font:900 clamp(15px,1.7vw,21px)/1 var(--disp);
+  letter-spacing:-.02em}
+.b-g span,.b-s span,.b-b span,.b-p span{color:rgba(28,22,10,.72)}
+.b-x span,.b-o span{color:rgba(243,239,229,.5)}
+.strip .bar::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(150deg,transparent 38%,rgba(255,255,255,.3) 48%,transparent 58%)}
+.strip .y{font:500 clamp(10px,1.05vw,12px)/1 var(--mono);color:var(--ink-3);
+  margin-top:8px;text-align:center}
+.b-g{background:linear-gradient(152deg,#C9A24B,#F0D896 24%,#B8862B 62%,#8E6A22)}
+.b-s{background:linear-gradient(152deg,#A8AEB5,#EDF1F5 24%,#8C939B 62%,#767D85)}
+.b-b{background:linear-gradient(152deg,#A2673A,#E0A87E 24%,#8A5227 62%,#71401D)}
+.b-p{background:linear-gradient(152deg,#E4E2DB,#FFFFFF 24%,#D2CFC6 62%,#C2BEB3)}
+.b-x{background:color-mix(in srgb,var(--acc) 52%,#1D1A14)}
+.b-o{background:#241F19}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px}
+.legend i{display:flex;align-items:center;gap:7px;font-style:normal;
+  font:500 clamp(11px,1.1vw,12.5px)/1 var(--sans);color:var(--ink-3)}
+.legend i b{width:12px;height:12px;border-radius:2px;display:block}
+.rankline{font:500 clamp(12.5px,1.25vw,14.5px)/1.5 var(--mono);color:var(--ink-3);
+  margin-top:clamp(14px,2vh,20px)}
+.rankline em{font-style:normal;color:var(--acc2)}
+
+/* ---------- entry and exit ---------- */
+.back{display:inline-block;margin-bottom:20px;color:var(--ink-3);text-decoration:none;
+  font:600 clamp(12px,1.2vw,13.5px)/1 var(--sans);letter-spacing:.1em;text-transform:uppercase}
+.back:hover{color:var(--acc2)}
+.nav .ends{display:flex;gap:14px;align-items:center;pointer-events:auto}
+.nav .ends button,.nav .ends a{appearance:none;background:transparent;cursor:pointer;
+  border:1px solid #35301F;color:var(--ink-2);text-decoration:none;
+  font:600 clamp(11px,1.1vw,12.5px)/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;
+  padding:10px 14px}
+.nav .ends button:hover,.nav .ends a:hover{color:var(--ink);border-color:var(--acc)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>const DATA=[{"accent":["#C79A3A","#F2DCA0"],"strip":[{"y":2017,"t":"s","fin":2,"r":"11-2"},{"y":2018,"t":"x","fin":5,"r":"7-6"},{"y":2019,"t":"s","fin":2,"r":"8-5"},{"y":2020,"t":"g","fin":1,"r":"10-3"},{"y":2021,"t":"g","fin":1,"r":"8-6"},{"y":2022,"t":"b","fin":3,"r":"9-5"},{"y":2023,"t":"x","fin":5,"r":"8-6"},{"y":2024,"t":"x","fin":6,"r":"5-9"},{"y":2025,"t":"o","fin":9,"r":"8-6"}],"name":"Logan","league":"loog","seasons":9,"first":2017,"last":2025,"w":74,"l":48,"winPct":60.7,"pf":14630,"ppg":120.1,"titles":2,"runnerUps":2,"thirds":1,"lasts":0,"playoffs":8,"divTitles":6,"allPlay":60.7,"best":{"y":2020,"r":"10–3","fin":1,"note":"Champion","ppg":137.9},"worst":{"y":2025,"r":"8–6","fin":9},"leagueWeeks":19,"heartbreak":13,"streak":[10,"2017 W5","2017 W15"],"favourite":["Robert Woods",3],"draft":{"per":-1.8,"grade":"C+","years":9,"total":-3.7},"steal":null,"bust":null,"victim":{"vs":"Dan","w":10,"l":2},"nemesis":{"vs":"Kaila","w":2,"l":6},"verdict":["Champion","Got their name on the trophy. Nobody can take that back."],"plates":{"gold":[{"y":2020,"r":"10–3"},{"y":2021,"r":"8–6"}],"silver":[{"y":2017,"r":"11–2"},{"y":2019,"r":"8–5"}],"bronze":[{"y":2022,"r":"9–5"}],"loo":[]},"rank":{"pf":1,"winPct":1,"titles":2,"playoffs":1},"of":12},{"accent":["#A84152","#F0B3BC"],"strip":[{"y":2022,"t":"x","fin":6,"r":"7-7"},{"y":2023,"t":"x","fin":4,"r":"9-5"},{"y":2024,"t":"o","fin":8,"r":"8-6"},{"y":2025,"t":"s","fin":2,"r":"8-6"}],"name":"Kaila","league":"loog","seasons":4,"first":2022,"last":2025,"w":32,"l":24,"winPct":57.1,"pf":6333,"ppg":113.1,"titles":0,"runnerUps":1,"thirds":0,"lasts":0,"playoffs":3,"divTitles":1,"allPlay":55.2,"best":{"y":2025,"r":"8–6","fin":2,"note":"Runner Up","ppg":112.1},"worst":{"y":2024,"r":"8–6","fin":8},"leagueWeeks":3,"heartbreak":7,"streak":[7,"2025 W9","2025 W16"],"favourite":["Nico Collins",3],"draft":{"per":2.3,"grade":"A-","years":4,"total":7},"steal":{"y":2022,"p":"Patrick Mahomes","pos":"QB","rd":"R5","val":"+167"},"bust":null,"victim":{"vs":"Caitlyn","w":6,"l":0},"nemesis":{"vs":"Dan","w":1,"l":5},"verdict":["Always invited, never crowned","Reliably in the playoffs. Reliably out of them again."],"plates":{"gold":[],"silver":[{"y":2025,"r":"8–6"}],"bronze":[],"loo":[]},"rank":{"pf":11,"winPct":2,"titles":6,"playoffs":10},"of":12},{"accent":["#3E8E77","#A9E3CF"],"strip":[{"y":2017,"t":"b","fin":3,"r":"9-4"},{"y":2018,"t":"o","fin":8,"r":"3-10"},{"y":2019,"t":"p","fin":10,"r":"4-9"},{"y":2020,"t":"o","fin":9,"r":"5-8"},{"y":2021,"t":"x","fin":5,"r":"8-6"},{"y":2022,"t":"x","fin":5,"r":"9-5"},{"y":2023,"t":"s","fin":2,"r":"9-5"},{"y":2024,"t":"s","fin":2,"r":"12-2"},{"y":2025,"t":"b","fin":3,"r":"10-4"}],"name":"Steve","league":"loog","seasons":9,"first":2017,"last":2025,"w":69,"l":53,"winPct":56.6,"pf":14232,"ppg":116.4,"titles":0,"runnerUps":2,"thirds":2,"lasts":1,"playoffs":6,"divTitles":3,"allPlay":55.8,"best":{"y":2024,"r":"12–2","fin":2,"note":"Runner Up","ppg":127.3},"worst":{"y":2020,"r":"5–8","fin":10},"leagueWeeks":13,"heartbreak":5,"streak":[9,"2024 W1","2024 W9"],"favourite":["DeAndre Hopkins",3],"draft":{"per":5.2,"grade":"A","years":9,"total":10.1},"steal":{"y":2021,"p":"Cooper Kupp","pos":"WR","rd":"R5","val":"+194"},"bust":{"y":2017,"p":"David Johnson","pos":"RB","rd":"R1","val":"-192"},"victim":{"vs":"Kaila","w":6,"l":2},"nemesis":{"vs":"Logan","w":5,"l":10},"verdict":["The bridesmaid","Made the final more than once. Won it none of those times."],"plates":{"gold":[],"silver":[{"y":2023,"r":"9–5"},{"y":2024,"r":"12–2"}],"bronze":[{"y":2017,"r":"9–4"},{"y":2025,"r":"10–4"}],"loo":[{"y":2019,"r":"4–9"}]},"rank":{"pf":4,"winPct":3,"titles":7,"playoffs":2},"of":12},{"accent":["#6689B8","#C3D8EF"],"strip":[{"y":2018,"t":"o","fin":9,"r":"6-7"},{"y":2019,"t":"x","fin":6,"r":"7-6"},{"y":2020,"t":"x","fin":6,"r":"7-6"},{"y":2021,"t":"x","fin":6,"r":"8-6"},{"y":2022,"t":"o","fin":8,"r":"5-9"},{"y":2023,"t":"b","fin":3,"r":"7-7"},{"y":2024,"t":"b","fin":3,"r":"11-3"},{"y":2025,"t":"o","fin":11,"r":"9-5"}],"name":"Kim","league":"loog","seasons":8,"first":2018,"last":2025,"w":60,"l":49,"winPct":55,"pf":12435,"ppg":114.1,"titles":0,"runnerUps":0,"thirds":2,"lasts":0,"playoffs":5,"divTitles":1,"allPlay":51.1,"best":{"y":2024,"r":"11–3","fin":3,"note":"Third","ppg":125.9},"worst":{"y":2025,"r":"9–5","fin":11},"leagueWeeks":7,"heartbreak":4,"streak":[8,"2024 W4","2024 W11"],"favourite":["Tom Brady",3],"draft":{"per":1.5,"grade":"B+","years":8,"total":3.2},"steal":null,"bust":null,"victim":{"vs":"Caitlyn","w":7,"l":0},"nemesis":{"vs":"Steve","w":5,"l":13},"verdict":["Quietly excellent","No fanfare, no collapse, just a winning record year on year."],"plates":{"gold":[],"silver":[],"bronze":[{"y":2023,"r":"7–7"},{"y":2024,"r":"11–3"}],"loo":[]},"rank":{"pf":10,"winPct":4,"titles":8,"playoffs":3},"of":12},{"accent":["#BC7C33","#F4CE96"],"strip":[{"y":2017,"t":"x","fin":6,"r":"4-9"},{"y":2018,"t":"g","fin":1,"r":"9-4"},{"y":2019,"t":"g","fin":1,"r":"11-2"},{"y":2020,"t":"o","fin":8,"r":"6-7"},{"y":2021,"t":"o","fin":8,"r":"7-7"},{"y":2022,"t":"s","fin":2,"r":"12-2"},{"y":2023,"t":"o","fin":11,"r":"5-9"},{"y":2024,"t":"g","fin":1,"r":"6-8"},{"y":2025,"t":"o","fin":8,"r":"4-10"}],"name":"Zach","league":"loog","seasons":9,"first":2017,"last":2025,"w":64,"l":58,"winPct":52.5,"pf":14423,"ppg":118.3,"titles":3,"runnerUps":1,"thirds":0,"lasts":0,"playoffs":5,"divTitles":3,"allPlay":52.7,"best":{"y":2019,"r":"11–2","fin":1,"note":"Champion","ppg":130.9},"worst":{"y":2023,"r":"5–9","fin":11},"leagueWeeks":10,"heartbreak":6,"streak":[10,"2022 W1","2022 W10"],"favourite":["Justin Jefferson",4],"draft":{"per":-0.2,"grade":"B","years":9,"total":-0.3},"steal":{"y":2025,"p":"Puka Nacua","pos":"WR","rd":"R1","val":"+154"},"bust":null,"victim":{"vs":"Karen","w":12,"l":2},"nemesis":{"vs":"Kaila","w":1,"l":3},"verdict":["Dynasty","Three or more rings. The rest of the league plays for second."],"plates":{"gold":[{"y":2018,"r":"9–4"},{"y":2019,"r":"11–2"},{"y":2024,"r":"6–8"}],"silver":[{"y":2022,"r":"12–2"}],"bronze":[],"loo":[]},"rank":{"pf":3,"winPct":5,"titles":1,"playoffs":4},"of":12},{"accent":["#8A6BAE","#D6C4EA"],"strip":[{"y":2017,"t":"g","fin":1,"r":"11-2"},{"y":2018,"t":"x","fin":4,"r":"9-4"},{"y":2019,"t":"x","fin":4,"r":"7-6"},{"y":2020,"t":"o","fin":7,"r":"6-7"},{"y":2021,"t":"p","fin":10,"r":"4-10"},{"y":2022,"t":"x","fin":4,"r":"4-10"},{"y":2023,"t":"o","fin":7,"r":"5-9"},{"y":2024,"t":"x","fin":4,"r":"8-6"},{"y":2025,"t":"p","fin":12,"r":"6-8"}],"name":"Jordan","league":"loog","seasons":9,"first":2017,"last":2025,"w":60,"l":62,"winPct":49.2,"pf":13562,"ppg":111.3,"titles":1,"runnerUps":0,"thirds":0,"lasts":2,"playoffs":5,"divTitles":2,"allPlay":48.3,"best":{"y":2017,"r":"11–2","fin":1,"note":"Champion","ppg":108},"worst":{"y":2025,"r":"6–8","fin":12},"leagueWeeks":11,"heartbreak":9,"streak":[9,"2017 W1","2017 W9"],"favourite":["Allen Robinson",3],"draft":{"per":2.1,"grade":"A-","years":9,"total":4.1},"steal":null,"bust":{"y":2022,"p":"Javonte Williams","pos":"RB","rd":"R1","val":"-178"},"victim":{"vs":"Dan","w":12,"l":4},"nemesis":{"vs":"Kaila","w":1,"l":5},"verdict":["Feast or famine","A title and a toilet. No middle gear whatsoever."],"plates":{"gold":[{"y":2017,"r":"11–2"}],"silver":[],"bronze":[],"loo":[{"y":2021,"r":"4–10"},{"y":2025,"r":"6–8"}]},"rank":{"pf":7,"winPct":6,"titles":4,"playoffs":5},"of":12},{"accent":["#2F8E97","#A6E2E8"],"strip":[{"y":2017,"t":"x","fin":4,"r":"7-6"},{"y":2018,"t":"x","fin":6,"r":"8-5"},{"y":2019,"t":"o","fin":7,"r":"5-8"},{"y":2020,"t":"s","fin":2,"r":"7-6"},{"y":2021,"t":"x","fin":4,"r":"7-7"},{"y":2022,"t":"o","fin":7,"r":"9-5"},{"y":2023,"t":"o","fin":10,"r":"7-7"},{"y":2024,"t":"o","fin":10,"r":"4-10"},{"y":2025,"t":"x","fin":5,"r":"6-8"}],"name":"Conner","league":"loog","seasons":9,"first":2017,"last":2025,"w":60,"l":62,"winPct":49.2,"pf":14001,"ppg":114.9,"titles":0,"runnerUps":1,"thirds":0,"lasts":0,"playoffs":5,"divTitles":1,"allPlay":48.3,"best":{"y":2020,"r":"7–6","fin":2,"note":"Runner Up","ppg":122},"worst":{"y":2024,"r":"4–10","fin":10},"leagueWeeks":8,"heartbreak":10,"streak":[6,"2022 W12","2022 W17"],"favourite":["Antonio Brown",3],"draft":{"per":-3.3,"grade":"C","years":9,"total":-6.4},"steal":{"y":2023,"p":"Dak Prescott","pos":"QB","rd":"R11","val":"+181"},"bust":{"y":2020,"p":"Saquon Barkley","pos":"RB","rd":"R1","val":"-188"},"victim":{"vs":"Danny","w":13,"l":8},"nemesis":{"vs":"Logan","w":6,"l":10},"verdict":["Scoreboard merchant","Tops the league most weeks. Tops the standings never."],"plates":{"gold":[],"silver":[{"y":2020,"r":"7–6"}],"bronze":[],"loo":[]},"rank":{"pf":6,"winPct":7,"titles":9,"playoffs":6},"of":12},{"accent":["#9A9138","#E6DC96"],"strip":[{"y":2018,"t":"b","fin":3,"r":"7-6"},{"y":2019,"t":"x","fin":5,"r":"5-8"},{"y":2020,"t":"x","fin":4,"r":"7-6"},{"y":2021,"t":"b","fin":3,"r":"9-5"},{"y":2022,"t":"p","fin":12,"r":"4-10"},{"y":2023,"t":"x","fin":6,"r":"8-6"},{"y":2024,"t":"o","fin":7,"r":"7-7"},{"y":2025,"t":"o","fin":10,"r":"4-10"}],"name":"Karen","league":"loog","seasons":8,"first":2018,"last":2025,"w":51,"l":58,"winPct":46.8,"pf":12496,"ppg":114.8,"titles":0,"runnerUps":0,"thirds":2,"lasts":1,"playoffs":5,"divTitles":2,"allPlay":45,"best":{"y":2021,"r":"9–5","fin":3,"note":"Third","ppg":125.4},"worst":{"y":2022,"r":"4–10","fin":12},"leagueWeeks":11,"heartbreak":7,"streak":[7,"2021 W5","2021 W11"],"favourite":["Tyreek Hill",5],"draft":{"per":-2.4,"grade":"C","years":8,"total":-4.9},"steal":null,"bust":null,"victim":{"vs":"Danny","w":10,"l":6},"nemesis":{"vs":"Zach","w":2,"l":12},"verdict":["Podium furniture","Third place knows their name. The top two never learned it."],"plates":{"gold":[],"silver":[],"bronze":[{"y":2018,"r":"7–6"},{"y":2021,"r":"9–5"}],"loo":[{"y":2022,"r":"4–10"}]},"rank":{"pf":9,"winPct":8,"titles":10,"playoffs":7},"of":12},{"accent":["#B5654A","#F2BCA9"],"strip":[{"y":2017,"t":"x","fin":5,"r":"5-8"},{"y":2018,"t":"s","fin":2,"r":"9-4"},{"y":2019,"t":"b","fin":3,"r":"7-6"},{"y":2020,"t":"x","fin":5,"r":"7-6"},{"y":2021,"t":"o","fin":7,"r":"6-8"},{"y":2022,"t":"o","fin":10,"r":"6-8"},{"y":2023,"t":"o","fin":8,"r":"7-7"},{"y":2024,"t":"o","fin":11,"r":"4-10"},{"y":2025,"t":"x","fin":4,"r":"5-9"}],"name":"Danny","league":"loog","seasons":9,"first":2017,"last":2025,"w":56,"l":66,"winPct":45.9,"pf":14059,"ppg":115.5,"titles":0,"runnerUps":1,"thirds":1,"lasts":0,"playoffs":5,"divTitles":1,"allPlay":48.6,"best":{"y":2018,"r":"9–4","fin":2,"note":"Runner Up","ppg":140.8},"worst":{"y":2024,"r":"4–10","fin":11},"leagueWeeks":10,"heartbreak":9,"streak":[7,"2017 W15","2018 W5"],"favourite":["Derrick Henry",4],"draft":{"per":1.1,"grade":"B+","years":9,"total":2.1},"steal":null,"bust":null,"victim":{"vs":"Chase","w":8,"l":3},"nemesis":{"vs":"Caitlyn","w":1,"l":3},"verdict":["Scoreboard merchant","Tops the league most weeks. Tops the standings never."],"plates":{"gold":[],"silver":[{"y":2018,"r":"9–4"}],"bronze":[{"y":2019,"r":"7–6"}],"loo":[]},"rank":{"pf":5,"winPct":9,"titles":11,"playoffs":8},"of":12},{"accent":["#4E8CA0","#B4DCE8"],"strip":[{"y":2017,"t":"p","fin":8,"r":"2-11"},{"y":2018,"t":"p","fin":10,"r":"3-10"},{"y":2019,"t":"o","fin":8,"r":"5-8"},{"y":2020,"t":"b","fin":3,"r":"7-6"},{"y":2021,"t":"s","fin":2,"r":"7-7"},{"y":2022,"t":"g","fin":1,"r":"9-5"},{"y":2023,"t":"g","fin":1,"r":"10-4"},{"y":2024,"t":"x","fin":5,"r":"7-7"},{"y":2025,"t":"o","fin":7,"r":"6-8"}],"name":"Chase","league":"loog","seasons":9,"first":2017,"last":2025,"w":56,"l":66,"winPct":45.9,"pf":14481,"ppg":118.4,"titles":2,"runnerUps":1,"thirds":1,"lasts":2,"playoffs":5,"divTitles":2,"allPlay":49,"best":{"y":2023,"r":"10–4","fin":1,"note":"Champion","ppg":124.3},"worst":{"y":2018,"r":"3–10","fin":9},"leagueWeeks":16,"heartbreak":5,"streak":[7,"2022 W12","2023 W2"],"favourite":["Keenan Allen",3],"draft":{"per":-1.5,"grade":"B-","years":9,"total":-3},"steal":{"y":2019,"p":"Lamar Jackson","pos":"QB","rd":"R15","val":"+196"},"bust":{"y":2023,"p":"Nick Chubb","pos":"RB","rd":"R1","val":"-207"},"victim":{"vs":"Caitlyn","w":4,"l":1},"nemesis":{"vs":"Danny","w":3,"l":8},"verdict":["Feast or famine","A title and a toilet. No middle gear whatsoever."],"plates":{"gold":[{"y":2022,"r":"9–5"},{"y":2023,"r":"10–4"}],"silver":[{"y":2021,"r":"7–7"}],"bronze":[{"y":2020,"r":"7–6"}],"loo":[{"y":2017,"r":"2–11"},{"y":2018,"r":"3–10"}]},"rank":{"pf":2,"winPct":10,"titles":3,"playoffs":9},"of":12},{"accent":["#A55C86","#EBBBD5"],"strip":[{"y":2022,"t":"o","fin":11,"r":"6-8"},{"y":2023,"t":"p","fin":12,"r":"3-11"},{"y":2024,"t":"o","fin":9,"r":"6-8"},{"y":2025,"t":"x","fin":6,"r":"8-6"}],"name":"Caitlyn","league":"loog","seasons":4,"first":2022,"last":2025,"w":23,"l":33,"winPct":41.1,"pf":5966,"ppg":106.5,"titles":0,"runnerUps":0,"thirds":0,"lasts":1,"playoffs":1,"divTitles":1,"allPlay":39.7,"best":{"y":2025,"r":"8–6","fin":6,"note":null,"ppg":117.8},"worst":{"y":2023,"r":"3–11","fin":12},"leagueWeeks":2,"heartbreak":7,"streak":[3,"2025 W10","2025 W12"],"favourite":["Davante Adams",2],"draft":{"per":-0.6,"grade":"B-","years":4,"total":-1.7},"steal":null,"bust":null,"victim":{"vs":"Jordan","w":4,"l":1},"nemesis":{"vs":"Kim","w":0,"l":7},"verdict":["Character-building years","A career spent making everyone else feel better about theirs."],"plates":{"gold":[],"silver":[],"bronze":[],"loo":[{"y":2023,"r":"3–11"}]},"rank":{"pf":12,"winPct":11,"titles":12,"playoffs":11},"of":12},{"accent":["#79924A","#D2E3A4"],"strip":[{"y":2017,"t":"o","fin":7,"r":"3-10"},{"y":2018,"t":"o","fin":7,"r":"4-9"},{"y":2019,"t":"o","fin":9,"r":"6-7"},{"y":2020,"t":"p","fin":10,"r":"3-10"},{"y":2021,"t":"o","fin":9,"r":"6-8"},{"y":2022,"t":"o","fin":9,"r":"4-10"},{"y":2023,"t":"o","fin":9,"r":"6-8"},{"y":2024,"t":"p","fin":12,"r":"6-8"},{"y":2025,"t":"g","fin":1,"r":"10-4"}],"name":"Dan","league":"loog","seasons":9,"first":2017,"last":2025,"w":48,"l":74,"winPct":39.3,"pf":13120,"ppg":107.4,"titles":1,"runnerUps":0,"thirds":0,"lasts":2,"playoffs":1,"divTitles":1,"allPlay":42.6,"best":{"y":2025,"r":"10–4","fin":1,"note":"Champion","ppg":121.2},"worst":{"y":2024,"r":"6–8","fin":12},"leagueWeeks":12,"heartbreak":3,"streak":[4,"2021 W3","2021 W6"],"favourite":["Drake London",4],"draft":{"per":-2.1,"grade":"C+","years":9,"total":-4},"steal":{"y":2023,"p":"Christian McCaffrey","pos":"RB","rd":"R1","val":"+159"},"bust":null,"victim":{"vs":"Kaila","w":5,"l":1},"nemesis":{"vs":"Logan","w":2,"l":10},"verdict":["Feast or famine","A title and a toilet. No middle gear whatsoever."],"plates":{"gold":[{"y":2025,"r":"10–4"}],"silver":[],"bronze":[],"loo":[{"y":2020,"r":"3–10"},{"y":2024,"r":"6–8"}]},"rank":{"pf":8,"winPct":12,"titles":5,"playoffs":12},"of":12}],LEAGUES={"loog":"League of Ordinary Gentlemen"},BACK="index.html";
+const app = document.getElementById('app');
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ord = n => n + (['th','st','nd','rd'][(n % 100 - 20) % 10] || ['th','st','nd','rd'][n % 100] || 'th');
+let M = null, i = 0;
+
+/* ---------- cards ---------- */
+const stat = (n, k, d = 0) => `<div class="stat ${REDUCED?'':'in'}" style="animation-delay:${d}ms">
+  <div class="n" data-to="${n}">${REDUCED ? n : 0}</div><div class="k">${k}</div></div>`;
+
+const CARDS = [
+  m => ({ eyebrow: LEAGUES[m.league], body: `
+    <h1 class="hero ${REDUCED?'':'in'}">${esc(m.name)}</h1>
+    <p class="sub ${REDUCED?'':'in'}" style="animation-delay:180ms">
+      ${m.seasons} seasons, ${m.first} to ${m.last}.<br>Here is how that actually went.</p>` }),
+
+  m => ({ eyebrow: 'The ledger', body: `
+    <h2 class="big ${REDUCED?'':'in'}">${m.w}–${m.l}</h2>
+    <p class="lede ${REDUCED?'':'in'}" style="animation-delay:120ms">
+      ${m.w + m.l} games played. ${m.pf.toLocaleString()} points scored,
+      ${m.ppg} a week on average.</p>
+    <div class="stats">
+      ${stat(m.winPct, 'Win %', 220)}
+      ${stat(m.playoffs, 'Playoff trips', 320)}
+      ${stat(m.divTitles, 'Division titles', 420)}
+      ${m.allPlay !== null ? stat(m.allPlay, 'All-play %', 520) : ''}
+    </div>
+    <p class="rankline ${REDUCED?'':'in'}" style="animation-delay:600ms">
+      <em>${ord(m.rank.pf)}</em> for points scored and <em>${ord(m.rank.winPct)}</em> by
+      win rate, out of ${m.of}.</p>` }),
+
+  m => ({ eyebrow: 'Every season', body: `
+    <h2 class="big ${REDUCED?'':'in'}">${m.first}<span style="opacity:.4">&ndash;</span>${m.last}</h2>
+    <p class="lede ${REDUCED?'':'in'}" style="animation-delay:120ms">
+      One block a season, and where it finished. This is the shape of the whole thing.</p>
+    <div class="strip">${m.strip.map((c, k) => `
+      <div class="cell ${REDUCED?'':'pop'}" style="animation-delay:${200 + k * 70}ms">
+        <div class="bar b-${c.t}" title="${c.y}: ${c.r}, ${ord(c.fin)}"><span>${ord(c.fin)}</span></div>
+        <div class="y">'${String(c.y).slice(2)}</div></div>`).join('')}</div>
+    <div class="legend ${REDUCED?'':'in'}" style="animation-delay:${200 + m.strip.length * 70 + 120}ms">
+      <i><b class="b-g"></b>Champion</i><i><b class="b-s"></b>Runner-up</i>
+      <i><b class="b-b"></b>Third</i><i><b class="b-p"></b>Biggest loser</i>
+      <i><b class="b-x"></b>Playoffs</i><i><b class="b-o"></b>Missed out</i>
+    </div>` }),
+
+  m => ({ eyebrow: 'The peak', body: `
+    <h2 class="big ${REDUCED?'':'in'}">${m.best.y}</h2>
+    <p class="lede ${REDUCED?'':'in'}" style="animation-delay:120ms">
+      Went <strong>${m.best.r}</strong> at ${m.best.ppg} a week and finished
+      <strong>${ord(m.best.fin)}</strong>${m.best.note ? ` — ${esc(m.best.note.toLowerCase())}` : ''}.</p>
+    <div class="stats">
+      ${stat(m.leagueWeeks, 'Weeks top-scored', 240)}
+      ${m.streak ? stat(m.streak[0], 'Longest win streak', 340) : ''}
+      ${stat(m.heartbreak, 'Losses scoring above par', 440)}
+    </div>` }),
+
+  m => ({ eyebrow: 'Rivalries', body: `
+    <h2 class="big ${REDUCED?'':'in'}">Who you beat<br>and who beat you</h2>
+    <div class="duo">
+      ${m.victim ? `<div class="box good ${REDUCED?'':'pop'}" style="animation-delay:180ms">
+        <div class="k">Your favourite opponent</div>
+        <div class="v">${esc(m.victim.vs)}</div>
+        <div class="m">${m.victim.w}–${m.victim.l} all time</div></div>` : ''}
+      ${m.nemesis ? `<div class="box bad ${REDUCED?'':'pop'}" style="animation-delay:300ms">
+        <div class="k">Your nemesis</div>
+        <div class="v">${esc(m.nemesis.vs)}</div>
+        <div class="m">${m.nemesis.w}–${m.nemesis.l} all time</div></div>` : ''}
+    </div>
+    ${m.favourite ? `<p class="lede ${REDUCED?'':'in'}" style="animation-delay:420ms">
+      You drafted <strong>${esc(m.favourite[0])}</strong> ${m.favourite[1]} times.
+      Make of that what you will.</p>` : ''}` }),
+
+  m => ({ eyebrow: 'The draft', body: `
+    <h2 class="big ${REDUCED?'':'in'}">Grade: ${m.draft ? esc(m.draft.grade) : '—'}</h2>
+    <p class="lede ${REDUCED?'':'in'}" style="animation-delay:120ms">
+      ${m.draft ? `${m.draft.per > 0 ? '+' : ''}${m.draft.per} points of value per draft across
+        ${m.draft.years} of them.` : 'Not enough draft history to grade.'}</p>
+    <div class="duo">
+      ${m.steal ? `<div class="box good ${REDUCED?'':'pop'}" style="animation-delay:240ms">
+        <div class="k">Best pick</div><div class="v">${esc(m.steal.p)}</div>
+        <div class="m">${m.steal.y} · ${esc(m.steal.rd)} · ${esc(m.steal.val)}</div></div>` : ''}
+      ${m.bust ? `<div class="box bad ${REDUCED?'':'pop'}" style="animation-delay:360ms">
+        <div class="k">Worst pick</div><div class="v">${esc(m.bust.p)}</div>
+        <div class="m">${m.bust.y} · ${esc(m.bust.rd)} · ${esc(m.bust.val)}</div></div>` : ''}
+    </div>` }),
+
+  m => ({ eyebrow: 'The verdict', body: `
+    <h2 class="hero ${REDUCED?'':'in'}" style="font-size:clamp(34px,8vw,80px)">${esc(m.verdict[0])}</h2>
+    <p class="sub ${REDUCED?'':'in'}" style="animation-delay:200ms">${esc(m.verdict[1])}</p>` }),
+
+  m => ({ eyebrow: 'The case', room: true, body: caseHTML(m) }),
+];
+
+/* ---------- the trophy case ---------- */
+const WEB = c => `<svg class="web ${c}" viewBox="0 0 100 100" fill="none" stroke="currentColor"
+  stroke-width="1.1"><path d="M0 0 L100 0 M0 0 L92 38 M0 0 L70 70 M0 0 L38 92 M0 0 L0 100"/>
+  <path d="M22 0 Q17 17 0 22 M42 0 Q34 34 0 42 M64 0 Q52 52 0 64 M88 0 Q72 72 0 88"/></svg>`;
+
+function caseHTML(m) {
+  const P = m.plates, bare = !P.gold.length && !P.silver.length && !P.bronze.length;
+  const plate = (cls, big, lab, d, k) => `<div class="plate ${cls} ${REDUCED?'':'pop'}"
+    style="animation-delay:${180 + k * 90}ms"><div class="yr">${d.y}</div>
+    <div class="big2">${big}</div><div class="lab">${lab}</div><div class="rec">${d.r}</div></div>`;
+  let k = 0;
+  const top = P.gold.map(d => plate('gold', '1st', 'Champion', d, k++)).join('');
+  const bot = [...P.silver.map(d => plate('silver', '2nd', 'Runner-up', d, k++)),
+               ...P.bronze.map(d => plate('bronze', '3rd', 'Third', d, k++))].join('');
+  return `<div class="roomWrap"><div class="caseWrap">
+    <div class="case ${REDUCED?'':'in'}"><div class="crown"></div>
+      <div class="felt"><div class="lights"></div>
+        ${bare ? WEB('tl') + WEB('tr') + WEB('bl') : ''}
+        ${bare ? '<div class="dust">Nothing but dust in here.</div>'
+               : (top ? `<div class="shelf">${top}</div>` : '') + (bot ? `<div class="shelf">${bot}</div>` : '')}
+      </div><div class="plaque">${esc(m.name)}</div>
+    </div></div>
+    ${P.loo.length ? `<div class="floor">${P.loo.map((d, j) => `
+      <div class="loo ${REDUCED?'':'pop'}" style="animation-delay:${380 + j * 110}ms">
+        <div class="yr">${d.y}</div><div class="lab">Biggest<br>Loser</div>
+        <div class="rec">${d.r}</div></div>`).join('')}</div>`
+      : '<div class="floor"></div>'}
+  </div>`;
+}
+
+/* ---------- deck ---------- */
+function renderDeck() {
+  const c = CARDS[i](M);
+  app.innerHTML = `<div class="deck" style="--acc:${M.accent[0]};--acc2:${M.accent[1]}">
+    <div class="bars">${CARDS.map((_, k) =>
+      `<i class="${k < i ? 'done' : k === i ? 'on' : ''}"><b></b></i>`).join('')}</div>
+    <div class="top"><span class="who2">${esc(M.name)} · ${LEAGUES[M.league]}</span>
+      <span class="topnav">
+        <button id="exit">All managers</button>
+        ${BACK ? `<a href="${BACK}">Record book</a>` : ''}
+      </span></div>
+    <div class="card${c.room ? ' room' : ''}">
+      ${c.room
+        ? `<div class="eyebrow ${REDUCED?'':'in'}">${esc(c.eyebrow)}</div>${c.body}`
+        : `<div class="inner"><div class="eyebrow ${REDUCED?'':'in'}">${esc(c.eyebrow)}</div>${c.body}</div>`}
+    </div>
+    <div class="nav"><span><em>${i + 1}</em> / ${CARDS.length}</span>
+      ${i === CARDS.length - 1
+        ? `<span class="ends"><button id="again">Pick someone else</button>${
+            BACK ? `<a href="${BACK}">Back to the record book</a>` : ''}</span>`
+        : '<span>Tap to continue</span>'}</div>
+  </div>`;
+  document.getElementById('exit').onclick = e => { e.stopPropagation(); pickerScreen(); };
+  const again = document.getElementById('again');
+  if (again) again.onclick = e => { e.stopPropagation(); pickerScreen(); };
+  countUp();
+}
+
+// numbers tick up rather than appearing; the label is readable throughout
+function countUp() {
+  if (REDUCED) return;
+  app.querySelectorAll('.n[data-to]').forEach(el => {
+    const to = +el.dataset.to, dec = String(to).includes('.') ? 1 : 0, t0 = performance.now(), D = 780;
+    (function step(t) {
+      const p = Math.min(1, (t - t0) / D), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = (to * e).toFixed(dec);
+      if (p < 1) requestAnimationFrame(step);
+    })(t0);
+  });
+}
+
+const go = d => { const n = i + d; if (n < 0 || n >= CARDS.length) return; i = n; renderDeck(); };
+
+addEventListener('keydown', e => {
+  if (!M) return;
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(1); }
+  if (e.key === 'ArrowLeft') go(-1);
+  if (e.key === 'Escape') pickerScreen();
+});
+addEventListener('click', e => {
+  if (!M || e.target.closest('button, a')) return;
+  // tapping the left sixth goes back, anywhere else advances
+  go(e.clientX < innerWidth / 6 ? -1 : 1);
+});
+let tx = null;
+addEventListener('touchstart', e => tx = e.changedTouches[0].clientX, { passive: true });
+addEventListener('touchend', e => {
+  if (!M || tx === null) return;
+  const dx = e.changedTouches[0].clientX - tx;
+  if (Math.abs(dx) > 45) { go(dx < 0 ? 1 : -1); tx = null; }
+});
+
+/* ---------- picker ---------- */
+function pickerScreen() {
+  M = null; history.replaceState(null, '', location.pathname);
+  const group = sl => DATA.filter(d => d.league === sl).map(d =>
+    `<button class="who" data-l="${d.league}" data-m="${esc(d.name)}">
+      <b>${esc(d.name)}</b><span>${d.seasons} seasons · ${d.w}–${d.l}</span></button>`).join('');
+  app.innerHTML = `<div class="pick">
+    ${BACK ? `<a class="back" href="${BACK}">\u2190 Back to the record book</a>` : ''}
+    <h1>The Tape</h1>
+    <p class="dek">Every season on the books, one manager at a time. Pick a name and tap
+       through — it ends where it should, at the trophy case.</p>
+    ${Object.entries(LEAGUES).map(([k, v]) =>
+      // a single-league page does not need to caption the only league it has
+      `${Object.keys(LEAGUES).length > 1 ? `<h2>${v}</h2>` : ''}
+       <div class="grid">${group(k)}</div>`).join('')}
+  </div>`;
+  app.querySelectorAll('.who').forEach(b => b.onclick = ev => {
+    ev.stopPropagation();
+    start(b.dataset.l, b.dataset.m);
+  });
+}
+
+function start(l, name) {
+  M = DATA.find(d => d.league === l && d.name === name);
+  if (!M) return pickerScreen();
+  i = Math.min(CARDS.length - 1, Math.max(0, +(new URLSearchParams(location.search).get('c') || 1) - 1));
+  history.replaceState(null, '', `?l=${encodeURIComponent(l)}&m=${encodeURIComponent(name)}`);
+  renderDeck();
+}
+
+const q = new URLSearchParams(location.search);
+// A per-league page only carries one league, so ?m= alone is a valid deep link;
+// ?l= is only needed where the page holds more than one.
+const ONLY = Object.keys(LEAGUES).length === 1 ? Object.keys(LEAGUES)[0] : null;
+if (q.get('m')) start(q.get('l') || ONLY, q.get('m')); else pickerScreen();
+
+
+/* dev only: report anything wider than the viewport */
+if (q.get('probe')) {          // PROBE  (q is captured before replaceState rewrites the URL)
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const V = document.documentElement.clientWidth, bad = [];
+    document.querySelectorAll('*').forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.right > V + 0.5 || r.left < -0.5)
+        bad.push(`${el.className||el.tagName} L${r.left.toFixed(0)} R${r.right.toFixed(0)} W${r.width.toFixed(0)}`);
+    });
+    const d = document.createElement('div');
+    d.style.cssText = 'position:fixed;left:0;top:0;right:0;z-index:99;background:#000;color:#0f0;'
+      + 'font:11px/1.35 monospace;padding:6px;white-space:pre-wrap';
+    d.textContent = 'VIEWPORT ' + V + '\n' + (bad.slice(0, 10).join('\n') || 'all inside');
+    document.body.appendChild(d);
+  }));
+}
+
+</script>
+</body>
+</html>

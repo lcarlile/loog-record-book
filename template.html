@@ -12,6 +12,7 @@
   --last:#7A2231;
   --brass-ink:#9A6E12;
   --shadow:0 1px 2px rgba(25,23,19,.07), 0 10px 28px -14px rgba(25,23,19,.22);
+  --tape-a:#15120E; --tape-b:#221D16;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
@@ -23,6 +24,7 @@
     --last:#C4606C;
     --brass-ink:#D9A93F;
     --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 28px -14px rgba(0,0,0,.65);
+    --tape-a:#241E16; --tape-b:#2E2719;
   }
 }
 :root[data-theme="dark"]{
@@ -34,6 +36,7 @@
   --last:#C4606C;
   --brass-ink:#D9A93F;
   --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 28px -14px rgba(0,0,0,.65);
+  --tape-a:#241E16; --tape-b:#2E2719;
 }
 
 *{box-sizing:border-box}
@@ -148,6 +151,33 @@ thead th{position:sticky; top:0; background:var(--sunk); font-size:10.5px; lette
 tbody tr:last-child td{border-bottom:0}
 tbody tr:hover td{background:rgba(var(--pos-rgb),.05)}
 td.name{font-weight:700}
+section#tape{
+  background:
+    radial-gradient(66% 120% at 50% 0%,rgba(217,169,63,.16),transparent 64%),
+    linear-gradient(180deg,var(--tape-a),var(--tape-b) 58%,var(--tape-a));
+  border-block-color:rgba(0,0,0,.35);color:#EFE9DA;text-align:center;
+  padding-block:clamp(52px,7vw,84px)}
+section#tape .teyebrow{margin:0 0 14px;font:700 11.5px/1 inherit;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--gold-bright)}
+section#tape h2{font-size:clamp(30px,4.8vw,50px);line-height:1.02;letter-spacing:-.022em;
+  color:#F4EFE2;font-weight:600}
+section#tape .tlede{margin:16px auto 0;max-width:54ch;color:rgba(239,233,218,.7);
+  font-size:clamp(15px,1.6vw,17.5px);line-height:1.55}
+a.tcta{display:inline-flex;align-items:center;gap:10px;margin-top:clamp(24px,3.4vw,34px);
+  padding:16px 30px;text-decoration:none;
+  background:var(--gold-bright);color:#231A08;
+  font:700 12.5px/1 "Archivo",system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;
+  border:1px solid var(--gold-bright);
+  transition:transform .16s,box-shadow .16s,background .16s}
+a.tcta:hover{transform:translateY(-2px);background:#F0D08A;
+  box-shadow:0 12px 26px -14px rgba(0,0,0,.7)}
+a.tcta:focus-visible{outline:2px solid #F4EFE2;outline-offset:3px}
+@media (max-width:640px){ a.tcta{padding:15px 24px;font-size:12px} }
+.rwbtn{display:block;margin:0 14px 14px;padding:14px 16px;text-align:center;
+  text-decoration:none;border:1px solid var(--brass-ink);color:var(--brass-ink);
+  font:700 12px/1 var(--sans-f);letter-spacing:.16em;text-transform:uppercase;
+  background:linear-gradient(180deg,rgba(184,134,43,.10),rgba(184,134,43,.02))}
+.rwbtn:hover{background:var(--felt);border-color:var(--felt);color:#F3EFE4}
 .sortable th[data-k]{cursor:pointer; user-select:none}
 .sortable th[data-k]:hover{color:var(--ink)}
 .sortable th.act{color:var(--ink)}
@@ -435,6 +465,7 @@ footer b{color:var(--ink-2)}
   <a href="#records">Record Book</a>
   <a href="#luck">Luck</a>
   <a href="#seasons">Seasons</a>
+  <a href="#tape" id="navTape">The Tape</a>
 </div></nav>
 
 <main class="wrap">
@@ -450,6 +481,13 @@ footer b{color:var(--ink-2)}
         <p class="never-names" id="neverNames"></p>
       </div>
     </div>
+  </section>
+
+  <section id="tape" class="tapeband" data-tier="a">
+    <p class="teyebrow">The Tape</p>
+    <h2>Everyone here has a tape.</h2>
+    <p class="tlede" id="tapeLede"></p>
+    <a class="tcta" id="tapeCta" href="#">Roll the tape <span aria-hidden="true">&rarr;</span></a>
   </section>
 
   <section id="alltime">
@@ -542,6 +580,7 @@ const YEARS = [...new Set(M.flatMap(m=>m.seasons.map(s=>s.year)))].sort();
 /* ---------- masthead ---------- */
 (function(){
   document.title = BRAND.title;
+  if (!BRAND.tapeHref) { $("#navTape").remove(); $("#tape").remove(); }
   $("#crestL").textContent = BRAND.crestLeft || "";
   $("#crestR").textContent = BRAND.crestRight || "";
   $("#mastheadTitle").innerHTML = BRAND.h1 || BRAND.title;
@@ -909,7 +948,12 @@ function openDetail(name){
         return c? c[2]+" <em style='font-style:normal;color:var(--ink-3);font-size:12px'>"+(c[1]>0?"+":"")+c[1].toFixed(1)+" pts per pick</em>" : "&mdash;"; })())
    +fact("Favourite pick", E.favourite[name] ? E.favourite[name][0]+" <em style='font-style:normal;color:var(--ink-3);font-size:12px'>&times;"+E.favourite[name][1]+"</em>" : "&mdash;")
    +fact("Longest skid", ls[0]+" &nbsp;<em style='font-style:normal;color:var(--ink-3);font-size:12px'>"+ls[1]+"&ndash;"+ls[2]+"</em>")
-   +'</div></div>';
+   +'</div>'
+   + (BRAND.tapeHref
+       ? '<a class="rwbtn" href="'+BRAND.tapeHref+'?m='+encodeURIComponent(name)+'">'
+         + 'Watch '+name+'&rsquo;s Rewind &rarr;</a>'
+       : '')
+   +'</div>';
   $("#cl").onclick=()=>{ host.innerHTML=""; document.querySelectorAll(".card").forEach(c=>c.setAttribute("aria-expanded","false")); };
   host.scrollIntoView({behavior:"smooth", block:"nearest"});
 }
@@ -1148,6 +1192,19 @@ addEventListener("orientationchange", syncLayout);
 })();
 
 /* ---------- nav highlight ---------- */
+/* ---------- The Tape band ---------- */
+function buildTape(){
+  const cta = $("#tapeCta");
+  if (cta && BRAND.tapeHref) cta.href = BRAND.tapeHref;
+  const n = YEARS.length, w = {4:"four",5:"five",6:"six",7:"seven",8:"eight",9:"nine",
+    10:"ten",11:"eleven",12:"twelve"}[n] || n;
+  const lede = $("#tapeLede");
+  if (lede) lede.innerHTML =
+    "Pick anyone and tap through all " + w + " seasons of them &mdash; the record, "
+    + "the year it all worked, the rival they can never beat, the draft picks they want "
+    + "back, and whatever they have to show for it.";
+}
+
 const links=[...document.querySelectorAll("#nav a")];
 const secs=[...document.querySelectorAll("main section")];
 const navEl=document.querySelector("nav");
@@ -1178,4 +1235,5 @@ addEventListener("scroll", ()=>{
 }, {passive:true});
 addEventListener("resize", markNav, {passive:true});
 markNav();
+buildTape();
 </script>

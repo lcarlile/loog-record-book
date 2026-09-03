@@ -1,0 +1,17 @@
+<!doctype html><meta charset="utf-8">
+<style>body{margin:0;font:16px/1.5 monospace;background:#fff;color:#111;padding:16px}</style>
+<div id="o">starting…</div>
+<script>
+const o=document.getElementById('o'); const log=m=>o.innerHTML+='<br>'+m;
+o.textContent='';
+try{
+  const c=document.createElement('canvas');
+  const gl=c.getContext('webgl2')||c.getContext('webgl');
+  log('webgl context: '+(gl?'OK':'NULL'));
+  if(gl){ const d=gl.getExtension('WEBGL_debug_renderer_info');
+    log('renderer: '+(d?gl.getParameter(d.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER))); }
+}catch(e){ log('webgl threw: '+e.message); }
+import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js')
+ .then(t=>log('three module: loaded r'+t.REVISION))
+ .catch(e=>log('three module FAILED: '+e.message));
+</script>

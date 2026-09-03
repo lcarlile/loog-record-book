@@ -1,0 +1,109 @@
+<!doctype html><meta charset="utf-8">
+<style>html,body{margin:0;background:transparent}canvas{display:block}
+#err{position:fixed;inset:0;background:#fff;color:#900;font:14px monospace;padding:14px;display:none}</style>
+<div id="err"></div>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+ "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+<script type="module">
+const fail=m=>{const e=document.getElementById('err');e.style.display='block';e.textContent='ERR: '+m;};
+window.addEventListener('error',e=>fail(e.message));
+try{
+const THREE = await import('three');
+const { RoomEnvironment } = await import('three/addons/environments/RoomEnvironment.js');
+const q=new URLSearchParams(location.search);
+const SIZE=+(q.get('size')||640), WHAT=q.get('what')||'trophy', TINT=q.get('tint')||'D9AF52';
+
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+renderer.setSize(SIZE,SIZE); renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.45;
+renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+
+const scene=new THREE.Scene();
+const pmrem=new THREE.PMREMGenerator(renderer);
+scene.environment=pmrem.fromScene(new RoomEnvironment(),0.03).texture;
+const key=new THREE.DirectionalLight(0xfff6e6,3.2); key.position.set(4,7,5); key.castShadow=true; scene.add(key);
+const fill=new THREE.DirectionalLight(0xd8e6ff,1.3); fill.position.set(-6,3,4); scene.add(fill);
+const rim=new THREE.DirectionalLight(0xffffff,2.0); rim.position.set(-3,4,-6); scene.add(rim);
+scene.add(new THREE.HemisphereLight(0xffffff,0x8a8a8a,1.5));
+const under=new THREE.DirectionalLight(0xffe9c4,1.1); under.position.set(2,-3,4); scene.add(under);
+
+const metal=c=>new THREE.MeshStandardMaterial({color:c,metalness:.92,roughness:0.30});
+const porc =c=>new THREE.MeshStandardMaterial({color:c,metalness:0.02,roughness:0.16});
+
+function trophy(colour){
+  const g=new THREE.Group(), M=metal(colour);
+  // cup: profile from the base of the bowl up to the rim, revolved
+  const prof=[[.30,0],[.52,.06],[.74,.30],[.90,.66],[1.00,1.06],[1.05,1.40],[1.06,1.52],
+              [.99,1.53],[.97,1.42],[.92,1.06],[.82,.68],[.66,.32],[.46,.08],[.28,.04]]
+    .map(p=>new THREE.Vector2(p[0],p[1]));
+  const bowl=new THREE.Mesh(new THREE.LatheGeometry(prof,80),M);
+  bowl.position.y=.62; bowl.castShadow=true; g.add(bowl);
+  // handles, opening outward from the upper bowl
+  [-1,1].forEach(sx=>{
+    const h=new THREE.Mesh(new THREE.TorusGeometry(.40,.072,18,48,Math.PI*1.15),M);
+    h.position.set(sx*1.00,1.46,0);
+    if(sx>0) h.rotation.set(0,0,-Math.PI*0.42); else h.rotation.set(0,Math.PI,-Math.PI*0.42);
+    h.castShadow=true; g.add(h);
+  });
+  const stem=new THREE.Mesh(new THREE.CylinderGeometry(.15,.21,.52,40),M);
+  stem.position.y=.34; stem.castShadow=true; g.add(stem);
+  const knob=new THREE.Mesh(new THREE.SphereGeometry(.19,28,20),M);
+  knob.position.y=.60; g.add(knob);
+  const p1=new THREE.Mesh(new THREE.CylinderGeometry(.56,.62,.14,48),M); p1.position.y=.02; p1.castShadow=true; g.add(p1);
+  const p2=new THREE.Mesh(new THREE.CylinderGeometry(.74,.80,.22,48),M); p2.position.y=-.16; p2.castShadow=true; g.add(p2);
+  return g;
+}
+
+function medal(){
+  const g=new THREE.Group(), M=metal('#D9AF52');
+  const disc=new THREE.Mesh(new THREE.CylinderGeometry(.95,.95,.14,64),M);
+  disc.rotation.x=Math.PI/2; disc.position.y=-.6; disc.castShadow=true; g.add(disc);
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(.72,.07,16,64),M);
+  ring.position.set(0,-.6,.09); g.add(ring);
+  const R=new THREE.MeshStandardMaterial({color:'#8E2A38',roughness:.75,metalness:0,side:THREE.DoubleSide});
+  [-1,1].forEach(s=>{ const rb=new THREE.Mesh(new THREE.PlaneGeometry(.42,1.7),R);
+    rb.position.set(s*.26,.62,0); rb.rotation.z=s*0.22; rb.castShadow=true; g.add(rb);});
+  return g;
+}
+function toilet(){
+  const g=new THREE.Group(), P=porc('#F5F3EC'), D=porc('#E3E0D6');
+  // cistern
+  const tank=new THREE.Mesh(new THREE.BoxGeometry(1.5,1.5,.62),P);
+  tank.position.set(0,1.55,-1.02); tank.castShadow=true; g.add(tank);
+  const lidT=new THREE.Mesh(new THREE.BoxGeometry(1.62,.14,.74),D);
+  lidT.position.set(0,2.36,-1.02); lidT.castShadow=true; g.add(lidT);
+  const btn=new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,.06,24),metal('#B9B2A2'));
+  btn.position.set(.38,2.44,-1.02); g.add(btn);
+  // bowl
+  const bowlProf=[[0,0],[.60,0],[.72,.24],[.78,.62],[.86,1.02],[.88,1.10]].map(p=>new THREE.Vector2(p[0],p[1]));
+  const bowl=new THREE.Mesh(new THREE.LatheGeometry(bowlProf,56),P);
+  bowl.scale.set(1,1,1.28); bowl.position.y=.30; bowl.castShadow=true; g.add(bowl);
+  // seat ring
+  const seat=new THREE.Mesh(new THREE.TorusGeometry(.66,.13,18,64),D);
+  seat.rotation.x=Math.PI/2; seat.scale.set(1.28,1,1); seat.position.set(0,1.45,.06); seat.castShadow=true; g.add(seat);
+  // open lid leaning back
+  const lid=new THREE.Mesh(new THREE.CylinderGeometry(.80,.80,.10,48),D);
+  lid.scale.set(1.18,1,1); lid.position.set(0,2.10,-.62); lid.rotation.x=-0.30; lid.castShadow=true; g.add(lid);
+  // pedestal
+  const ped=new THREE.Mesh(new THREE.CylinderGeometry(.42,.60,1.30,40),P);
+  ped.scale.set(1,1,1.10); ped.position.y=-.35; ped.castShadow=true; g.add(ped);
+  const base=new THREE.Mesh(new THREE.BoxGeometry(1.18,.16,1.34),D);
+  base.position.y=-1.02; base.castShadow=true; g.add(base);
+  return g;
+}
+
+const obj = WHAT==='toilet'?toilet() : WHAT==='medal'?medal() : trophy('#'+TINT);
+scene.add(obj);
+const box=new THREE.Box3().setFromObject(obj), size=box.getSize(new THREE.Vector3()), ctr=box.getCenter(new THREE.Vector3());
+obj.position.sub(ctr);
+const camera=new THREE.PerspectiveCamera(30,1,.01,100);
+const r=Math.max(size.x,size.y,size.z)*.5, d=r/Math.sin(THREE.MathUtils.degToRad(30)/2)*1.22;
+const yaw=THREE.MathUtils.degToRad(+(q.get('yaw')??24)), pit=THREE.MathUtils.degToRad(+(q.get('pitch')??14));
+camera.position.set(Math.sin(yaw)*d*Math.cos(pit),Math.sin(pit)*d,Math.cos(yaw)*d*Math.cos(pit));
+camera.lookAt(0,0,0);
+renderer.render(scene,camera); document.title='READY';
+}catch(e){fail(e&&e.message?e.message:String(e));}
+</script>

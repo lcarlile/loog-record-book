@@ -3,3 +3,8 @@ espn-auth.json
 .espn-cache*.json
 .DS_Store
 build/
+models/
+render/selftest.png
+mock/
+art/
+render/*.png
