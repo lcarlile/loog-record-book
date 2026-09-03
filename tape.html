@@ -43,7 +43,8 @@ body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.5 var(--
 .who span{font:500 clamp(12px,1.2vw,13px)/1 var(--mono);color:var(--ink-3)}
 
 /* ---------- deck ---------- */
-.deck{position:fixed;inset:0;display:flex;flex-direction:column}
+.deck{position:fixed;inset:0;display:flex;flex-direction:column;cursor:pointer;
+  -webkit-tap-highlight-color:transparent}
 .bars{display:flex;gap:4px;padding:12px var(--pad) 0;flex:0 0 auto}
 .bars,.top,.nav>*{max-width:none}
 .top{max-width:none}
@@ -57,7 +58,16 @@ body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.5 var(--
 .top button,.top .topnav a{appearance:none;background:transparent;border:1px solid #302B23;
   color:var(--ink-3);cursor:pointer;font:600 clamp(11px,1.1vw,12.5px)/1 var(--sans);letter-spacing:.14em;
   text-transform:uppercase;padding:9px 13px}
-.top .topnav a{text-decoration:none;display:inline-flex;align-items:center}
+.top .topnav a{text-decoration:none}
+.top button,.top .topnav a{display:inline-flex;align-items:center;justify-content:center;
+  text-align:center;white-space:nowrap}
+/* the league name plus two buttons will not fit a phone on one line; give the
+   buttons their own row rather than letting one slide off the right edge */
+@media (max-width:620px){
+  .top{flex-wrap:wrap;gap:8px}
+  .top .who2{flex:1 1 100%}
+  .topnav{margin-left:0;width:100%}
+}
 .top button:hover,.top .topnav a:hover{color:var(--ink);border-color:var(--acc)}
 .card{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;
   padding:clamp(16px,4vh,40px) var(--pad) clamp(64px,9vh,92px);overflow-y:auto}
@@ -101,10 +111,11 @@ body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.5 var(--
 /* The case used to float as a small island on the page ground, which is what made
    it read as tacked on. It now sits in a room: a wall behind it that bleeds the full
    width, and a floor that runs off both edges and down to the bottom of the screen. */
-.card.room{justify-content:flex-end;padding-bottom:0;
+.card.room{justify-content:flex-start;padding-bottom:0;
   background:linear-gradient(180deg,#16130F 0%,#1B1712 46%,#221D16 78%,#282219 100%)}
-.card.room .eyebrow{position:absolute;top:clamp(58px,9vh,86px);left:0;right:0;text-align:center}
-.roomWrap{position:relative;display:flex;flex-direction:column;align-items:center;width:100%}
+.card.room .eyebrow{text-align:center;margin-bottom:clamp(10px,2vh,18px);flex:0 0 auto}
+.roomWrap{position:relative;display:flex;flex-direction:column;align-items:center;width:100%;
+  flex:1 1 auto;justify-content:flex-end}
 /* the pool of light the case throws onto its own wall */
 .roomWrap::before{content:"";position:absolute;
   left:calc(-1 * var(--pad));right:calc(-1 * var(--pad));
@@ -408,16 +419,27 @@ addEventListener('keydown', e => {
 });
 addEventListener('click', e => {
   if (!M || e.target.closest('button, a')) return;
-  // tapping the left sixth goes back, anywhere else advances
+  // a tap on a touch screen already advanced via touchend; ignore the synthetic
+  // click that follows it so the deck does not jump two cards
+  if (Date.now() - lastTouch < 700) return;
   go(e.clientX < innerWidth / 6 ? -1 : 1);
 });
-let tx = null;
-addEventListener('touchstart', e => tx = e.changedTouches[0].clientX, { passive: true });
+
+/* Touch is handled explicitly rather than leaning on the click above: iOS Safari
+   does not reliably fire click for taps on non-interactive elements when the
+   listener sits on window, which left swiping as the only way to advance. */
+let tx = null, ty = null, lastTouch = 0;
+addEventListener('touchstart', e => {
+  const t = e.changedTouches[0]; tx = t.clientX; ty = t.clientY;
+}, { passive: true });
 addEventListener('touchend', e => {
   if (!M || tx === null) return;
-  const dx = e.changedTouches[0].clientX - tx;
-  if (Math.abs(dx) > 45) { go(dx < 0 ? 1 : -1); tx = null; }
-});
+  const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty;
+  tx = null; lastTouch = Date.now();
+  if (e.target.closest('button, a')) return;
+  if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) { go(dx < 0 ? 1 : -1); return; }
+  if (Math.abs(dx) < 14 && Math.abs(dy) < 14) go(t.clientX < innerWidth / 6 ? -1 : 1);
+}, { passive: true });
 
 /* ---------- picker ---------- */
 function pickerScreen() {

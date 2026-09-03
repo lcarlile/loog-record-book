@@ -172,16 +172,27 @@ addEventListener('keydown', e => {
 });
 addEventListener('click', e => {
   if (!M || e.target.closest('button, a')) return;
-  // tapping the left sixth goes back, anywhere else advances
+  // a tap on a touch screen already advanced via touchend; ignore the synthetic
+  // click that follows it so the deck does not jump two cards
+  if (Date.now() - lastTouch < 700) return;
   go(e.clientX < innerWidth / 6 ? -1 : 1);
 });
-let tx = null;
-addEventListener('touchstart', e => tx = e.changedTouches[0].clientX, { passive: true });
+
+/* Touch is handled explicitly rather than leaning on the click above: iOS Safari
+   does not reliably fire click for taps on non-interactive elements when the
+   listener sits on window, which left swiping as the only way to advance. */
+let tx = null, ty = null, lastTouch = 0;
+addEventListener('touchstart', e => {
+  const t = e.changedTouches[0]; tx = t.clientX; ty = t.clientY;
+}, { passive: true });
 addEventListener('touchend', e => {
   if (!M || tx === null) return;
-  const dx = e.changedTouches[0].clientX - tx;
-  if (Math.abs(dx) > 45) { go(dx < 0 ? 1 : -1); tx = null; }
-});
+  const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty;
+  tx = null; lastTouch = Date.now();
+  if (e.target.closest('button, a')) return;
+  if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) { go(dx < 0 ? 1 : -1); return; }
+  if (Math.abs(dx) < 14 && Math.abs(dy) < 14) go(t.clientX < innerWidth / 6 ? -1 : 1);
+}, { passive: true });
 
 /* ---------- picker ---------- */
 function pickerScreen() {
